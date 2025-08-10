@@ -16,9 +16,10 @@
             padding: 0;
             background-color: #f0f2f5;
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Stack header and app wrapper */
+            align-items: center; /* Center app wrapper horizontally */
             height: 100vh;
-            overflow: hidden; /* Prevent body scroll */
+            overflow: hidden; 
         }
 
         .download-header {
@@ -29,6 +30,8 @@
             font-size: 1.2rem;
             font-weight: bold;
             z-index: 1000;
+            flex-shrink: 0;
+            width: 100%;
         }
 
         .download-header a {
@@ -36,56 +39,20 @@
             text-decoration: none;
             animation: pulse 2s infinite;
         }
-
-        .main-container {
-            display: flex;
-            flex-grow: 1;
-            overflow: hidden;
-        }
-
-        .ad-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #e0e0e0;
-        }
-
-        .ad-left, .ad-right {
-            flex: 0 0 160px; /* Fixed width for side ads */
-            overflow: auto;
-        }
-
-        .ad-top, .ad-bottom {
-            flex: 0 0 auto; /* Height will be determined by content */
-            width: 100%;
-            padding: 5px 0;
-        }
         
-        .content-wrapper {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .app-container {
-            flex-grow: 1;
-            overflow: auto; /* The app itself will scroll */
-            position: relative;
-        }
-        
-        /* Styles from the user's app */
+        /* Styles from the user's app, adapted for the main container */
         .app-wrapper {
             width: 100%;
-            height: 100%; /* Make it fill the container */
-            max-width: none; /* Override max-width */
+            max-width: 42rem; /* Restore max-width for app-like feel */
+            flex-grow: 1; /* Allow wrapper to fill remaining height */
             background-color: #ffffff;
             display: flex;
             flex-direction: column;
-            box-shadow: none; /* Remove original shadow */
-            border-radius: 0; /* Remove original radius */
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
             overflow: hidden;
+            position: relative;
         }
+
         main {
             flex-grow: 1;
             overflow-y: auto;
@@ -260,9 +227,9 @@
         @keyframes fadeInScale { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
         @keyframes modalPop { from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 6px 12px rgba(237, 137, 54, 0.4); }
-            50% { transform: scale(1.03); box-shadow: 0 10px 20px rgba(237, 137, 54, 0.6); }
-            100% { transform: scale(1); box-shadow: 0 6px 12px rgba(237, 137, 54, 0.4); }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
         .animate-pulse-subtle { animation: pulse 2s infinite ease-in-out; }
         input[type="text"], input[type="email"], input[type="password"], textarea, select {
@@ -321,6 +288,7 @@
         .notification-item.read { border-left-color: #d1d5db; background-color: #f9fafb; }
         .info-icon { cursor: pointer; color: #9ca3af; transition: color 0.2s ease; }
         .info-icon:hover { color: #6b7280; }
+        
     </style>
 </head>
 <body>
@@ -331,508 +299,470 @@
         </a>
     </div>
 
-    <!-- Main container for ads and app -->
-    <div class="main-container">
-        
-        <!-- Left Ad -->
-        <div class="ad-container ad-left">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '83bf329d89f64adb373217c75241cebf',
-                    'format' : 'iframe',
-                    'height' : 600,
-                    'width' : 160,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//www.highperformanceformat.com/83bf329d89f64adb373217c75241cebf/invoke.js"></script>
-        </div>
-
-        <!-- Central Content (App + Top/Bottom Ads) -->
-        <div class="content-wrapper">
-            <!-- Top Ad -->
-            <div class="ad-container ad-top">
-                <script async="async" data-cfasync="false" src="//pl27209153.profitableratecpm.com/4e2d6d16c1332f7c73b28bca760b3ec9/invoke.js"></script>
-                <div id="container-4e2d6d16c1332f7c73b28bca760b3ec9"></div>
+    <!-- The App itself -->
+    <div class="app-wrapper">
+        <main class="flex-grow flex flex-col overflow-y-auto">
+            <!-- Loading Screen -->
+            <div id="loading-screen" class="screen active flex-col justify-center items-center p-8">
+                <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-indigo-600"></div>
+                <h1 class="text-4xl font-bold mt-8 gradient-text">Future JEE Crackers</h1>
+                <p class="text-slate-500 mt-3 text-lg">by ARVIND DARA BISHNOI</p>
             </div>
 
-            <!-- The App itself -->
-            <div class="app-container">
-                <!-- The entire body content from your app goes here -->
-                <div class="app-wrapper">
-                    <main class="flex-grow flex flex-col overflow-y-auto">
-                        <!-- Loading Screen -->
-                        <div id="loading-screen" class="screen active flex-col justify-center items-center p-8">
-                            <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-indigo-600"></div>
-                            <h1 class="text-4xl font-bold mt-8 gradient-text">Future JEE Crackers</h1>
-                            <p class="text-slate-500 mt-3 text-lg">by ARVIND DARA BISHNOI</p>
-                        </div>
+            <!-- Original Intro/Login Screens -->
+            <div id="intro-screen" class="screen justify-center items-center p-8">
+                <h1 class="text-6xl font-extrabold gradient-text text-center leading-tight">ARVIND DARA BISHNOI</h1>
+                <p class="text-slate-600 text-center mt-4 text-lg">JEE में सफलता का आपका मार्ग यहाँ से शुरू होता है।</p>
+            </div>
+            <!-- LOGIN FIX: Simplified main screen -->
+            <div id="main-screen" class="screen flex-col justify-center items-center p-8 space-y-6">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8">स्वागत है! 👋</h2>
+                <button id="email-signup-btn" class="button-primary w-full max-w-sm">साइन अप करें (ईमेल/पासवर्ड)</button>
+                <button id="email-login-btn" class="button-secondary w-full max-w-sm">लॉग इन करें (ईमेल/पासवर्ड)</button>
+                <button id="continue-as-guest-btn" class="button-secondary w-full max-w-sm">गेस्ट के रूप में जारी रखें</button>
+            </div>
+            <div id="new-user-screen" class="screen flex-col justify-center items-center p-8 space-y-6">
+                <button class="back-btn absolute top-6 left-6 p-3 rounded-full hover:bg-slate-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                <h2 class="text-3xl font-bold text-gray-800">आपका पूरा नाम क्या है?</h2>
+                <input type="text" id="new-user-name-input" placeholder="अपना पूरा नाम दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
+                <button id="create-guest-user-btn" class="button-primary w-full max-w-sm">गेस्ट खाता बनाएँ</button>
+            </div>
+            <div id="email-signup-screen" class="screen flex-col justify-center items-center p-8 space-y-6">
+                <button class="back-btn absolute top-6 left-6 p-3 rounded-full hover:bg-slate-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                <h2 class="text-3xl font-bold text-gray-800">खाता बनाएँ</h2>
+                <input type="text" id="signup-name-input" placeholder="अपना पूरा नाम दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
+                <input type="email" id="signup-email-input" placeholder="ईमेल दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
+                <input type="password" id="signup-password-input" placeholder="पासवर्ड दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
+                <button id="signup-btn" class="button-primary w-full max-w-sm">साइन अप करें</button>
+            </div>
+             <div id="email-login-screen" class="screen flex-col justify-center items-center p-8 space-y-6">
+                <button class="back-btn absolute top-6 left-6 p-3 rounded-full hover:bg-slate-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                <h2 class="text-3xl font-bold text-gray-800">लॉग इन करें</h2>
+                <input type="email" id="login-email-input" placeholder="ईमेल दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
+                <input type="password" id="login-password-input" placeholder="पासवर्ड दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
+                <button id="email-login-submit-btn" class="button-primary w-full max-w-sm">लॉग इन करें</button>
+            </div>
             
-                        <!-- Original Intro/Login Screens -->
-                        <div id="intro-screen" class="screen justify-center items-center p-8">
-                            <h1 class="text-6xl font-extrabold gradient-text text-center leading-tight">ARVIND DARA BISHNOI</h1>
-                            <p class="text-slate-600 text-center mt-4 text-lg">JEE में सफलता का आपका मार्ग यहाँ से शुरू होता है।</p>
-                        </div>
-                        <!-- LOGIN FIX: Simplified main screen -->
-                        <div id="main-screen" class="screen flex-col justify-center items-center p-8 space-y-6">
-                            <h2 class="text-4xl font-bold text-gray-800 mb-8">स्वागत है! 👋</h2>
-                            <button id="email-signup-btn" class="button-primary w-full max-w-sm">साइन अप करें (ईमेल/पासवर्ड)</button>
-                            <button id="email-login-btn" class="button-secondary w-full max-w-sm">लॉग इन करें (ईमेल/पासवर्ड)</button>
-                            <button id="continue-as-guest-btn" class="button-secondary w-full max-w-sm">गेस्ट के रूप में जारी रखें</button>
-                        </div>
-                        <div id="new-user-screen" class="screen flex-col justify-center items-center p-8 space-y-6">
-                            <button class="back-btn absolute top-6 left-6 p-3 rounded-full hover:bg-slate-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
-                            <h2 class="text-3xl font-bold text-gray-800">आपका पूरा नाम क्या है?</h2>
-                            <input type="text" id="new-user-name-input" placeholder="अपना पूरा नाम दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
-                            <button id="create-guest-user-btn" class="button-primary w-full max-w-sm">गेस्ट खाता बनाएँ</button>
-                        </div>
-                        <div id="email-signup-screen" class="screen flex-col justify-center items-center p-8 space-y-6">
-                            <button class="back-btn absolute top-6 left-6 p-3 rounded-full hover:bg-slate-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
-                            <h2 class="text-3xl font-bold text-gray-800">खाता बनाएँ</h2>
-                            <input type="text" id="signup-name-input" placeholder="अपना पूरा नाम दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
-                            <input type="email" id="signup-email-input" placeholder="ईमेल दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
-                            <input type="password" id="signup-password-input" placeholder="पासवर्ड दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
-                            <button id="signup-btn" class="button-primary w-full max-w-sm">साइन अप करें</button>
-                        </div>
-                         <div id="email-login-screen" class="screen flex-col justify-center items-center p-8 space-y-6">
-                            <button class="back-btn absolute top-6 left-6 p-3 rounded-full hover:bg-slate-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
-                            <h2 class="text-3xl font-bold text-gray-800">लॉग इन करें</h2>
-                            <input type="email" id="login-email-input" placeholder="ईमेल दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
-                            <input type="password" id="login-password-input" placeholder="पासवर्ड दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
-                            <button id="email-login-submit-btn" class="button-primary w-full max-w-sm">लॉग इन करें</button>
-                        </div>
-                        
-                        <!-- Home Screen -->
-                        <div id="home-screen" class="screen flex-col p-6 md:p-8 space-y-6 overflow-y-auto">
-                            <header class="pb-4 border-b border-slate-100 flex items-center justify-between">
-                                <div>
-                                    <h1 id="welcome-message" class="text-3xl font-bold text-slate-800">नमस्ते!</h1>
-                                    <p class="text-slate-500 text-lg mt-1">JEE जीतने के लिए तैयार हैं?</p>
-                                </div>
-                                <i data-lucide="graduation-cap" class="text-5xl gradient-text opacity-80"></i>
-                            </header>
-            
-                            <!-- Target Section -->
-                            <div id="target-section" class="bg-slate-50 p-5 rounded-2xl shadow-md text-center">
-                                <div class="flex items-center justify-center gap-2 mb-2">
-                                    <h2 class="shining-text">TARGET</h2>
-                                    <i id="target-info-icon" data-lucide="info" class="text-xl text-slate-400 cursor-pointer hover:text-slate-600 transition"></i>
-                                </div>
-                                <p id="target-count" class="text-5xl font-bold text-slate-700">0</p>
-                            </div>
-            
-                            <!-- NEW: Real JEE Main Test Button -->
-                             <div class="pt-4">
-                                <button id="real-jee-test-btn" class="w-full button-highlight py-4 font-bold shadow-lg text-xl flex items-center justify-center gap-3">
-                                    <i data-lucide="flame"></i>
-                                    <span>REAL JEE MAIN TEST</span>
-                                </button>
-                            </div>
-            
-                            <!-- Poll Box (formerly Announcement Box) -->
-                            <div id="poll-box" class="bg-indigo-50 border-l-4 border-indigo-500 text-indigo-800 p-4 rounded-r-lg shadow-sm hidden">
-                                <p class="font-bold mb-2">आज का पोल</p>
-                                <p id="poll-question-text" class="text-lg mb-4"></p>
-                                <div class="flex justify-around items-center gap-4">
-                                    <button id="thumbs-up-btn" class="vote-btn flex-1 bg-green-500 hover:bg-green-600">
-                                        <i data-lucide="thumbs-up"></i> <span id="thumbs-up-count">0</span>
-                                    </button>
-                                    <button id="thumbs-down-btn" class="vote-btn flex-1 bg-red-500 hover:bg-red-600">
-                                        <i data-lucide="thumbs-down"></i> <span id="thumbs-down-count">0</span>
-                                    </button>
-                                </div>
-                                <p id="vote-status-message" class="vote-status-message text-center"></p>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-4">
-                                <button id="prep-by-syllabus-btn" class="bg-indigo-600 text-white p-7 rounded-2xl shadow-xl hover:bg-indigo-700 transition text-left space-y-2 transform hover:scale-105 flex items-center justify-between">
-                                    <div>
-                                        <h2 class="text-2xl font-bold">JEE मुख्य तैयारी</h2>
-                                        <p class="text-indigo-200 text-base">पाठ्यक्रम के अनुसार अभ्यास टेस्ट।</p>
-                                    </div>
-                                    <i data-lucide="book-open" class="h-10 w-10 opacity-70"></i>
-                                </button>
-                                <button id="daily-rank-test-btn" class="bg-pink-600 text-white p-7 rounded-2xl shadow-xl hover:bg-pink-700 transition text-left space-y-2 transform hover:scale-105 flex items-center justify-between">
-                                    <div>
-                                        <h2 class="text-2xl font-bold">दैनिक JEE रैंक श्रृंखला</h2>
-                                        <p class="text-pink-200 text-base">एक लाइव टेस्ट में प्रतिस्पर्धा करें।</p>
-                                    </div>
-                                    <i data-lucide="trophy" class="h-10 w-10 opacity-70"></i>
-                                </button>
-                                 <button id="pyq-btn" class="bg-teal-600 text-white p-7 rounded-2xl shadow-xl hover:bg-teal-700 transition text-left space-y-2 transform hover:scale-105 flex items-center justify-between">
-                                    <div>
-                                        <h2 class="text-2xl font-bold">पिछले वर्षों के प्रश्नपत्र</h2>
-                                        <p class="text-teal-200 text-base">वास्तविक JEE प्रश्नपत्रों के साथ अभ्यास करें।</p>
-                                    </div>
-                                    <i data-lucide="history" class="h-10 w-10 opacity-70"></i>
-                                </button>
-                                <button id="scoreboard-btn" class="bg-green-600 text-white p-7 rounded-2xl shadow-xl hover:bg-green-700 transition text-left space-y-2 transform hover:scale-105 flex items-center justify-between">
-                                    <div>
-                                        <h2 class="text-2xl font-bold">दैनिक स्कोर बोर्ड</h2>
-                                        <p class="text-green-200 text-base">रैंक और शीर्ष प्रदर्शन करने वालों की जाँच करें।</p>
-                                    </div>
-                                    <i data-lucide="clipboard-list" class="h-10 w-10 opacity-70"></i>
-                                </button>
-                                 <button id="external-scoreboard-btn" class="bg-purple-600 text-white p-7 rounded-2xl shadow-xl hover:bg-purple-700 transition text-left space-y-2 transform hover:scale-105 flex items-center justify-between">
-                                    <div>
-                                        <h2 class="text-2xl font-bold">JEE Main स्कोरबोर्ड</h2>
-                                        <p class="text-purple-200 text-base">अखिल भारतीय रैंक देखें।</p>
-                                    </div>
-                                    <i data-lucide="globe" class="h-10 w-10 opacity-70"></i>
-                                </button>
-                                <div class="bg-amber-500 text-white p-7 rounded-2xl shadow-xl text-left space-y-2 animate-pulse-subtle flex items-center justify-between col-span-1 md:col-span-2">
-                                    <div>
-                                        <h2 class="text-2xl font-bold">अखिल भारतीय JEE+एडवांस्ड</h2>
-                                        <p id="all-india-test-countdown" class="text-amber-200 text-base">7 दिनों में शुरू होगा!</p>
-                                    </div>
-                                    <i data-lucide="star" class="h-10 w-10 opacity-70"></i>
-                                </div>
-                            </div>
-                            <div class="pt-6">
-                                <button id="feedback-btn" class="w-full text-center py-4 bg-slate-200 text-slate-700 rounded-xl hover:bg-slate-300 transition font-semibold text-lg shadow-md flex items-center justify-center gap-3">
-                                    <i data-lucide="message-square-plus"></i>
-                                    <span>आप कौन सी नई सुविधाएँ चाहते हैं?</span>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Global Chat Screen -->
-                        <div id="chat-screen" class="screen flex-col">
-                             <header class="p-4 border-b border-slate-200 flex items-center justify-between bg-white shadow-sm">
-                                <h1 class="font-bold text-xl text-slate-700">वैश्विक चैट</h1>
-                                <div class="flex items-center gap-2">
-                                    <label for="chat-filter" class="text-sm font-medium text-slate-500">Sort by:</label>
-                                    <select id="chat-filter" class="p-1 border rounded-md text-sm">
-                                        <option value="newest" selected>Newest</option>
-                                        <option value="oldest">Oldest</option>
-                                    </select>
-                                </div>
-                            </header>
-                            <div id="chat-messages-container" class="flex-grow p-4 space-y-4 overflow-y-auto flex flex-col-reverse">
-                                <div id="chat-messages" class="flex flex-col gap-4"></div>
-                                <button id="load-more-messages-btn" class="button-secondary mx-auto my-2 py-2 px-4 text-sm hidden">Load More</button>
-                            </div>
-                            <form id="chat-form" class="p-4 border-t border-slate-200 flex gap-3 bg-white">
-                                <input type="text" id="chat-input" placeholder="एक संदेश टाइप करें..." class="flex-grow p-3 border rounded-full text-base">
-                                <button type="submit" class="bg-indigo-600 text-white rounded-full p-3 flex-shrink-0 shadow-md hover:bg-indigo-700 transition"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.428A1 1 0 009.894 15V4.106A1 1 0 0010.894 2.553z" /></svg></button>
-                            </form>
-                        </div>
-                        
-                        <!-- Users List Screen for Personal Chat -->
-                        <div id="users-list-screen" class="screen flex-col">
-                            <header class="p-4 border-b border-slate-200 font-bold text-xl text-center text-slate-700 bg-white shadow-sm">एक उपयोगकर्ता चुनें</header>
-                            <div id="users-list-container" class="flex-grow p-4 space-y-2 overflow-y-auto">
-                                <!-- User list will be populated here -->
-                            </div>
-                        </div>
-            
-                        <!-- Personal Chat Screen -->
-                        <div id="personal-chat-screen" class="screen flex-col">
-                            <header class="p-4 border-b border-slate-200 flex items-center bg-white shadow-sm">
-                                <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
-                                <h1 id="personal-chat-header" class="font-bold text-xl text-slate-700">चैट</h1>
-                            </header>
-                            <div id="personal-chat-messages" class="flex-grow p-4 space-y-4 overflow-y-auto flex flex-col"></div>
-                            <form id="personal-chat-form" class="p-4 border-t border-slate-200 flex gap-3 bg-white">
-                                <input type="text" id="personal-chat-input" placeholder="एक संदेश टाइप करें..." class="flex-grow p-3 border rounded-full text-base">
-                                <button type="submit" class="bg-indigo-600 text-white rounded-full p-3 flex-shrink-0 shadow-md hover:bg-indigo-700 transition"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.428A1 1 0 009.894 15V4.106A1 1 0 0010.894 2.553z" /></svg></button>
-                            </form>
-                        </div>
-            
-                        <!-- Notifications Screen -->
-                        <div id="notifications-screen" class="screen flex-col">
-                            <header class="p-4 border-b border-slate-200 font-bold text-xl text-center text-slate-700 bg-white shadow-sm">सूचनाएं</header>
-                            <div id="notifications-container" class="flex-grow p-4 space-y-3 overflow-y-auto bg-slate-50">
-                                <!-- Notifications will be populated here -->
-                            </div>
-                        </div>
-            
-                        <!-- Profile Screen -->
-                        <div id="profile-screen" class="screen flex-col p-6 space-y-6 overflow-y-auto">
-                             <h2 class="text-4xl font-bold text-gray-800 gradient-text mb-4">प्रोफाइल</h2>
-                            <div class="bg-slate-100 p-5 rounded-xl shadow-sm">
-                                <p class="font-semibold text-gray-700 mb-2 text-lg">आपकी उपयोगकर्ता आईडी:</p>
-                                <div class="flex items-center justify-between">
-                                    <p id="display-user-id" class="font-mono text-gray-600 break-all text-sm bg-slate-200 p-2 rounded-md flex-grow mr-2"></p>
-                                    <button id="copy-id-btn" class="px-4 py-2 bg-gray-200 text-gray-700 text-sm rounded-lg hover:bg-gray-300 transition">कॉपी करें</button>
-                                </div>
-                            </div>
-                             <div class="bg-slate-100 p-5 rounded-xl shadow-sm">
-                                <p class="font-semibold text-gray-700 mb-2 text-lg">आपका नाम:</p>
-                                <input type="text" id="profile-name-input" class="p-3 border rounded-lg w-full mb-3 text-base">
-                                <button id="save-name-btn" class="button-primary w-full text-base py-3">नाम सहेजें</button>
-                            </div>
-                            <!-- Leveling System UI -->
-                            <div class="bg-slate-100 p-5 rounded-xl shadow-sm">
-                                <div class="flex justify-between items-center mb-2">
-                                    <p class="font-semibold text-gray-700 text-lg">लेवल <span id="profile-level">0</span></p>
-                                    <p id="profile-xp" class="text-sm text-gray-500">0 / 100 XP</p>
-                                </div>
-                                <div class="xp-bar-container">
-                                    <div id="profile-xp-bar" class="xp-bar" style="width: 0%;"></div>
-                                </div>
-                            </div>
-                            <div class="bg-slate-100 p-5 rounded-xl shadow-sm">
-                                <p class="font-semibold text-gray-700 mb-2 text-lg">भाषा चुनें:</p>
-                                <select id="language-select" class="w-full p-3 border rounded-lg bg-white text-base">
-                                    <option value="english">English</option>
-                                    <option value="hindi" selected>हिंदी</option>
-                                </select>
-                            </div>
-                            <a href="http://www.youtube.com/@RAVI..BHAI_0029" target="_blank" class="button-secondary w-full text-center text-lg py-4">चैनल देखें</a>
-                            <button id="logout-btn" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 rounded-xl shadow-md text-lg">लॉग आउट</button>
-                        </div>
-            
-                        <!-- Real JEE Test Form Screen -->
-                        <div id="real-jee-form-screen" class="screen flex-col p-6 md:p-8 space-y-6 overflow-y-auto">
-                            <header class="flex items-center pb-4 border-b border-slate-100">
-                                <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
-                                <h1 class="text-3xl font-bold">REAL JEE MAIN TEST पंजीकरण</h1>
-                            </header>
-                            <div class="space-y-8 pt-4">
-                                <div>
-                                    <label for="real-jee-name" class="font-semibold mb-2 text-lg block">पूरा नाम</label>
-                                    <input type="text" id="real-jee-name" class="w-full p-3 border rounded-lg bg-slate-100" readonly>
-                                </div>
-                                <div>
-                                    <label for="real-jee-class" class="font-semibold mb-2 text-lg block">आपकी कक्षा</label>
-                                    <select id="real-jee-class" class="w-full p-3 border rounded-lg bg-white text-base">
-                                        <option value="11th">11वीं</option>
-                                        <option value="12th">12वीं</option>
-                                        <option value="Dropper" selected>ड्रॉपर</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="real-jee-target" class="font-semibold mb-2 text-lg block">लक्ष्य JEE वर्ष</label>
-                                    <select id="real-jee-target" class="w-full p-3 border rounded-lg bg-white text-base">
-                                        <option value="2025">2025</option>
-                                        <option value="2026">2026</option>
-                                        <option value="2027">2027</option>
-                                    </select>
-                                </div>
-                                <button id="real-jee-form-submit-btn" class="w-full button-highlight py-4 font-bold shadow-lg text-xl">टेस्ट शुरू करें</button>
-                            </div>
-                        </div>
-            
-                        <!-- JEE Screens -->
-                        <div id="jee-prep-setup-screen" class="screen flex-col p-6 md:p-8 space-y-6 overflow-y-auto">
-                            <header class="flex items-center pb-4 border-b border-slate-100">
-                                <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
-                                <h1 class="text-3xl font-bold">अपना टेस्ट बनाएँ</h1>
-                            </header>
-                            <div class="space-y-8 pt-4">
-                                <div>
-                                    <h3 class="font-semibold mb-3 text-xl">1. कक्षा चुनें</h3>
-                                    <select id="class-select" class="w-full p-3 border rounded-lg bg-white text-base"><option value="11">कक्षा 11</option><option value="12">कक्षा 12</option><option value="11,12" selected>पूरा पाठ्यक्रम (11वीं + 12वीं)</option></select>
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold mb-3 text-xl">2. विषय चुनें</h3>
-                                    <div id="subject-selection" class="subject-grid"></div>
-                                </div>
-                                <!-- New section for Lesson Selection -->
-                                <div id="lesson-selection-section" class="hidden">
-                                    <h3 class="font-semibold mb-3 text-xl">3. पाठ चुनें (वैकल्पिक)</h3>
-                                    <div id="lesson-selection-container" class="space-y-3">
-                                        <!-- Lessons will be dynamically loaded here -->
-                                        <p class="text-slate-500">विषय चुनने के बाद पाठ यहाँ दिखाई देंगे।</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold mb-3 text-xl">4. कठिनाई चुनें</h3>
-                                    <div class="flex flex-wrap gap-4">
-                                        <label class="flex-1 min-w-[120px] flex items-center p-3 border rounded-lg bg-white cursor-pointer has-[:checked]:bg-indigo-100 has-[:checked]:border-indigo-500">
-                                            <input type="radio" name="difficulty" value="Basic" class="mr-2 h-5 w-5 rounded-full text-indigo-600 focus:ring-indigo-500">
-                                            <span class="font-semibold text-base">मूल</span>
-                                        </label>
-                                        <label class="flex-1 min-w-[120px] flex items-center p-3 border rounded-lg bg-white cursor-pointer has-[:checked]:bg-indigo-100 has-[:checked]:border-indigo-500">
-                                            <input type="radio" name="difficulty" value="JEE Main" class="mr-2 h-5 w-5 rounded-full text-indigo-600 focus:ring-indigo-500" checked>
-                                            <span class="font-semibold text-base">JEE मुख्य</span>
-                                        </label>
-                                        <label class="flex-1 min-w-[120px] flex items-center p-3 border rounded-lg bg-white cursor-pointer has-[:checked]:bg-indigo-100 has-[:checked]:border-indigo-500">
-                                            <input type="radio" name="difficulty" value="JEE Advanced" class="mr-2 h-5 w-5 rounded-full text-indigo-600 focus:ring-indigo-500">
-                                            <span class="font-semibold text-base">JEE एडवांस्ड</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <button id="generate-test-btn" class="w-full button-primary py-4 font-bold shadow-lg text-xl">टेस्ट बनाएँ</button>
-                            </div>
-                        </div>
-            
-                        <!-- PYQ Screens -->
-                        <div id="pyq-year-screen" class="screen flex-col p-6 md:p-8 space-y-6 overflow-y-auto">
-                            <header class="flex items-center pb-4 border-b border-slate-100">
-                                <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
-                                <h1 class="text-3xl font-bold">वर्ष चुनें</h1>
-                            </header>
-                            <div id="pyq-year-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4 pt-4">
-                                <!-- Year buttons will be added here by JS -->
-                            </div>
-                        </div>
-            
-                        <div id="pyq-type-screen" class="screen flex-col p-6 md:p-8 space-y-6 overflow-y-auto">
-                            <header class="flex items-center pb-4 border-b border-slate-100">
-                                <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
-                                <h1 id="pyq-type-title" class="text-3xl font-bold">परीक्षा का प्रकार चुनें</h1>
-                            </header>
-                            <div class="flex flex-col gap-4 pt-4">
-                                 <button data-pyq-type="Main" class="pyq-type-btn button-primary w-full text-xl py-4">JEE Main</button>
-                                 <button data-pyq-type="Advanced" class="pyq-type-btn button-primary w-full text-xl py-4">JEE Advanced</button>
-                            </div>
-                        </div>
-            
-                        <div id="exam-screen" class="screen flex-col">
-                            <header class="sticky top-0 bg-white shadow-md z-10 p-4 flex justify-between items-center border-b border-slate-200">
-                                <h1 id="exam-title" class="text-xl font-bold text-slate-800">टेस्ट प्रगति पर है</h1>
-                                <div id="exam-timer" class="font-bold text-2xl text-indigo-600 bg-indigo-50 px-4 py-2 rounded-full shadow-inner">03:00:00</div>
-                            </header>
-                            <div id="exam-content" class="p-4 md:p-6 space-y-8 overflow-y-auto flex-grow bg-slate-50"></div>
-                            <footer class="sticky bottom-0 bg-white p-4 border-t border-slate-200 shadow-md">
-                                <button id="submit-exam-btn" class="w-full bg-green-600 text-white font-bold py-3 rounded-xl hover:bg-green-700 transition text-lg shadow-lg">टेस्ट जमा करें</button>
-                            </footer>
-                        </div>
-                        <div id="result-screen" class="screen flex-col justify-center items-center p-8">
-                             <h1 class="text-5xl font-bold mb-6 gradient-text">टेस्ट पूरा हुआ! 🎉</h1>
-                             <div class="text-center bg-slate-100 p-10 rounded-3xl shadow-2xl w-full max-w-md">
-                                <p class="text-xl text-slate-600 mb-2">आपका स्कोर</p>
-                                <p id="result-score" class="text-8xl font-extrabold my-4 text-indigo-600">--/300</p>
-                                <div class="grid grid-cols-3 gap-4 text-center mt-6">
-                                    <div><p class="font-semibold text-slate-700">सही</p><p id="result-correct" class="text-3xl font-bold text-green-600">0</p></div>
-                                    <div><p class="font-semibold text-slate-700">गलत</p><p id="result-incorrect" class="text-3xl font-bold text-red-600">0</p></div>
-                                    <div><p class="font-semibold text-slate-700">अनुत्तरित</p><p id="result-unanswered" class="text-3xl font-bold text-slate-500">0</p></div>
-                                </div>
-                             </div>
-                             <div class="flex flex-col md:flex-row gap-4 mt-8">
-                                <button id="review-answers-btn" class="button-secondary py-3 px-8 text-lg shadow-lg">उत्तरों की समीक्षा करें</button>
-                                <button id="back-to-home-btn" class="button-primary py-3 px-8 text-lg shadow-lg">होम पर वापस जाएँ</button>
-                             </div>
-                        </div>
-                         <!-- NEW: Real JEE Result Screen -->
-                        <div id="real-jee-result-screen" class="screen flex-col justify-center items-center p-8 text-center">
-                            <h1 class="text-5xl font-bold mb-6 gradient-text">टेस्ट जमा हो गया!</h1>
-                            <div class="bg-slate-100 p-10 rounded-3xl shadow-2xl w-full max-w-md">
-                                <p class="text-xl text-slate-600 mb-2">आपका स्कोर</p>
-                                <p id="real-jee-result-score" class="text-8xl font-extrabold my-4 text-indigo-600">0</p>
-                                <p class="text-lg text-slate-700 font-semibold">कटऑफ: 50</p>
-                                <p id="real-jee-cutoff-status" class="text-4xl font-bold mt-4"></p>
-                                <p class="text-slate-500 mt-8 text-lg">आपकी अखिल भारतीय रैंक 2 घंटे में स्कोरबोर्ड पर अपडेट की जाएगी।</p>
-                            </div>
-                            <button id="real-jee-back-home-btn" class="button-primary py-3 px-8 text-lg shadow-lg mt-8">होम पर वापस जाएँ</button>
-                        </div>
-                        <div id="scoreboard-screen" class="screen flex-col p-6 md:p-8">
-                            <header class="flex items-center mb-6 pb-4 border-b border-slate-100">
-                                <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
-                                <h1 class="text-3xl font-bold">दैनिक टेस्ट स्कोरबोर्ड</h1>
-                            </header>
-                            <div id="scoreboard-info" class="text-center text-slate-500 p-3 bg-slate-100 rounded-lg mb-6 text-sm shadow-sm">टेस्ट जमा करने के 2 घंटे बाद स्कोर अपडेट किए जाते हैं।</div>
-                            <div id="scoreboard-list" class="space-y-3 overflow-y-auto flex-grow"><p class="text-center text-slate-500 p-8">स्कोरबोर्ड लोड हो रहा है...</p></div>
-                        </div>
-                        <!-- NEW: External Scoreboard Screen -->
-                        <div id="external-scoreboard-screen" class="screen flex-col p-6 md:p-8">
-                            <header class="flex items-center mb-6 pb-4 border-b border-slate-100">
-                                <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
-                                <h1 class="text-3xl font-bold">JEE Main स्कोरबोर्ड</h1>
-                            </header>
-                            <!-- SCOREBOARD FIX: Sticky container for user's rank -->
-                            <div id="user-rank-sticky" class="hidden"></div>
-                            <div id="external-scoreboard-list" class="space-y-3 overflow-y-auto flex-grow"><p class="text-center text-slate-500 p-8">स्कोरबोर्ड लोड हो रहा है...</p></div>
-                        </div>
-                        <!-- New Review Screen -->
-                        <div id="review-screen" class="screen flex-col">
-                            <header class="sticky top-0 bg-white shadow-md z-10 p-4 flex items-center border-b border-slate-200">
-                                <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
-                                <h1 id="review-title" class="text-xl font-bold text-slate-800">उत्तरों की समीक्षा</h1>
-                            </header>
-                            <div id="review-content" class="p-4 md:p-6 space-y-8 overflow-y-auto flex-grow bg-slate-50"></div>
-                        </div>
-            
-                    </main>
-                    
-                    <!-- Bottom Nav -->
-                    <nav id="bottom-nav" class="bottom-nav hidden">
-                        <div id="nav-home" class="nav-item active">
-                            <i data-lucide="home"></i>
-                            <span>होम</span>
-                        </div>
-                        <div id="nav-chat" class="nav-item">
-                            <i data-lucide="message-circle"></i>
-                            <span>वैश्विक चैट</span>
-                        </div>
-                         <div id="nav-users" class="nav-item">
-                            <i data-lucide="users"></i>
-                            <span>मैसेज</span>
-                        </div>
-                        <div id="nav-notifications" class="nav-item">
-                            <i data-lucide="bell"></i>
-                            <span>सूचनाएं</span>
-                        </div>
-                        <div id="nav-profile" class="nav-item">
-                            <i data-lucide="user"></i>
-                            <span>प्रोफाइल</span>
-                        </div>
-                    </nav>
-                    <footer id="app-footer" class="text-center p-3 text-xs text-slate-400 opacity-60 hidden bg-white">Arvind Dara Bishnoi द्वारा निर्मित</footer>
+            <!-- Home Screen -->
+            <div id="home-screen" class="screen flex-col p-6 md:p-8 space-y-6 overflow-y-auto">
+                <header class="pb-4 border-b border-slate-100 flex items-center justify-between">
+                    <div>
+                        <h1 id="welcome-message" class="text-3xl font-bold text-slate-800">नमस्ते!</h1>
+                        <p class="text-slate-500 text-lg mt-1">JEE जीतने के लिए तैयार हैं?</p>
+                    </div>
+                    <i data-lucide="graduation-cap" class="text-5xl gradient-text opacity-80"></i>
+                </header>
+
+                <!-- In-App Ad Slot 1 -->
+                <div class="my-4 flex justify-center">
+                    <script async="async" data-cfasync="false" src="//pl27209153.profitableratecpm.com/4e2d6d16c1332f7c73b28bca760b3ec9/invoke.js"></script>
+                    <div id="container-4e2d6d16c1332f7c73b28bca760b3ec9"></div>
+                </div>
+
+                <!-- Target Section -->
+                <div id="target-section" class="bg-slate-50 p-5 rounded-2xl shadow-md text-center">
+                    <div class="flex items-center justify-center gap-2 mb-2">
+                        <h2 class="shining-text">TARGET</h2>
+                        <i id="target-info-icon" data-lucide="info" class="text-xl text-slate-400 cursor-pointer hover:text-slate-600 transition"></i>
+                    </div>
+                    <p id="target-count" class="text-5xl font-bold text-slate-700">0</p>
+                </div>
+
+                <!-- NEW: Real JEE Main Test Button -->
+                 <div class="pt-4">
+                    <button id="real-jee-test-btn" class="w-full button-highlight py-4 font-bold shadow-lg text-xl flex items-center justify-center gap-3">
+                        <i data-lucide="flame"></i>
+                        <span>REAL JEE MAIN TEST</span>
+                    </button>
                 </div>
                 
-                <!-- Modals Container -->
-                <div id="modal-container" class="hidden">
-                    <div class="modal-backdrop"></div>
-                    <div id="message-modal" class="modal bg-white rounded-2xl shadow-2xl p-8 w-11/12 max-w-sm text-center">
-                        <h3 id="message-modal-title" class="text-2xl font-bold mb-4 text-slate-800">अलर्ट</h3>
-                        <p id="message-modal-text" class="text-slate-600 mb-6 text-lg"></p>
-                        <button id="message-modal-ok-btn" class="w-full button-primary py-3 text-lg">ठीक है</button>
+                <!-- In-App Ad Slot 2 -->
+                <div class="my-4 flex justify-center">
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key' : '0d15173de61272c3e2bb15f8677bb5c5',
+                            'format' : 'iframe',
+                            'height' : 250,
+                            'width' : 300,
+                            'params' : {}
+                        };
+                    </script>
+                    <script type="text/javascript" src="//www.highperformanceformat.com/0d15173de61272c3e2bb15f8677bb5c5/invoke.js"></script>
+                </div>
+
+                <!-- Poll Box (formerly Announcement Box) -->
+                <div id="poll-box" class="bg-indigo-50 border-l-4 border-indigo-500 text-indigo-800 p-4 rounded-r-lg shadow-sm hidden">
+                    <p class="font-bold mb-2">आज का पोल</p>
+                    <p id="poll-question-text" class="text-lg mb-4"></p>
+                    <div class="flex justify-around items-center gap-4">
+                        <button id="thumbs-up-btn" class="vote-btn flex-1 bg-green-500 hover:bg-green-600">
+                            <i data-lucide="thumbs-up"></i> <span id="thumbs-up-count">0</span>
+                        </button>
+                        <button id="thumbs-down-btn" class="vote-btn flex-1 bg-red-500 hover:bg-red-600">
+                            <i data-lucide="thumbs-down"></i> <span id="thumbs-down-count">0</span>
+                        </button>
                     </div>
-                     <div id="target-info-modal" class="modal bg-white rounded-2xl shadow-2xl p-8 w-11/12 max-w-md hidden">
-                         <h3 class="text-2xl font-bold mb-4 text-slate-800">Target Information</h3>
-                         <p class="text-slate-600 mb-4 text-base">
-                            यह टारगेट सेक्शन ऐप में उपस्थित नए उपयोगकर्ताओं के लिए है जिन्होंने अभी लॉग इन किया है। अगर 1000 टारगेट पूरे होते हैं, तो ऐप में कई सारे रोमांचक टेस्ट चालू होंगे, जैसे कि माइंड आईक्यू टेस्ट, रीजनिंग पहेलियाँ, और भी बहुत कुछ।
-                         </p>
-                         <button id="target-info-ok-btn" class="w-full button-primary py-3 text-lg mt-4">समझ गया</button>
-                    </div>
-                    <div id="feedback-modal" class="modal bg-white rounded-2xl shadow-2xl p-8 w-11/12 max-w-md hidden">
-                         <h3 class="text-2xl font-bold mb-4 text-slate-800">आपकी प्रतिक्रिया</h3>
-                         <p class="text-slate-600 mb-4 text-base">आप कौन सी नई सुविधाएँ या सुधार चाहते हैं? (प्रति दिन एक बार)</p>
-                         <textarea id="feedback-input" class="w-full p-3 border rounded-lg h-32 text-base" placeholder="यहाँ टाइप करें..."></textarea>
-                         <div class="flex gap-4 mt-6">
-                            <button id="feedback-cancel-btn" class="flex-1 bg-slate-200 py-3 rounded-lg text-lg font-semibold hover:bg-slate-300 transition">रद्द करें</button>
-                            <button id="feedback-submit-btn" class="flex-1 button-primary py-3 text-lg">जमा करें</button>
+                    <p id="vote-status-message" class="vote-status-message text-center"></p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-4">
+                    <button id="prep-by-syllabus-btn" class="bg-indigo-600 text-white p-7 rounded-2xl shadow-xl hover:bg-indigo-700 transition text-left space-y-2 transform hover:scale-105 flex items-center justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold">JEE मुख्य तैयारी</h2>
+                            <p class="text-indigo-200 text-base">पाठ्यक्रम के अनुसार अभ्यास टेस्ट।</p>
                         </div>
+                        <i data-lucide="book-open" class="h-10 w-10 opacity-70"></i>
+                    </button>
+                    <button id="daily-rank-test-btn" class="bg-pink-600 text-white p-7 rounded-2xl shadow-xl hover:bg-pink-700 transition text-left space-y-2 transform hover:scale-105 flex items-center justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold">दैनिक JEE रैंक श्रृंखला</h2>
+                            <p class="text-pink-200 text-base">एक लाइव टेस्ट में प्रतिस्पर्धा करें।</p>
+                        </div>
+                        <i data-lucide="trophy" class="h-10 w-10 opacity-70"></i>
+                    </button>
+                     <button id="pyq-btn" class="bg-teal-600 text-white p-7 rounded-2xl shadow-xl hover:bg-teal-700 transition text-left space-y-2 transform hover:scale-105 flex items-center justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold">पिछले वर्षों के प्रश्नपत्र</h2>
+                            <p class="text-teal-200 text-base">वास्तविक JEE प्रश्नपत्रों के साथ अभ्यास करें।</p>
+                        </div>
+                        <i data-lucide="history" class="h-10 w-10 opacity-70"></i>
+                    </button>
+                    <button id="scoreboard-btn" class="bg-green-600 text-white p-7 rounded-2xl shadow-xl hover:bg-green-700 transition text-left space-y-2 transform hover:scale-105 flex items-center justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold">दैनिक स्कोर बोर्ड</h2>
+                            <p class="text-green-200 text-base">रैंक और शीर्ष प्रदर्शन करने वालों की जाँच करें।</p>
+                        </div>
+                        <i data-lucide="clipboard-list" class="h-10 w-10 opacity-70"></i>
+                    </button>
+                     <button id="external-scoreboard-btn" class="bg-purple-600 text-white p-7 rounded-2xl shadow-xl hover:bg-purple-700 transition text-left space-y-2 transform hover:scale-105 flex items-center justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold">JEE Main स्कोरबोर्ड</h2>
+                            <p class="text-purple-200 text-base">अखिल भारतीय रैंक देखें।</p>
+                        </div>
+                        <i data-lucide="globe" class="h-10 w-10 opacity-70"></i>
+                    </button>
+                    <div class="bg-amber-500 text-white p-7 rounded-2xl shadow-xl text-left space-y-2 animate-pulse-subtle flex items-center justify-between col-span-1 md:col-span-2">
+                        <div>
+                            <h2 class="text-2xl font-bold">अखिल भारतीय JEE+एडवांस्ड</h2>
+                            <p id="all-india-test-countdown" class="text-amber-200 text-base">7 दिनों में शुरू होगा!</p>
+                        </div>
+                        <i data-lucide="star" class="h-10 w-10 opacity-70"></i>
                     </div>
-                    <!-- Level Up Modal -->
-                    <div id="level-up-modal" class="modal bg-white rounded-2xl shadow-2xl p-8 w-11/12 max-w-sm text-center hidden">
-                        <i data-lucide="arrow-up-circle" class="h-16 w-16 text-yellow-400 mb-4"></i>
-                        <h3 class="text-4xl font-bold mb-4 gradient-text">लेवल अप!</h3>
-                        <p id="level-up-text" class="text-slate-600 mb-6 text-2xl"></p>
-                        <button id="level-up-ok-btn" class="w-full button-primary py-3 text-lg">बहुत बढ़िया!</button>
+                </div>
+                <div class="pt-6">
+                    <button id="feedback-btn" class="w-full text-center py-4 bg-slate-200 text-slate-700 rounded-xl hover:bg-slate-300 transition font-semibold text-lg shadow-md flex items-center justify-center gap-3">
+                        <i data-lucide="message-square-plus"></i>
+                        <span>आप कौन सी नई सुविधाएँ चाहते हैं?</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Global Chat Screen -->
+            <div id="chat-screen" class="screen flex-col">
+                 <header class="p-4 border-b border-slate-200 flex items-center justify-between bg-white shadow-sm">
+                    <h1 class="font-bold text-xl text-slate-700">वैश्विक चैट</h1>
+                    <div class="flex items-center gap-2">
+                        <label for="chat-filter" class="text-sm font-medium text-slate-500">Sort by:</label>
+                        <select id="chat-filter" class="p-1 border rounded-md text-sm">
+                            <option value="newest" selected>Newest</option>
+                            <option value="oldest">Oldest</option>
+                        </select>
                     </div>
+                </header>
+                <div id="chat-messages-container" class="flex-grow p-4 space-y-4 overflow-y-auto flex flex-col-reverse">
+                    <div id="chat-messages" class="flex flex-col gap-4"></div>
+                    <button id="load-more-messages-btn" class="button-secondary mx-auto my-2 py-2 px-4 text-sm hidden">Load More</button>
+                </div>
+                <form id="chat-form" class="p-4 border-t border-slate-200 flex gap-3 bg-white">
+                    <input type="text" id="chat-input" placeholder="एक संदेश टाइप करें..." class="flex-grow p-3 border rounded-full text-base">
+                    <button type="submit" class="bg-indigo-600 text-white rounded-full p-3 flex-shrink-0 shadow-md hover:bg-indigo-700 transition"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.428A1 1 0 009.894 15V4.106A1 1 0 0010.894 2.553z" /></svg></button>
+                </form>
+            </div>
+            
+            <!-- Users List Screen for Personal Chat -->
+            <div id="users-list-screen" class="screen flex-col">
+                <header class="p-4 border-b border-slate-200 font-bold text-xl text-center text-slate-700 bg-white shadow-sm">एक उपयोगकर्ता चुनें</header>
+                <div id="users-list-container" class="flex-grow p-4 space-y-2 overflow-y-auto">
+                    <!-- User list will be populated here -->
                 </div>
             </div>
 
-            <!-- Bottom Ad -->
-            <div class="ad-container ad-bottom">
-                <script type="text/javascript">
-                    atOptions = {
-                        'key' : '0d15173de61272c3e2bb15f8677bb5c5',
-                        'format' : 'iframe',
-                        'height' : 250,
-                        'width' : 300,
-                        'params' : {}
-                    };
-                </script>
-                <script type="text/javascript" src="//www.highperformanceformat.com/0d15173de61272c3e2bb15f8677bb5c5/invoke.js"></script>
+            <!-- Personal Chat Screen -->
+            <div id="personal-chat-screen" class="screen flex-col">
+                <header class="p-4 border-b border-slate-200 flex items-center bg-white shadow-sm">
+                    <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                    <h1 id="personal-chat-header" class="font-bold text-xl text-slate-700">चैट</h1>
+                </header>
+                <div id="personal-chat-messages" class="flex-grow p-4 space-y-4 overflow-y-auto flex flex-col"></div>
+                <form id="personal-chat-form" class="p-4 border-t border-slate-200 flex gap-3 bg-white">
+                    <input type="text" id="personal-chat-input" placeholder="एक संदेश टाइप करें..." class="flex-grow p-3 border rounded-full text-base">
+                    <button type="submit" class="bg-indigo-600 text-white rounded-full p-3 flex-shrink-0 shadow-md hover:bg-indigo-700 transition"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.428A1 1 0 009.894 15V4.106A1 1 0 0010.894 2.553z" /></svg></button>
+                </form>
+            </div>
+
+            <!-- Notifications Screen -->
+            <div id="notifications-screen" class="screen flex-col">
+                <header class="p-4 border-b border-slate-200 font-bold text-xl text-center text-slate-700 bg-white shadow-sm">सूचनाएं</header>
+                <div id="notifications-container" class="flex-grow p-4 space-y-3 overflow-y-auto bg-slate-50">
+                    <!-- Notifications will be populated here -->
+                </div>
+            </div>
+
+            <!-- Profile Screen -->
+            <div id="profile-screen" class="screen flex-col p-6 space-y-6 overflow-y-auto">
+                 <h2 class="text-4xl font-bold text-gray-800 gradient-text mb-4">प्रोफाइल</h2>
+                <div class="bg-slate-100 p-5 rounded-xl shadow-sm">
+                    <p class="font-semibold text-gray-700 mb-2 text-lg">आपकी उपयोगकर्ता आईडी:</p>
+                    <div class="flex items-center justify-between">
+                        <p id="display-user-id" class="font-mono text-gray-600 break-all text-sm bg-slate-200 p-2 rounded-md flex-grow mr-2"></p>
+                        <button id="copy-id-btn" class="px-4 py-2 bg-gray-200 text-gray-700 text-sm rounded-lg hover:bg-gray-300 transition">कॉपी करें</button>
+                    </div>
+                </div>
+                 <div class="bg-slate-100 p-5 rounded-xl shadow-sm">
+                    <p class="font-semibold text-gray-700 mb-2 text-lg">आपका नाम:</p>
+                    <input type="text" id="profile-name-input" class="p-3 border rounded-lg w-full mb-3 text-base">
+                    <button id="save-name-btn" class="button-primary w-full text-base py-3">नाम सहेजें</button>
+                </div>
+                <!-- Leveling System UI -->
+                <div class="bg-slate-100 p-5 rounded-xl shadow-sm">
+                    <div class="flex justify-between items-center mb-2">
+                        <p class="font-semibold text-gray-700 text-lg">लेवल <span id="profile-level">0</span></p>
+                        <p id="profile-xp" class="text-sm text-gray-500">0 / 100 XP</p>
+                    </div>
+                    <div class="xp-bar-container">
+                        <div id="profile-xp-bar" class="xp-bar" style="width: 0%;"></div>
+                    </div>
+                </div>
+                <div class="bg-slate-100 p-5 rounded-xl shadow-sm">
+                    <p class="font-semibold text-gray-700 mb-2 text-lg">भाषा चुनें:</p>
+                    <select id="language-select" class="w-full p-3 border rounded-lg bg-white text-base">
+                        <option value="english">English</option>
+                        <option value="hindi" selected>हिंदी</option>
+                    </select>
+                </div>
+                <a href="http://www.youtube.com/@RAVI..BHAI_0029" target="_blank" class="button-secondary w-full text-center text-lg py-4">चैनल देखें</a>
+                <button id="logout-btn" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 rounded-xl shadow-md text-lg">लॉग आउट</button>
+            </div>
+
+            <!-- Real JEE Test Form Screen -->
+            <div id="real-jee-form-screen" class="screen flex-col p-6 md:p-8 space-y-6 overflow-y-auto">
+                <header class="flex items-center pb-4 border-b border-slate-100">
+                    <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                    <h1 class="text-3xl font-bold">REAL JEE MAIN TEST पंजीकरण</h1>
+                </header>
+                <div class="space-y-8 pt-4">
+                    <div>
+                        <label for="real-jee-name" class="font-semibold mb-2 text-lg block">पूरा नाम</label>
+                        <input type="text" id="real-jee-name" class="w-full p-3 border rounded-lg bg-slate-100" readonly>
+                    </div>
+                    <div>
+                        <label for="real-jee-class" class="font-semibold mb-2 text-lg block">आपकी कक्षा</label>
+                        <select id="real-jee-class" class="w-full p-3 border rounded-lg bg-white text-base">
+                            <option value="11th">11वीं</option>
+                            <option value="12th">12वीं</option>
+                            <option value="Dropper" selected>ड्रॉपर</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="real-jee-target" class="font-semibold mb-2 text-lg block">लक्ष्य JEE वर्ष</label>
+                        <select id="real-jee-target" class="w-full p-3 border rounded-lg bg-white text-base">
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                        </select>
+                    </div>
+                    <button id="real-jee-form-submit-btn" class="w-full button-highlight py-4 font-bold shadow-lg text-xl">टेस्ट शुरू करें</button>
+                </div>
+            </div>
+
+            <!-- JEE Screens -->
+            <div id="jee-prep-setup-screen" class="screen flex-col p-6 md:p-8 space-y-6 overflow-y-auto">
+                <header class="flex items-center pb-4 border-b border-slate-100">
+                    <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                    <h1 class="text-3xl font-bold">अपना टेस्ट बनाएँ</h1>
+                </header>
+                <div class="space-y-8 pt-4">
+                    <div>
+                        <h3 class="font-semibold mb-3 text-xl">1. कक्षा चुनें</h3>
+                        <select id="class-select" class="w-full p-3 border rounded-lg bg-white text-base"><option value="11">कक्षा 11</option><option value="12">कक्षा 12</option><option value="11,12" selected>पूरा पाठ्यक्रम (11वीं + 12वीं)</option></select>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-3 text-xl">2. विषय चुनें</h3>
+                        <div id="subject-selection" class="subject-grid"></div>
+                    </div>
+                    <!-- New section for Lesson Selection -->
+                    <div id="lesson-selection-section" class="hidden">
+                        <h3 class="font-semibold mb-3 text-xl">3. पाठ चुनें (वैकल्पिक)</h3>
+                        <div id="lesson-selection-container" class="space-y-3">
+                            <!-- Lessons will be dynamically loaded here -->
+                            <p class="text-slate-500">विषय चुनने के बाद पाठ यहाँ दिखाई देंगे।</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-3 text-xl">4. कठिनाई चुनें</h3>
+                        <div class="flex flex-wrap gap-4">
+                            <label class="flex-1 min-w-[120px] flex items-center p-3 border rounded-lg bg-white cursor-pointer has-[:checked]:bg-indigo-100 has-[:checked]:border-indigo-500">
+                                <input type="radio" name="difficulty" value="Basic" class="mr-2 h-5 w-5 rounded-full text-indigo-600 focus:ring-indigo-500">
+                                <span class="font-semibold text-base">मूल</span>
+                            </label>
+                            <label class="flex-1 min-w-[120px] flex items-center p-3 border rounded-lg bg-white cursor-pointer has-[:checked]:bg-indigo-100 has-[:checked]:border-indigo-500">
+                                <input type="radio" name="difficulty" value="JEE Main" class="mr-2 h-5 w-5 rounded-full text-indigo-600 focus:ring-indigo-500" checked>
+                                <span class="font-semibold text-base">JEE मुख्य</span>
+                            </label>
+                            <label class="flex-1 min-w-[120px] flex items-center p-3 border rounded-lg bg-white cursor-pointer has-[:checked]:bg-indigo-100 has-[:checked]:border-indigo-500">
+                                <input type="radio" name="difficulty" value="JEE Advanced" class="mr-2 h-5 w-5 rounded-full text-indigo-600 focus:ring-indigo-500">
+                                <span class="font-semibold text-base">JEE एडवांस्ड</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button id="generate-test-btn" class="w-full button-primary py-4 font-bold shadow-lg text-xl">टेस्ट बनाएँ</button>
+                </div>
+            </div>
+
+            <!-- PYQ Screens -->
+            <div id="pyq-year-screen" class="screen flex-col p-6 md:p-8 space-y-6 overflow-y-auto">
+                <header class="flex items-center pb-4 border-b border-slate-100">
+                    <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                    <h1 class="text-3xl font-bold">वर्ष चुनें</h1>
+                </header>
+                <div id="pyq-year-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4 pt-4">
+                    <!-- Year buttons will be added here by JS -->
+                </div>
+            </div>
+
+            <div id="pyq-type-screen" class="screen flex-col p-6 md:p-8 space-y-6 overflow-y-auto">
+                <header class="flex items-center pb-4 border-b border-slate-100">
+                    <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                    <h1 id="pyq-type-title" class="text-3xl font-bold">परीक्षा का प्रकार चुनें</h1>
+                </header>
+                <div class="flex flex-col gap-4 pt-4">
+                     <button data-pyq-type="Main" class="pyq-type-btn button-primary w-full text-xl py-4">JEE Main</button>
+                     <button data-pyq-type="Advanced" class="pyq-type-btn button-primary w-full text-xl py-4">JEE Advanced</button>
+                </div>
+            </div>
+
+            <div id="exam-screen" class="screen flex-col">
+                <header class="sticky top-0 bg-white shadow-md z-10 p-4 flex justify-between items-center border-b border-slate-200">
+                    <h1 id="exam-title" class="text-xl font-bold text-slate-800">टेस्ट प्रगति पर है</h1>
+                    <div id="exam-timer" class="font-bold text-2xl text-indigo-600 bg-indigo-50 px-4 py-2 rounded-full shadow-inner">03:00:00</div>
+                </header>
+                <div id="exam-content" class="p-4 md:p-6 space-y-8 overflow-y-auto flex-grow bg-slate-50"></div>
+                <footer class="sticky bottom-0 bg-white p-4 border-t border-slate-200 shadow-md">
+                    <button id="submit-exam-btn" class="w-full bg-green-600 text-white font-bold py-3 rounded-xl hover:bg-green-700 transition text-lg shadow-lg">टेस्ट जमा करें</button>
+                </footer>
+            </div>
+            <div id="result-screen" class="screen flex-col justify-center items-center p-8">
+                 <h1 class="text-5xl font-bold mb-6 gradient-text">टेस्ट पूरा हुआ! 🎉</h1>
+                 <div class="text-center bg-slate-100 p-10 rounded-3xl shadow-2xl w-full max-w-md">
+                    <p class="text-xl text-slate-600 mb-2">आपका स्कोर</p>
+                    <p id="result-score" class="text-8xl font-extrabold my-4 text-indigo-600">--/300</p>
+                    <div class="grid grid-cols-3 gap-4 text-center mt-6">
+                        <div><p class="font-semibold text-slate-700">सही</p><p id="result-correct" class="text-3xl font-bold text-green-600">0</p></div>
+                        <div><p class="font-semibold text-slate-700">गलत</p><p id="result-incorrect" class="text-3xl font-bold text-red-600">0</p></div>
+                        <div><p class="font-semibold text-slate-700">अनुत्तरित</p><p id="result-unanswered" class="text-3xl font-bold text-slate-500">0</p></div>
+                    </div>
+                 </div>
+                 <div class="flex flex-col md:flex-row gap-4 mt-8">
+                    <button id="review-answers-btn" class="button-secondary py-3 px-8 text-lg shadow-lg">उत्तरों की समीक्षा करें</button>
+                    <button id="back-to-home-btn" class="button-primary py-3 px-8 text-lg shadow-lg">होम पर वापस जाएँ</button>
+                 </div>
+            </div>
+             <!-- NEW: Real JEE Result Screen -->
+            <div id="real-jee-result-screen" class="screen flex-col justify-center items-center p-8 text-center">
+                <h1 class="text-5xl font-bold mb-6 gradient-text">टेस्ट जमा हो गया!</h1>
+                <div class="bg-slate-100 p-10 rounded-3xl shadow-2xl w-full max-w-md">
+                    <p class="text-xl text-slate-600 mb-2">आपका स्कोर</p>
+                    <p id="real-jee-result-score" class="text-8xl font-extrabold my-4 text-indigo-600">0</p>
+                    <p class="text-lg text-slate-700 font-semibold">कटऑफ: 50</p>
+                    <p id="real-jee-cutoff-status" class="text-4xl font-bold mt-4"></p>
+                    <p class="text-slate-500 mt-8 text-lg">आपकी अखिल भारतीय रैंक 2 घंटे में स्कोरबोर्ड पर अपडेट की जाएगी।</p>
+                </div>
+                <button id="real-jee-back-home-btn" class="button-primary py-3 px-8 text-lg shadow-lg mt-8">होम पर वापस जाएँ</button>
+            </div>
+            <div id="scoreboard-screen" class="screen flex-col p-6 md:p-8">
+                <header class="flex items-center mb-6 pb-4 border-b border-slate-100">
+                    <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                    <h1 class="text-3xl font-bold">दैनिक टेस्ट स्कोरबोर्ड</h1>
+                </header>
+                <div id="scoreboard-info" class="text-center text-slate-500 p-3 bg-slate-100 rounded-lg mb-6 text-sm shadow-sm">टेस्ट जमा करने के 2 घंटे बाद स्कोर अपडेट किए जाते हैं।</div>
+                <div id="scoreboard-list" class="space-y-3 overflow-y-auto flex-grow"><p class="text-center text-slate-500 p-8">स्कोरबोर्ड लोड हो रहा है...</p></div>
+            </div>
+            <!-- NEW: External Scoreboard Screen -->
+            <div id="external-scoreboard-screen" class="screen flex-col p-6 md:p-8">
+                <header class="flex items-center mb-6 pb-4 border-b border-slate-100">
+                    <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                    <h1 class="text-3xl font-bold">JEE Main स्कोरबोर्ड</h1>
+                </header>
+                <!-- SCOREBOARD FIX: Sticky container for user's rank -->
+                <div id="user-rank-sticky" class="hidden"></div>
+                <div id="external-scoreboard-list" class="space-y-3 overflow-y-auto flex-grow"><p class="text-center text-slate-500 p-8">स्कोरबोर्ड लोड हो रहा है...</p></div>
+            </div>
+            <!-- New Review Screen -->
+            <div id="review-screen" class="screen flex-col">
+                <header class="sticky top-0 bg-white shadow-md z-10 p-4 flex items-center border-b border-slate-200">
+                    <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                    <h1 id="review-title" class="text-xl font-bold text-slate-800">उत्तरों की समीक्षा</h1>
+                </header>
+                <div id="review-content" class="p-4 md:p-6 space-y-8 overflow-y-auto flex-grow bg-slate-50"></div>
+            </div>
+
+        </main>
+        
+        <!-- Bottom Nav -->
+        <nav id="bottom-nav" class="bottom-nav hidden">
+            <div id="nav-home" class="nav-item active">
+                <i data-lucide="home"></i>
+                <span>होम</span>
+            </div>
+            <div id="nav-chat" class="nav-item">
+                <i data-lucide="message-circle"></i>
+                <span>वैश्विक चैट</span>
+            </div>
+             <div id="nav-users" class="nav-item">
+                <i data-lucide="users"></i>
+                <span>मैसेज</span>
+            </div>
+            <div id="nav-notifications" class="nav-item">
+                <i data-lucide="bell"></i>
+                <span>सूचनाएं</span>
+            </div>
+            <div id="nav-profile" class="nav-item">
+                <i data-lucide="user"></i>
+                <span>प्रोफाइल</span>
+            </div>
+        </nav>
+        <footer id="app-footer" class="text-center p-3 text-xs text-slate-400 opacity-60 hidden bg-white">Arvind Dara Bishnoi द्वारा निर्मित</footer>
+    </div>
+    
+    <!-- Modals Container -->
+    <div id="modal-container" class="hidden">
+        <div class="modal-backdrop"></div>
+        <div id="message-modal" class="modal bg-white rounded-2xl shadow-2xl p-8 w-11/12 max-w-sm text-center">
+            <h3 id="message-modal-title" class="text-2xl font-bold mb-4 text-slate-800">अलर्ट</h3>
+            <p id="message-modal-text" class="text-slate-600 mb-6 text-lg"></p>
+            <button id="message-modal-ok-btn" class="w-full button-primary py-3 text-lg">ठीक है</button>
+        </div>
+         <div id="target-info-modal" class="modal bg-white rounded-2xl shadow-2xl p-8 w-11/12 max-w-md hidden">
+             <h3 class="text-2xl font-bold mb-4 text-slate-800">Target Information</h3>
+             <p class="text-slate-600 mb-4 text-base">
+                यह टारगेट सेक्शन ऐप में उपस्थित नए उपयोगकर्ताओं के लिए है जिन्होंने अभी लॉग इन किया है। अगर 1000 टारगेट पूरे होते हैं, तो ऐप में कई सारे रोमांचक टेस्ट चालू होंगे, जैसे कि माइंड आईक्यू टेस्ट, रीजनिंग पहेलियाँ, और भी बहुत कुछ।
+             </p>
+             <button id="target-info-ok-btn" class="w-full button-primary py-3 text-lg mt-4">समझ गया</button>
+        </div>
+        <div id="feedback-modal" class="modal bg-white rounded-2xl shadow-2xl p-8 w-11/12 max-w-md hidden">
+             <h3 class="text-2xl font-bold mb-4 text-slate-800">आपकी प्रतिक्रिया</h3>
+             <p class="text-slate-600 mb-4 text-base">आप कौन सी नई सुविधाएँ या सुधार चाहते हैं? (प्रति दिन एक बार)</p>
+             <textarea id="feedback-input" class="w-full p-3 border rounded-lg h-32 text-base" placeholder="यहाँ टाइप करें..."></textarea>
+             <div class="flex gap-4 mt-6">
+                <button id="feedback-cancel-btn" class="flex-1 bg-slate-200 py-3 rounded-lg text-lg font-semibold hover:bg-slate-300 transition">रद्द करें</button>
+                <button id="feedback-submit-btn" class="flex-1 button-primary py-3 text-lg">जमा करें</button>
             </div>
         </div>
-
-        <!-- Right Ad -->
-        <div class="ad-container ad-right">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '83bf329d89f64adb373217c75241cebf',
-                    'format' : 'iframe',
-                    'height' : 600,
-                    'width' : 160,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//www.highperformanceformat.com/83bf329d89f64adb373217c75241cebf/invoke.js"></script>
+        <!-- Level Up Modal -->
+        <div id="level-up-modal" class="modal bg-white rounded-2xl shadow-2xl p-8 w-11/12 max-w-sm text-center hidden">
+            <i data-lucide="arrow-up-circle" class="h-16 w-16 text-yellow-400 mb-4"></i>
+            <h3 class="text-4xl font-bold mb-4 gradient-text">लेवल अप!</h3>
+            <p id="level-up-text" class="text-slate-600 mb-6 text-2xl"></p>
+            <button id="level-up-ok-btn" class="w-full button-primary py-3 text-lg">बहुत बढ़िया!</button>
         </div>
     </div>
 
@@ -2490,3 +2420,5 @@
     </script>
 </body>
 </html>
+" and I'm asking to make the following changes to the selected code:
+"sir ji app ke aour ads ke beech me thora gap rak
