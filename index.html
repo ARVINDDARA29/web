@@ -1,0 +1,2492 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future JEE Crackers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Main layout styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden; /* Prevent body scroll */
+        }
+
+        .download-header {
+            background-color: #1a237e; /* Dark blue */
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .download-header a {
+            color: #ffeb3b; /* Yellow */
+            text-decoration: none;
+            animation: pulse 2s infinite;
+        }
+
+        .main-container {
+            display: flex;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        .ad-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e0e0e0;
+        }
+
+        .ad-left, .ad-right {
+            flex: 0 0 160px; /* Fixed width for side ads */
+            overflow: auto;
+        }
+
+        .ad-top, .ad-bottom {
+            flex: 0 0 auto; /* Height will be determined by content */
+            width: 100%;
+            padding: 5px 0;
+        }
+        
+        .content-wrapper {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .app-container {
+            flex-grow: 1;
+            overflow: auto; /* The app itself will scroll */
+            position: relative;
+        }
+        
+        /* Styles from the user's app */
+        .app-wrapper {
+            width: 100%;
+            height: 100%; /* Make it fill the container */
+            max-width: none; /* Override max-width */
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            box-shadow: none; /* Remove original shadow */
+            border-radius: 0; /* Remove original radius */
+            overflow: hidden;
+        }
+        main {
+            flex-grow: 1;
+            overflow-y: auto;
+            position: relative;
+        }
+        .screen {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            animation: fadeInScale 0.6s ease-out forwards;
+        }
+        .screen.active {
+            display: flex;
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .shining-text {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff00ff, #00ffff, #ff00ff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 4s linear infinite;
+        }
+        .button-primary {
+            background-color: #6366f1;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 12px rgba(99, 102, 241, 0.3);
+            letter-spacing: 0.025em;
+            text-transform: uppercase;
+        }
+        .button-primary:hover:not(:disabled) {
+            background-color: #4f46e5;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
+        }
+        .button-primary:disabled {
+            background-color: #a5b4fc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        .button-secondary {
+            background-color: #e0e7ff;
+            color: #4f46e5;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .button-secondary:hover {
+            background-color: #c7d2fe;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .button-highlight {
+            background: linear-gradient(45deg, #f56565, #ed8936);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 12px rgba(237, 137, 54, 0.4);
+            letter-spacing: 0.025em;
+            text-transform: uppercase;
+            border: none;
+            animation: pulse 2s infinite;
+        }
+        .button-highlight:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(237, 137, 54, 0.5);
+        }
+        .bottom-nav {
+            display: flex;
+            border-top: 1px solid #e5e7eb;
+            background-color: #ffffff;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+            border-top-left-radius: 1.5rem;
+            border-top-right-radius: 1.5rem;
+            flex-shrink: 0;
+        }
+        .nav-item {
+            flex: 1;
+            text-align: center;
+            padding: 0.75rem 0;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-top: 3px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            position: relative;
+        }
+        .nav-item.active {
+            color: #6366f1;
+            border-top-color: #6366f1;
+            font-weight: 600;
+        }
+        .nav-item:hover {
+            background-color: #f3f4f6;
+        }
+        .nav-item svg {
+            margin: 0 auto 0.25rem;
+            width: 1.5rem; 
+            height: 1.5rem;
+        }
+        .notification-badge {
+            position: absolute;
+            top: 5px;
+            right: calc(50% - 20px);
+            background-color: #ef4444;
+            color: white;
+            border-radius: 9999px;
+            width: 18px;
+            height: 18px;
+            font-size: 11px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            border: 2px solid white;
+        }
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 40;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            z-index: 50;
+            animation: modalPop 0.3s ease-out forwards;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+        }
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.25rem;
+        }
+        .exam-question, .review-question {
+            scroll-margin-top: 80px;
+            background-color: #ffffff;
+            padding: 1.75rem;
+            border-radius: 1.25rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease-out;
+        }
+        .exam-question:hover {
+            transform: translateY(-2px);
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        @keyframes modalPop { from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 6px 12px rgba(237, 137, 54, 0.4); }
+            50% { transform: scale(1.03); box-shadow: 0 10px 20px rgba(237, 137, 54, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 6px 12px rgba(237, 137, 54, 0.4); }
+        }
+        .animate-pulse-subtle { animation: pulse 2s infinite ease-in-out; }
+        input[type="text"], input[type="email"], input[type="password"], textarea, select {
+            border: 1px solid #cbd5e1;
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            width: 100%;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+        input[type="radio"], input[type="checkbox"] {
+            -webkit-appearance: none; -moz-appearance: none; appearance: none;
+            width: 1.25rem; height: 1.25rem;
+            border: 2px solid #9ca3af; border-radius: 0.375rem;
+            background-color: #ffffff; transition: all 0.2s ease; cursor: pointer;
+        }
+        input[type="radio"] { border-radius: 50%; }
+        input[type="radio"]:checked, input[type="checkbox"]:checked { background-color: #6366f1; border-color: #6366f1; }
+        input[type="radio"]:checked::before { content: ''; display: block; width: 0.5rem; height: 0.5rem; border-radius: 50%; background-color: white; margin: 3px; }
+        input[type="checkbox"]:checked::before { content: '✔'; display: block; color: white; font-size: 0.75rem; line-height: 1; text-align: center; margin-top: 1px; }
+        .subject-grid label { transition: all 0.2s ease; border: 2px solid #e2e8f0; border-radius: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .subject-grid label:hover { border-color: #a5b4fc; transform: translateY(-1px); }
+        .subject-grid label.has-[:checked]:bg-indigo-100 { background-color: #e0e7ff; border-color: #6366f1; box-shadow: 0 4px 8px rgba(99, 102, 241, 0.2); }
+        .back-btn { background-color: #f1f5f9; color: #475569; border-radius: 9999px; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
+        .back-btn:hover { background-color: #e2e8f0; transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        #poll-box { background-color: #eef2ff; border-left: 5px solid #6366f1; color: #4338ca; padding: 1.25rem; border-radius: 0.75rem; box-shadow: 0 4px 8px rgba(0,0,0,0.05); animation: fadeIn 0.5s ease-in-out; }
+        #poll-box .vote-btn { background-color: #6366f1; color: white; padding: 0.75rem 1.25rem; border-radius: 9999px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: all 0.2s ease; }
+        #poll-box .vote-btn:hover:not(:disabled) { background-color: #4f46e5; transform: translateY(-2px); }
+        #poll-box .vote-btn:disabled { background-color: #a5b4fc; cursor: not-allowed; opacity: 0.7; }
+        #poll-box .vote-count { font-weight: 700; font-size: 1.25rem; color: #4f46e5; }
+        #poll-box .vote-status-message { font-style: italic; color: #5a67d8; font-size: 0.9rem; margin-top: 0.75rem; }
+        #scoreboard-list div, #external-scoreboard-list div { border-radius: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.2s ease; }
+        #scoreboard-list div:hover, #external-scoreboard-list div:hover { transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        #scoreboard-list div.bg-indigo-100, #external-scoreboard-list div.bg-yellow-100 { background-color: #e0e7ff; border-color: #6366f1; }
+        #external-scoreboard-list div.bg-yellow-100 { background-color: #fefcbf; border: 2px solid #f6e05e; }
+        #user-rank-sticky { position: sticky; top: -1px; z-index: 10; background-color: white; padding: 1rem; margin: -1.5rem -1.5rem 1.5rem -1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-bottom: 1px solid #e5e7eb; }
+        #chat-messages div, #personal-chat-messages div { border-radius: 1.25rem; padding: 0.75rem 1rem; max-width: 80%; word-wrap: break-word; font-size: 0.95rem; }
+        #chat-messages div.bg-indigo-500, #personal-chat-messages div.bg-indigo-500 { background-color: #6366f1; }
+        #chat-messages div.bg-slate-200, #personal-chat-messages div.bg-slate-200 { background-color: #e2e8f0; }
+        #chat-input, #personal-chat-input { border-radius: 9999px; padding-left: 1.25rem; padding-right: 1.25rem; }
+        #chat-form button, #personal-chat-form button { background-color: #6366f1; border-radius: 9999px; padding: 0.75rem; box-shadow: 0 4px 8px rgba(99, 102, 241, 0.3); transition: all 0.2s ease; }
+        #chat-form button:hover, #personal-chat-form button:hover { background-color: #4f46e5; transform: translateY(-1px); box-shadow: 0 6px 12px rgba(99, 102, 241, 0.4); }
+        .bg-amber-500 { background-color: #f59e0b; box-shadow: 0 6px 12px rgba(245, 158, 11, 0.3); animation: pulse 2s infinite ease-in-out; }
+        .xp-bar-container { background-color: #e0e7ff; border-radius: 9999px; overflow: hidden; height: 10px; }
+        .xp-bar { background-color: #4f46e5; height: 100%; transition: width 0.5s ease-in-out; }
+        @keyframes levelUp { 0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; } 50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+        #level-up-modal { animation: levelUp 0.5s ease-out forwards; }
+        .notification-item { border-left-width: 4px; transition: all 0.2s ease-in-out; }
+        .notification-item:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+        .notification-item.unread { border-left-color: #6366f1; background-color: #eef2ff; }
+        .notification-item.read { border-left-color: #d1d5db; background-color: #f9fafb; }
+        .info-icon { cursor: pointer; color: #9ca3af; transition: color 0.2s ease; }
+        .info-icon:hover { color: #6b7280; }
+    </style>
+</head>
+<body>
+    <!-- Top Header for Download Link -->
+    <div class="download-header">
+        <a href="https://www.mediafire.com/file/b5we5cyupdsev73/WEBSITEASSES.apk/file" target="_blank" rel="noopener noreferrer">
+            Download JEE Cracker App (Ad-Free)
+        </a>
+    </div>
+
+    <!-- Main container for ads and app -->
+    <div class="main-container">
+        
+        <!-- Left Ad -->
+        <div class="ad-container ad-left">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '83bf329d89f64adb373217c75241cebf',
+                    'format' : 'iframe',
+                    'height' : 600,
+                    'width' : 160,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/83bf329d89f64adb373217c75241cebf/invoke.js"></script>
+        </div>
+
+        <!-- Central Content (App + Top/Bottom Ads) -->
+        <div class="content-wrapper">
+            <!-- Top Ad -->
+            <div class="ad-container ad-top">
+                <script async="async" data-cfasync="false" src="//pl27209153.profitableratecpm.com/4e2d6d16c1332f7c73b28bca760b3ec9/invoke.js"></script>
+                <div id="container-4e2d6d16c1332f7c73b28bca760b3ec9"></div>
+            </div>
+
+            <!-- The App itself -->
+            <div class="app-container">
+                <!-- The entire body content from your app goes here -->
+                <div class="app-wrapper">
+                    <main class="flex-grow flex flex-col overflow-y-auto">
+                        <!-- Loading Screen -->
+                        <div id="loading-screen" class="screen active flex-col justify-center items-center p-8">
+                            <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-indigo-600"></div>
+                            <h1 class="text-4xl font-bold mt-8 gradient-text">Future JEE Crackers</h1>
+                            <p class="text-slate-500 mt-3 text-lg">by ARVIND DARA BISHNOI</p>
+                        </div>
+            
+                        <!-- Original Intro/Login Screens -->
+                        <div id="intro-screen" class="screen justify-center items-center p-8">
+                            <h1 class="text-6xl font-extrabold gradient-text text-center leading-tight">ARVIND DARA BISHNOI</h1>
+                            <p class="text-slate-600 text-center mt-4 text-lg">JEE में सफलता का आपका मार्ग यहाँ से शुरू होता है।</p>
+                        </div>
+                        <!-- LOGIN FIX: Simplified main screen -->
+                        <div id="main-screen" class="screen flex-col justify-center items-center p-8 space-y-6">
+                            <h2 class="text-4xl font-bold text-gray-800 mb-8">स्वागत है! 👋</h2>
+                            <button id="email-signup-btn" class="button-primary w-full max-w-sm">साइन अप करें (ईमेल/पासवर्ड)</button>
+                            <button id="email-login-btn" class="button-secondary w-full max-w-sm">लॉग इन करें (ईमेल/पासवर्ड)</button>
+                            <button id="continue-as-guest-btn" class="button-secondary w-full max-w-sm">गेस्ट के रूप में जारी रखें</button>
+                        </div>
+                        <div id="new-user-screen" class="screen flex-col justify-center items-center p-8 space-y-6">
+                            <button class="back-btn absolute top-6 left-6 p-3 rounded-full hover:bg-slate-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                            <h2 class="text-3xl font-bold text-gray-800">आपका पूरा नाम क्या है?</h2>
+                            <input type="text" id="new-user-name-input" placeholder="अपना पूरा नाम दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
+                            <button id="create-guest-user-btn" class="button-primary w-full max-w-sm">गेस्ट खाता बनाएँ</button>
+                        </div>
+                        <div id="email-signup-screen" class="screen flex-col justify-center items-center p-8 space-y-6">
+                            <button class="back-btn absolute top-6 left-6 p-3 rounded-full hover:bg-slate-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                            <h2 class="text-3xl font-bold text-gray-800">खाता बनाएँ</h2>
+                            <input type="text" id="signup-name-input" placeholder="अपना पूरा नाम दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
+                            <input type="email" id="signup-email-input" placeholder="ईमेल दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
+                            <input type="password" id="signup-password-input" placeholder="पासवर्ड दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
+                            <button id="signup-btn" class="button-primary w-full max-w-sm">साइन अप करें</button>
+                        </div>
+                         <div id="email-login-screen" class="screen flex-col justify-center items-center p-8 space-y-6">
+                            <button class="back-btn absolute top-6 left-6 p-3 rounded-full hover:bg-slate-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                            <h2 class="text-3xl font-bold text-gray-800">लॉग इन करें</h2>
+                            <input type="email" id="login-email-input" placeholder="ईमेल दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
+                            <input type="password" id="login-password-input" placeholder="पासवर्ड दर्ज करें" class="p-4 border rounded-xl w-full max-w-sm text-lg">
+                            <button id="email-login-submit-btn" class="button-primary w-full max-w-sm">लॉग इन करें</button>
+                        </div>
+                        
+                        <!-- Home Screen -->
+                        <div id="home-screen" class="screen flex-col p-6 md:p-8 space-y-6 overflow-y-auto">
+                            <header class="pb-4 border-b border-slate-100 flex items-center justify-between">
+                                <div>
+                                    <h1 id="welcome-message" class="text-3xl font-bold text-slate-800">नमस्ते!</h1>
+                                    <p class="text-slate-500 text-lg mt-1">JEE जीतने के लिए तैयार हैं?</p>
+                                </div>
+                                <i data-lucide="graduation-cap" class="text-5xl gradient-text opacity-80"></i>
+                            </header>
+            
+                            <!-- Target Section -->
+                            <div id="target-section" class="bg-slate-50 p-5 rounded-2xl shadow-md text-center">
+                                <div class="flex items-center justify-center gap-2 mb-2">
+                                    <h2 class="shining-text">TARGET</h2>
+                                    <i id="target-info-icon" data-lucide="info" class="text-xl text-slate-400 cursor-pointer hover:text-slate-600 transition"></i>
+                                </div>
+                                <p id="target-count" class="text-5xl font-bold text-slate-700">0</p>
+                            </div>
+            
+                            <!-- NEW: Real JEE Main Test Button -->
+                             <div class="pt-4">
+                                <button id="real-jee-test-btn" class="w-full button-highlight py-4 font-bold shadow-lg text-xl flex items-center justify-center gap-3">
+                                    <i data-lucide="flame"></i>
+                                    <span>REAL JEE MAIN TEST</span>
+                                </button>
+                            </div>
+            
+                            <!-- Poll Box (formerly Announcement Box) -->
+                            <div id="poll-box" class="bg-indigo-50 border-l-4 border-indigo-500 text-indigo-800 p-4 rounded-r-lg shadow-sm hidden">
+                                <p class="font-bold mb-2">आज का पोल</p>
+                                <p id="poll-question-text" class="text-lg mb-4"></p>
+                                <div class="flex justify-around items-center gap-4">
+                                    <button id="thumbs-up-btn" class="vote-btn flex-1 bg-green-500 hover:bg-green-600">
+                                        <i data-lucide="thumbs-up"></i> <span id="thumbs-up-count">0</span>
+                                    </button>
+                                    <button id="thumbs-down-btn" class="vote-btn flex-1 bg-red-500 hover:bg-red-600">
+                                        <i data-lucide="thumbs-down"></i> <span id="thumbs-down-count">0</span>
+                                    </button>
+                                </div>
+                                <p id="vote-status-message" class="vote-status-message text-center"></p>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-4">
+                                <button id="prep-by-syllabus-btn" class="bg-indigo-600 text-white p-7 rounded-2xl shadow-xl hover:bg-indigo-700 transition text-left space-y-2 transform hover:scale-105 flex items-center justify-between">
+                                    <div>
+                                        <h2 class="text-2xl font-bold">JEE मुख्य तैयारी</h2>
+                                        <p class="text-indigo-200 text-base">पाठ्यक्रम के अनुसार अभ्यास टेस्ट।</p>
+                                    </div>
+                                    <i data-lucide="book-open" class="h-10 w-10 opacity-70"></i>
+                                </button>
+                                <button id="daily-rank-test-btn" class="bg-pink-600 text-white p-7 rounded-2xl shadow-xl hover:bg-pink-700 transition text-left space-y-2 transform hover:scale-105 flex items-center justify-between">
+                                    <div>
+                                        <h2 class="text-2xl font-bold">दैनिक JEE रैंक श्रृंखला</h2>
+                                        <p class="text-pink-200 text-base">एक लाइव टेस्ट में प्रतिस्पर्धा करें।</p>
+                                    </div>
+                                    <i data-lucide="trophy" class="h-10 w-10 opacity-70"></i>
+                                </button>
+                                 <button id="pyq-btn" class="bg-teal-600 text-white p-7 rounded-2xl shadow-xl hover:bg-teal-700 transition text-left space-y-2 transform hover:scale-105 flex items-center justify-between">
+                                    <div>
+                                        <h2 class="text-2xl font-bold">पिछले वर्षों के प्रश्नपत्र</h2>
+                                        <p class="text-teal-200 text-base">वास्तविक JEE प्रश्नपत्रों के साथ अभ्यास करें।</p>
+                                    </div>
+                                    <i data-lucide="history" class="h-10 w-10 opacity-70"></i>
+                                </button>
+                                <button id="scoreboard-btn" class="bg-green-600 text-white p-7 rounded-2xl shadow-xl hover:bg-green-700 transition text-left space-y-2 transform hover:scale-105 flex items-center justify-between">
+                                    <div>
+                                        <h2 class="text-2xl font-bold">दैनिक स्कोर बोर्ड</h2>
+                                        <p class="text-green-200 text-base">रैंक और शीर्ष प्रदर्शन करने वालों की जाँच करें।</p>
+                                    </div>
+                                    <i data-lucide="clipboard-list" class="h-10 w-10 opacity-70"></i>
+                                </button>
+                                 <button id="external-scoreboard-btn" class="bg-purple-600 text-white p-7 rounded-2xl shadow-xl hover:bg-purple-700 transition text-left space-y-2 transform hover:scale-105 flex items-center justify-between">
+                                    <div>
+                                        <h2 class="text-2xl font-bold">JEE Main स्कोरबोर्ड</h2>
+                                        <p class="text-purple-200 text-base">अखिल भारतीय रैंक देखें।</p>
+                                    </div>
+                                    <i data-lucide="globe" class="h-10 w-10 opacity-70"></i>
+                                </button>
+                                <div class="bg-amber-500 text-white p-7 rounded-2xl shadow-xl text-left space-y-2 animate-pulse-subtle flex items-center justify-between col-span-1 md:col-span-2">
+                                    <div>
+                                        <h2 class="text-2xl font-bold">अखिल भारतीय JEE+एडवांस्ड</h2>
+                                        <p id="all-india-test-countdown" class="text-amber-200 text-base">7 दिनों में शुरू होगा!</p>
+                                    </div>
+                                    <i data-lucide="star" class="h-10 w-10 opacity-70"></i>
+                                </div>
+                            </div>
+                            <div class="pt-6">
+                                <button id="feedback-btn" class="w-full text-center py-4 bg-slate-200 text-slate-700 rounded-xl hover:bg-slate-300 transition font-semibold text-lg shadow-md flex items-center justify-center gap-3">
+                                    <i data-lucide="message-square-plus"></i>
+                                    <span>आप कौन सी नई सुविधाएँ चाहते हैं?</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Global Chat Screen -->
+                        <div id="chat-screen" class="screen flex-col">
+                             <header class="p-4 border-b border-slate-200 flex items-center justify-between bg-white shadow-sm">
+                                <h1 class="font-bold text-xl text-slate-700">वैश्विक चैट</h1>
+                                <div class="flex items-center gap-2">
+                                    <label for="chat-filter" class="text-sm font-medium text-slate-500">Sort by:</label>
+                                    <select id="chat-filter" class="p-1 border rounded-md text-sm">
+                                        <option value="newest" selected>Newest</option>
+                                        <option value="oldest">Oldest</option>
+                                    </select>
+                                </div>
+                            </header>
+                            <div id="chat-messages-container" class="flex-grow p-4 space-y-4 overflow-y-auto flex flex-col-reverse">
+                                <div id="chat-messages" class="flex flex-col gap-4"></div>
+                                <button id="load-more-messages-btn" class="button-secondary mx-auto my-2 py-2 px-4 text-sm hidden">Load More</button>
+                            </div>
+                            <form id="chat-form" class="p-4 border-t border-slate-200 flex gap-3 bg-white">
+                                <input type="text" id="chat-input" placeholder="एक संदेश टाइप करें..." class="flex-grow p-3 border rounded-full text-base">
+                                <button type="submit" class="bg-indigo-600 text-white rounded-full p-3 flex-shrink-0 shadow-md hover:bg-indigo-700 transition"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.428A1 1 0 009.894 15V4.106A1 1 0 0010.894 2.553z" /></svg></button>
+                            </form>
+                        </div>
+                        
+                        <!-- Users List Screen for Personal Chat -->
+                        <div id="users-list-screen" class="screen flex-col">
+                            <header class="p-4 border-b border-slate-200 font-bold text-xl text-center text-slate-700 bg-white shadow-sm">एक उपयोगकर्ता चुनें</header>
+                            <div id="users-list-container" class="flex-grow p-4 space-y-2 overflow-y-auto">
+                                <!-- User list will be populated here -->
+                            </div>
+                        </div>
+            
+                        <!-- Personal Chat Screen -->
+                        <div id="personal-chat-screen" class="screen flex-col">
+                            <header class="p-4 border-b border-slate-200 flex items-center bg-white shadow-sm">
+                                <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                                <h1 id="personal-chat-header" class="font-bold text-xl text-slate-700">चैट</h1>
+                            </header>
+                            <div id="personal-chat-messages" class="flex-grow p-4 space-y-4 overflow-y-auto flex flex-col"></div>
+                            <form id="personal-chat-form" class="p-4 border-t border-slate-200 flex gap-3 bg-white">
+                                <input type="text" id="personal-chat-input" placeholder="एक संदेश टाइप करें..." class="flex-grow p-3 border rounded-full text-base">
+                                <button type="submit" class="bg-indigo-600 text-white rounded-full p-3 flex-shrink-0 shadow-md hover:bg-indigo-700 transition"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.428A1 1 0 009.894 15V4.106A1 1 0 0010.894 2.553z" /></svg></button>
+                            </form>
+                        </div>
+            
+                        <!-- Notifications Screen -->
+                        <div id="notifications-screen" class="screen flex-col">
+                            <header class="p-4 border-b border-slate-200 font-bold text-xl text-center text-slate-700 bg-white shadow-sm">सूचनाएं</header>
+                            <div id="notifications-container" class="flex-grow p-4 space-y-3 overflow-y-auto bg-slate-50">
+                                <!-- Notifications will be populated here -->
+                            </div>
+                        </div>
+            
+                        <!-- Profile Screen -->
+                        <div id="profile-screen" class="screen flex-col p-6 space-y-6 overflow-y-auto">
+                             <h2 class="text-4xl font-bold text-gray-800 gradient-text mb-4">प्रोफाइल</h2>
+                            <div class="bg-slate-100 p-5 rounded-xl shadow-sm">
+                                <p class="font-semibold text-gray-700 mb-2 text-lg">आपकी उपयोगकर्ता आईडी:</p>
+                                <div class="flex items-center justify-between">
+                                    <p id="display-user-id" class="font-mono text-gray-600 break-all text-sm bg-slate-200 p-2 rounded-md flex-grow mr-2"></p>
+                                    <button id="copy-id-btn" class="px-4 py-2 bg-gray-200 text-gray-700 text-sm rounded-lg hover:bg-gray-300 transition">कॉपी करें</button>
+                                </div>
+                            </div>
+                             <div class="bg-slate-100 p-5 rounded-xl shadow-sm">
+                                <p class="font-semibold text-gray-700 mb-2 text-lg">आपका नाम:</p>
+                                <input type="text" id="profile-name-input" class="p-3 border rounded-lg w-full mb-3 text-base">
+                                <button id="save-name-btn" class="button-primary w-full text-base py-3">नाम सहेजें</button>
+                            </div>
+                            <!-- Leveling System UI -->
+                            <div class="bg-slate-100 p-5 rounded-xl shadow-sm">
+                                <div class="flex justify-between items-center mb-2">
+                                    <p class="font-semibold text-gray-700 text-lg">लेवल <span id="profile-level">0</span></p>
+                                    <p id="profile-xp" class="text-sm text-gray-500">0 / 100 XP</p>
+                                </div>
+                                <div class="xp-bar-container">
+                                    <div id="profile-xp-bar" class="xp-bar" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-100 p-5 rounded-xl shadow-sm">
+                                <p class="font-semibold text-gray-700 mb-2 text-lg">भाषा चुनें:</p>
+                                <select id="language-select" class="w-full p-3 border rounded-lg bg-white text-base">
+                                    <option value="english">English</option>
+                                    <option value="hindi" selected>हिंदी</option>
+                                </select>
+                            </div>
+                            <a href="http://www.youtube.com/@RAVI..BHAI_0029" target="_blank" class="button-secondary w-full text-center text-lg py-4">चैनल देखें</a>
+                            <button id="logout-btn" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 rounded-xl shadow-md text-lg">लॉग आउट</button>
+                        </div>
+            
+                        <!-- Real JEE Test Form Screen -->
+                        <div id="real-jee-form-screen" class="screen flex-col p-6 md:p-8 space-y-6 overflow-y-auto">
+                            <header class="flex items-center pb-4 border-b border-slate-100">
+                                <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                                <h1 class="text-3xl font-bold">REAL JEE MAIN TEST पंजीकरण</h1>
+                            </header>
+                            <div class="space-y-8 pt-4">
+                                <div>
+                                    <label for="real-jee-name" class="font-semibold mb-2 text-lg block">पूरा नाम</label>
+                                    <input type="text" id="real-jee-name" class="w-full p-3 border rounded-lg bg-slate-100" readonly>
+                                </div>
+                                <div>
+                                    <label for="real-jee-class" class="font-semibold mb-2 text-lg block">आपकी कक्षा</label>
+                                    <select id="real-jee-class" class="w-full p-3 border rounded-lg bg-white text-base">
+                                        <option value="11th">11वीं</option>
+                                        <option value="12th">12वीं</option>
+                                        <option value="Dropper" selected>ड्रॉपर</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="real-jee-target" class="font-semibold mb-2 text-lg block">लक्ष्य JEE वर्ष</label>
+                                    <select id="real-jee-target" class="w-full p-3 border rounded-lg bg-white text-base">
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                    </select>
+                                </div>
+                                <button id="real-jee-form-submit-btn" class="w-full button-highlight py-4 font-bold shadow-lg text-xl">टेस्ट शुरू करें</button>
+                            </div>
+                        </div>
+            
+                        <!-- JEE Screens -->
+                        <div id="jee-prep-setup-screen" class="screen flex-col p-6 md:p-8 space-y-6 overflow-y-auto">
+                            <header class="flex items-center pb-4 border-b border-slate-100">
+                                <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                                <h1 class="text-3xl font-bold">अपना टेस्ट बनाएँ</h1>
+                            </header>
+                            <div class="space-y-8 pt-4">
+                                <div>
+                                    <h3 class="font-semibold mb-3 text-xl">1. कक्षा चुनें</h3>
+                                    <select id="class-select" class="w-full p-3 border rounded-lg bg-white text-base"><option value="11">कक्षा 11</option><option value="12">कक्षा 12</option><option value="11,12" selected>पूरा पाठ्यक्रम (11वीं + 12वीं)</option></select>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold mb-3 text-xl">2. विषय चुनें</h3>
+                                    <div id="subject-selection" class="subject-grid"></div>
+                                </div>
+                                <!-- New section for Lesson Selection -->
+                                <div id="lesson-selection-section" class="hidden">
+                                    <h3 class="font-semibold mb-3 text-xl">3. पाठ चुनें (वैकल्पिक)</h3>
+                                    <div id="lesson-selection-container" class="space-y-3">
+                                        <!-- Lessons will be dynamically loaded here -->
+                                        <p class="text-slate-500">विषय चुनने के बाद पाठ यहाँ दिखाई देंगे।</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold mb-3 text-xl">4. कठिनाई चुनें</h3>
+                                    <div class="flex flex-wrap gap-4">
+                                        <label class="flex-1 min-w-[120px] flex items-center p-3 border rounded-lg bg-white cursor-pointer has-[:checked]:bg-indigo-100 has-[:checked]:border-indigo-500">
+                                            <input type="radio" name="difficulty" value="Basic" class="mr-2 h-5 w-5 rounded-full text-indigo-600 focus:ring-indigo-500">
+                                            <span class="font-semibold text-base">मूल</span>
+                                        </label>
+                                        <label class="flex-1 min-w-[120px] flex items-center p-3 border rounded-lg bg-white cursor-pointer has-[:checked]:bg-indigo-100 has-[:checked]:border-indigo-500">
+                                            <input type="radio" name="difficulty" value="JEE Main" class="mr-2 h-5 w-5 rounded-full text-indigo-600 focus:ring-indigo-500" checked>
+                                            <span class="font-semibold text-base">JEE मुख्य</span>
+                                        </label>
+                                        <label class="flex-1 min-w-[120px] flex items-center p-3 border rounded-lg bg-white cursor-pointer has-[:checked]:bg-indigo-100 has-[:checked]:border-indigo-500">
+                                            <input type="radio" name="difficulty" value="JEE Advanced" class="mr-2 h-5 w-5 rounded-full text-indigo-600 focus:ring-indigo-500">
+                                            <span class="font-semibold text-base">JEE एडवांस्ड</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <button id="generate-test-btn" class="w-full button-primary py-4 font-bold shadow-lg text-xl">टेस्ट बनाएँ</button>
+                            </div>
+                        </div>
+            
+                        <!-- PYQ Screens -->
+                        <div id="pyq-year-screen" class="screen flex-col p-6 md:p-8 space-y-6 overflow-y-auto">
+                            <header class="flex items-center pb-4 border-b border-slate-100">
+                                <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                                <h1 class="text-3xl font-bold">वर्ष चुनें</h1>
+                            </header>
+                            <div id="pyq-year-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4 pt-4">
+                                <!-- Year buttons will be added here by JS -->
+                            </div>
+                        </div>
+            
+                        <div id="pyq-type-screen" class="screen flex-col p-6 md:p-8 space-y-6 overflow-y-auto">
+                            <header class="flex items-center pb-4 border-b border-slate-100">
+                                <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                                <h1 id="pyq-type-title" class="text-3xl font-bold">परीक्षा का प्रकार चुनें</h1>
+                            </header>
+                            <div class="flex flex-col gap-4 pt-4">
+                                 <button data-pyq-type="Main" class="pyq-type-btn button-primary w-full text-xl py-4">JEE Main</button>
+                                 <button data-pyq-type="Advanced" class="pyq-type-btn button-primary w-full text-xl py-4">JEE Advanced</button>
+                            </div>
+                        </div>
+            
+                        <div id="exam-screen" class="screen flex-col">
+                            <header class="sticky top-0 bg-white shadow-md z-10 p-4 flex justify-between items-center border-b border-slate-200">
+                                <h1 id="exam-title" class="text-xl font-bold text-slate-800">टेस्ट प्रगति पर है</h1>
+                                <div id="exam-timer" class="font-bold text-2xl text-indigo-600 bg-indigo-50 px-4 py-2 rounded-full shadow-inner">03:00:00</div>
+                            </header>
+                            <div id="exam-content" class="p-4 md:p-6 space-y-8 overflow-y-auto flex-grow bg-slate-50"></div>
+                            <footer class="sticky bottom-0 bg-white p-4 border-t border-slate-200 shadow-md">
+                                <button id="submit-exam-btn" class="w-full bg-green-600 text-white font-bold py-3 rounded-xl hover:bg-green-700 transition text-lg shadow-lg">टेस्ट जमा करें</button>
+                            </footer>
+                        </div>
+                        <div id="result-screen" class="screen flex-col justify-center items-center p-8">
+                             <h1 class="text-5xl font-bold mb-6 gradient-text">टेस्ट पूरा हुआ! 🎉</h1>
+                             <div class="text-center bg-slate-100 p-10 rounded-3xl shadow-2xl w-full max-w-md">
+                                <p class="text-xl text-slate-600 mb-2">आपका स्कोर</p>
+                                <p id="result-score" class="text-8xl font-extrabold my-4 text-indigo-600">--/300</p>
+                                <div class="grid grid-cols-3 gap-4 text-center mt-6">
+                                    <div><p class="font-semibold text-slate-700">सही</p><p id="result-correct" class="text-3xl font-bold text-green-600">0</p></div>
+                                    <div><p class="font-semibold text-slate-700">गलत</p><p id="result-incorrect" class="text-3xl font-bold text-red-600">0</p></div>
+                                    <div><p class="font-semibold text-slate-700">अनुत्तरित</p><p id="result-unanswered" class="text-3xl font-bold text-slate-500">0</p></div>
+                                </div>
+                             </div>
+                             <div class="flex flex-col md:flex-row gap-4 mt-8">
+                                <button id="review-answers-btn" class="button-secondary py-3 px-8 text-lg shadow-lg">उत्तरों की समीक्षा करें</button>
+                                <button id="back-to-home-btn" class="button-primary py-3 px-8 text-lg shadow-lg">होम पर वापस जाएँ</button>
+                             </div>
+                        </div>
+                         <!-- NEW: Real JEE Result Screen -->
+                        <div id="real-jee-result-screen" class="screen flex-col justify-center items-center p-8 text-center">
+                            <h1 class="text-5xl font-bold mb-6 gradient-text">टेस्ट जमा हो गया!</h1>
+                            <div class="bg-slate-100 p-10 rounded-3xl shadow-2xl w-full max-w-md">
+                                <p class="text-xl text-slate-600 mb-2">आपका स्कोर</p>
+                                <p id="real-jee-result-score" class="text-8xl font-extrabold my-4 text-indigo-600">0</p>
+                                <p class="text-lg text-slate-700 font-semibold">कटऑफ: 50</p>
+                                <p id="real-jee-cutoff-status" class="text-4xl font-bold mt-4"></p>
+                                <p class="text-slate-500 mt-8 text-lg">आपकी अखिल भारतीय रैंक 2 घंटे में स्कोरबोर्ड पर अपडेट की जाएगी।</p>
+                            </div>
+                            <button id="real-jee-back-home-btn" class="button-primary py-3 px-8 text-lg shadow-lg mt-8">होम पर वापस जाएँ</button>
+                        </div>
+                        <div id="scoreboard-screen" class="screen flex-col p-6 md:p-8">
+                            <header class="flex items-center mb-6 pb-4 border-b border-slate-100">
+                                <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                                <h1 class="text-3xl font-bold">दैनिक टेस्ट स्कोरबोर्ड</h1>
+                            </header>
+                            <div id="scoreboard-info" class="text-center text-slate-500 p-3 bg-slate-100 rounded-lg mb-6 text-sm shadow-sm">टेस्ट जमा करने के 2 घंटे बाद स्कोर अपडेट किए जाते हैं।</div>
+                            <div id="scoreboard-list" class="space-y-3 overflow-y-auto flex-grow"><p class="text-center text-slate-500 p-8">स्कोरबोर्ड लोड हो रहा है...</p></div>
+                        </div>
+                        <!-- NEW: External Scoreboard Screen -->
+                        <div id="external-scoreboard-screen" class="screen flex-col p-6 md:p-8">
+                            <header class="flex items-center mb-6 pb-4 border-b border-slate-100">
+                                <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                                <h1 class="text-3xl font-bold">JEE Main स्कोरबोर्ड</h1>
+                            </header>
+                            <!-- SCOREBOARD FIX: Sticky container for user's rank -->
+                            <div id="user-rank-sticky" class="hidden"></div>
+                            <div id="external-scoreboard-list" class="space-y-3 overflow-y-auto flex-grow"><p class="text-center text-slate-500 p-8">स्कोरबोर्ड लोड हो रहा है...</p></div>
+                        </div>
+                        <!-- New Review Screen -->
+                        <div id="review-screen" class="screen flex-col">
+                            <header class="sticky top-0 bg-white shadow-md z-10 p-4 flex items-center border-b border-slate-200">
+                                <button class="back-btn p-3 rounded-full hover:bg-slate-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                                <h1 id="review-title" class="text-xl font-bold text-slate-800">उत्तरों की समीक्षा</h1>
+                            </header>
+                            <div id="review-content" class="p-4 md:p-6 space-y-8 overflow-y-auto flex-grow bg-slate-50"></div>
+                        </div>
+            
+                    </main>
+                    
+                    <!-- Bottom Nav -->
+                    <nav id="bottom-nav" class="bottom-nav hidden">
+                        <div id="nav-home" class="nav-item active">
+                            <i data-lucide="home"></i>
+                            <span>होम</span>
+                        </div>
+                        <div id="nav-chat" class="nav-item">
+                            <i data-lucide="message-circle"></i>
+                            <span>वैश्विक चैट</span>
+                        </div>
+                         <div id="nav-users" class="nav-item">
+                            <i data-lucide="users"></i>
+                            <span>मैसेज</span>
+                        </div>
+                        <div id="nav-notifications" class="nav-item">
+                            <i data-lucide="bell"></i>
+                            <span>सूचनाएं</span>
+                        </div>
+                        <div id="nav-profile" class="nav-item">
+                            <i data-lucide="user"></i>
+                            <span>प्रोफाइल</span>
+                        </div>
+                    </nav>
+                    <footer id="app-footer" class="text-center p-3 text-xs text-slate-400 opacity-60 hidden bg-white">Arvind Dara Bishnoi द्वारा निर्मित</footer>
+                </div>
+                
+                <!-- Modals Container -->
+                <div id="modal-container" class="hidden">
+                    <div class="modal-backdrop"></div>
+                    <div id="message-modal" class="modal bg-white rounded-2xl shadow-2xl p-8 w-11/12 max-w-sm text-center">
+                        <h3 id="message-modal-title" class="text-2xl font-bold mb-4 text-slate-800">अलर्ट</h3>
+                        <p id="message-modal-text" class="text-slate-600 mb-6 text-lg"></p>
+                        <button id="message-modal-ok-btn" class="w-full button-primary py-3 text-lg">ठीक है</button>
+                    </div>
+                     <div id="target-info-modal" class="modal bg-white rounded-2xl shadow-2xl p-8 w-11/12 max-w-md hidden">
+                         <h3 class="text-2xl font-bold mb-4 text-slate-800">Target Information</h3>
+                         <p class="text-slate-600 mb-4 text-base">
+                            यह टारगेट सेक्शन ऐप में उपस्थित नए उपयोगकर्ताओं के लिए है जिन्होंने अभी लॉग इन किया है। अगर 1000 टारगेट पूरे होते हैं, तो ऐप में कई सारे रोमांचक टेस्ट चालू होंगे, जैसे कि माइंड आईक्यू टेस्ट, रीजनिंग पहेलियाँ, और भी बहुत कुछ।
+                         </p>
+                         <button id="target-info-ok-btn" class="w-full button-primary py-3 text-lg mt-4">समझ गया</button>
+                    </div>
+                    <div id="feedback-modal" class="modal bg-white rounded-2xl shadow-2xl p-8 w-11/12 max-w-md hidden">
+                         <h3 class="text-2xl font-bold mb-4 text-slate-800">आपकी प्रतिक्रिया</h3>
+                         <p class="text-slate-600 mb-4 text-base">आप कौन सी नई सुविधाएँ या सुधार चाहते हैं? (प्रति दिन एक बार)</p>
+                         <textarea id="feedback-input" class="w-full p-3 border rounded-lg h-32 text-base" placeholder="यहाँ टाइप करें..."></textarea>
+                         <div class="flex gap-4 mt-6">
+                            <button id="feedback-cancel-btn" class="flex-1 bg-slate-200 py-3 rounded-lg text-lg font-semibold hover:bg-slate-300 transition">रद्द करें</button>
+                            <button id="feedback-submit-btn" class="flex-1 button-primary py-3 text-lg">जमा करें</button>
+                        </div>
+                    </div>
+                    <!-- Level Up Modal -->
+                    <div id="level-up-modal" class="modal bg-white rounded-2xl shadow-2xl p-8 w-11/12 max-w-sm text-center hidden">
+                        <i data-lucide="arrow-up-circle" class="h-16 w-16 text-yellow-400 mb-4"></i>
+                        <h3 class="text-4xl font-bold mb-4 gradient-text">लेवल अप!</h3>
+                        <p id="level-up-text" class="text-slate-600 mb-6 text-2xl"></p>
+                        <button id="level-up-ok-btn" class="w-full button-primary py-3 text-lg">बहुत बढ़िया!</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Ad -->
+            <div class="ad-container ad-bottom">
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '0d15173de61272c3e2bb15f8677bb5c5',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//www.highperformanceformat.com/0d15173de61272c3e2bb15f8677bb5c5/invoke.js"></script>
+            </div>
+        </div>
+
+        <!-- Right Ad -->
+        <div class="ad-container ad-right">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '83bf329d89f64adb373217c75241cebf',
+                    'format' : 'iframe',
+                    'height' : 600,
+                    'width' : 160,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/83bf329d89f64adb373217c75241cebf/invoke.js"></script>
+        </div>
+    </div>
+
+    <!-- The entire script from your app goes here -->
+    <script type="module">
+        // Debugging: Script parsing started.
+        console.log("Script parsing started."); 
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, collection, updateDoc, query, where, onSnapshot, addDoc, getDocs, orderBy, serverTimestamp, limit, increment, startAfter, endBefore, writeBatch } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+        // --- CONFIG & GLOBAL VARS ---
+        const GEMINI_API_KEY = "AIzaSyCsxr987Sb41cI13aJ0PyfOYxCuNWH3p-0"; 
+        const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${GEMINI_API_KEY}`;
+        const firebaseConfig = {
+            apiKey: "AIzaSyC3faZ16ZTsIUBEfI9dl55RnDklVeWIHts",
+            authDomain: "arvind-dara.firebaseapp.com",
+            projectId: "arvind-dara",
+            storageBucket: "arvind-dara.appspot.com",
+            messagingSenderId: "341922555843",
+            appId: "1:341922555843:web:cefd0e44e5d8afae4fbf76"
+        };
+
+        let app, db, auth, currentUser, userData, applicationUserId, currentUserName;
+        let screenHistory = [];
+        let unsubscribeChat = null;
+        let unsubscribePersonalChat = null;
+        let unsubscribeNotifications = null;
+        let unsubscribeUserCount = null;
+        let currentPersonalChatRecipient = {};
+        let currentExamData = null;
+        let examTimerInterval = null;
+        let generationTimerInterval = null;
+        let tabSwitchCount = 0;
+        let modalOkCallback = null;
+        let currentPollId = null;
+        let remainingExamTime = 0;
+        let selectedPYQYear = null; // To store selected PYQ year
+        let lastVisibleMessage = null; // For chat pagination
+        let isFetchingMessages = false; // To prevent multiple fetches
+
+        // --- DOM ELEMENTS ---
+        const allScreens = document.querySelectorAll('.screen');
+        const bottomNav = document.getElementById('bottom-nav');
+        const appFooter = document.getElementById('app-footer');
+        const modalContainer = document.getElementById('modal-container');
+        const messageModal = { el: document.getElementById('message-modal'), title: document.getElementById('message-modal-title'), text: document.getElementById('message-modal-text'), okBtn: document.getElementById('message-modal-ok-btn') };
+        const targetInfoModal = { el: document.getElementById('target-info-modal'), okBtn: document.getElementById('target-info-ok-btn')};
+        const feedbackModal = { el: document.getElementById('feedback-modal'), input: document.getElementById('feedback-input'), submitBtn: document.getElementById('feedback-submit-btn'), cancelBtn: document.getElementById('feedback-cancel-btn') };
+        const levelUpModal = { el: document.getElementById('level-up-modal'), text: document.getElementById('level-up-text'), okBtn: document.getElementById('level-up-ok-btn') };
+        const pollBox = document.getElementById('poll-box');
+        const pollQuestionText = document.getElementById('poll-question-text');
+        const thumbsUpBtn = document.getElementById('thumbs-up-btn');
+        const thumbsDownBtn = document.getElementById('thumbs-down-btn');
+        const thumbsUpCount = document.getElementById('thumbs-up-count');
+        const thumbsDownCount = document.getElementById('thumbs-down-count');
+        const voteStatusMessage = document.getElementById('vote-status-message');
+        const lessonSelectionSection = document.getElementById('lesson-selection-section');
+        const lessonSelectionContainer = document.getElementById('lesson-selection-container');
+        const loadMoreBtn = document.getElementById('load-more-messages-btn');
+
+        // --- CORE APP FLOW ---
+        function showScreen(screenId, isNav = false) {
+            console.log(`Showing screen: ${screenId}`);
+            const currentActive = document.querySelector('.screen.active');
+            if (currentActive && currentActive.id !== screenId && !isNav) {
+                screenHistory.push(currentActive.id);
+            }
+            if (isNav) screenHistory = [];
+
+            allScreens.forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            let associatedNav;
+            if (screenId === 'users-list-screen' || screenId === 'personal-chat-screen') {
+                associatedNav = document.getElementById('nav-users');
+            } else {
+                associatedNav = document.getElementById(`nav-${screenId.replace('-screen', '')}`);
+            }
+
+            if(associatedNav) associatedNav.classList.add('active');
+            else document.getElementById('nav-home').classList.add('active');
+
+            // Manage listeners
+            if (screenId === 'chat-screen' && !unsubscribeChat) loadMessages(true);
+            if (screenId !== 'chat-screen' && unsubscribeChat) { unsubscribeChat(); unsubscribeChat = null; }
+
+            if (screenId !== 'personal-chat-screen' && unsubscribePersonalChat) { unsubscribePersonalChat(); unsubscribePersonalChat = null; }
+
+            if (screenId !== 'exam-screen' && examTimerInterval) { clearInterval(examTimerInterval); examTimerInterval = null; }
+            else if (screenId === 'exam-screen' && remainingExamTime > 0 && !examTimerInterval) { startTimer(remainingExamTime); }
+        }
+
+        function goBack() {
+            if (screenHistory.length > 0) {
+                const lastScreenId = screenHistory.pop();
+                showScreen(lastScreenId, true);
+            } else {
+                showScreen('home-screen', true);
+            }
+        }
+
+        function showModal(content, title = "अलर्ट", onOk, duration = null) {
+            console.log(`Showing modal: ${title} - ${content}`);
+            messageModal.title.textContent = title;
+            messageModal.text.innerHTML = content;
+            modalContainer.classList.remove('hidden');
+            messageModal.el.classList.remove('hidden');
+            feedbackModal.el.classList.add('hidden');
+            levelUpModal.el.classList.add('hidden');
+            targetInfoModal.el.classList.add('hidden');
+            modalOkCallback = onOk;
+            
+            if (duration) {
+                setTimeout(hideModals, duration);
+            }
+        }
+
+        function hideModals() { 
+            console.log("Hiding modals.");
+            modalContainer.classList.add('hidden'); 
+            if (typeof modalOkCallback === 'function') {
+                const callback = modalOkCallback;
+                modalOkCallback = null;
+                callback();
+            }
+        }
+
+        // --- FIREBASE & AUTH ---
+        window.addEventListener('unhandledrejection', (event) => {
+            console.error('Unhandled promise rejection:', event.promise, 'reason:', event.reason);
+            // Ignore certain benign errors
+            if (event.reason && event.reason.code === 'permission-denied') {
+                 console.warn("A Firestore permission-denied error was caught. This is expected if rules are working correctly.");
+                 return;
+            }
+            showModal(`An unexpected error occurred: ${event.reason.message || event.reason}. Please check the console.`, "Error");
+        });
+
+        async function initializeFirebase() {
+            console.log("Initializing Firebase...");
+            try {
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                onAuthStateChanged(auth, async (user) => {
+                    console.log("onAuthStateChanged fired. User:", user ? user.uid : "null");
+                    if (user) {
+                        currentUser = user;
+                        await findAndLinkAppUserByAuthUid(currentUser.uid);
+                    } else {
+                        // LOGIN FIX: If no user is logged in (e.g., after logout or first visit), show the main login/signup screen.
+                        console.log("No Firebase user. Showing main screen.");
+                        showScreen('main-screen');
+                    }
+                });
+            } catch (error) { 
+                console.error("Firebase init error:", error); 
+                showModal("Could not initialize the app. Please refresh.", "Error");
+            }
+        }
+        
+        async function findAndLinkAppUserByAuthUid(authUid) {
+            console.log("Attempting to find and link app user by authUid:", authUid);
+            const storedAppUserId = localStorage.getItem('arvindAppUserId');
+            let userDocSnap = null;
+
+            // Priority 1: Check if we have a stored ID and if it's valid for the current auth user.
+            if (storedAppUserId) {
+                const userRef = doc(db, "users", storedAppUserId);
+                const tempSnap = await getDoc(userRef);
+                if (tempSnap.exists() && tempSnap.data().authUid === authUid) {
+                    console.log("Found app user by stored ID and matching authUid.");
+                    userDocSnap = tempSnap;
+                } else {
+                     console.warn("Stored appUserId is invalid or doesn't match current authUid. Clearing local storage.");
+                     localStorage.removeItem('arvindAppUserId');
+                }
+            }
+
+            // Priority 2: If no valid stored ID, query Firestore for a user matching the authUid.
+            if (!userDocSnap) {
+                const q = query(collection(db, "users"), where("authUid", "==", authUid), limit(1));
+                const querySnap = await getDocs(q);
+
+                if (!querySnap.empty) {
+                    console.log("Found app user by authUid in Firestore.");
+                    userDocSnap = querySnap.docs[0];
+                    // Store the found ID for next time.
+                    localStorage.setItem('arvindAppUserId', userDocSnap.id);
+                }
+            }
+            
+            // If we found a user document by either method, set up the app.
+            if (userDocSnap) {
+                await setupAppForUser(userDocSnap.data(), userDocSnap.id);
+            } else {
+                // This can happen if a user is authenticated with Firebase (e.g., from a previous session)
+                // but doesn't have a corresponding user document in Firestore yet.
+                // This is a valid state before they complete the signup/guest flow.
+                console.log("No existing app user document found for this Firebase Auth UID. Redirecting to main screen for profile creation.");
+                showScreen('main-screen');
+            }
+        }
+
+
+        async function setupAppForUser(fetchedUserData, appUserId) {
+            // Update global variables
+            userData = fetchedUserData;
+            applicationUserId = appUserId;
+            currentUserName = userData.name || "User";
+            
+            console.log("Setting up app for user:", currentUserName);
+            document.getElementById('welcome-message').textContent = `नमस्ते, ${currentUserName}!`;
+            updateProfileUI();
+            try {
+                await loadPoll();
+                listenForUserCount();
+                listenForNotifications();
+                console.log("Poll loaded and notification listener attached.");
+            } catch (error) {
+                console.error("Error during setupAppForUser:", error);
+                showModal("Failed to load initial data.", "Error");
+            }
+            bottomNav.classList.remove('hidden');
+            appFooter.classList.remove('hidden');
+            lucide.createIcons(); // Render all Lucide icons
+            console.log("Showing home screen.");
+            showScreen('home-screen', true);
+        }
+        
+        // --- NEW JEE APP LOGIC ---
+        function getTodayDateString() {
+            return new Date().toISOString().split('T')[0]; // YYYY-MM-DD in UTC
+        }
+        
+        async function loadPoll() {
+            console.log("Loading poll...");
+            try {
+                const q = query(collection(db, "polls"), orderBy("createdAt", "desc"), limit(1));
+                const querySnapshot = await getDocs(q);
+                if (!querySnapshot.empty) {
+                    const poll = querySnapshot.docs[0].data();
+                    currentPollId = querySnapshot.docs[0].id;
+                    pollQuestionText.textContent = poll.questionText;
+                    thumbsUpCount.textContent = poll.thumbsUpCount || 0;
+                    thumbsDownCount.textContent = poll.thumbsDownCount || 0;
+                    pollBox.classList.remove('hidden');
+
+                    const userRef = doc(db, "users", applicationUserId);
+                    const userSnap = await getDoc(userRef);
+                    if (userSnap.exists()) {
+                        const userVotedPolls = userSnap.data().votedPolls || {};
+                        if (userVotedPolls[currentPollId]) {
+                            thumbsUpBtn.disabled = true;
+                            thumbsDownBtn.disabled = true;
+                            voteStatusMessage.textContent = "आपने इस पोल पर पहले ही वोट कर दिया है।";
+                        } else {
+                            thumbsUpBtn.disabled = false;
+                            thumbsDownBtn.disabled = false;
+                            voteStatusMessage.textContent = "वोट करने के लिए थम्स अप या थम्स डाउन दबाएँ।";
+                        }
+                    }
+                } else {
+                    pollBox.classList.add('hidden');
+                    console.log("No polls found, hiding poll box.");
+                }
+            } catch (error) { 
+                console.error("Error loading poll:", error); 
+            }
+        }
+
+        async function submitVote(voteType) {
+            if (!currentPollId || !applicationUserId) {
+                showModal("Poll or user ID not available.");
+                return;
+            }
+
+            thumbsUpBtn.disabled = true;
+            thumbsDownBtn.disabled = true;
+
+            try {
+                const pollRef = doc(db, "polls", currentPollId);
+                const userRef = doc(db, "users", applicationUserId);
+
+                const userSnap = await getDoc(userRef);
+                const userVotedPolls = userSnap.data().votedPolls || {};
+                if (userVotedPolls[currentPollId]) {
+                    showModal("आपने इस पोल पर पहले ही वोट कर दिया है।", "Voted", null, 2000);
+                    voteStatusMessage.textContent = "आपने इस पोल पर पहले ही वोट कर दिया है।";
+                    return;
+                }
+
+                await updateDoc(pollRef, {
+                    [`${voteType}Count`]: increment(1)
+                });
+
+                await updateDoc(userRef, {
+                    [`votedPolls.${currentPollId}`]: true
+                });
+
+                if (voteType === 'thumbsUp') {
+                    thumbsUpCount.textContent = parseInt(thumbsUpCount.textContent) + 1;
+                } else {
+                    thumbsDownCount.textContent = parseInt(thumbsDownCount.textContent) + 1;
+                }
+                voteStatusMessage.textContent = "आपका वोट दर्ज कर लिया गया है!";
+                showModal("आपका वोट सफलतापूर्वक दर्ज कर लिया गया है!", "Vote Successful", null, 2000);
+
+            } catch (error) {
+                console.error("Error submitting vote:", error);
+                showModal("Error submitting vote. Please try again.", "Error");
+                thumbsUpBtn.disabled = false;
+                thumbsDownBtn.disabled = false;
+                voteStatusMessage.textContent = "Error submitting vote.";
+            }
+        }
+
+        const JEE_LESSONS = {
+            "भौतिकी (Physics)": ["गतिकी (Kinematics)", "न्यूटन के गति के नियम (Newton's Laws of Motion)", "कार्य, ऊर्जा और शक्ति (Work, Energy and Power)", "घूर्णी गति (Rotational Motion)", "गुरुत्वाकर्षण (Gravitation)", "ठोसों के यांत्रिक गुण (Mechanical Properties of Solids)", "तरलों के यांत्रिक गुण (Mechanical Properties of Fluids)", "ऊष्मागतिकी (Thermodynamics)", "गतिज सिद्धांत (Kinetic Theory)", "दोलन (Oscillations)", "तरंगें (Waves)", "स्थिरविद्युतिकी (Electrostatics)", "विद्युत धारा (Current Electricity)", "धारा का चुंबकीय प्रभाव (Magnetic Effects of Current)", "विद्युत चुम्बकीय प्रेरण (Electromagnetic Induction)", "प्रत्यावर्ती धारा (Alternating Current)", "प्रकाशिकी (Optics)", "आधुनिक भौतिकी (Modern Physics)", "अर्धचालक इलेक्ट्रॉनिक्स (Semiconductor Electronics)"],
+            "रसायन विज्ञान (Chemistry)": ["रसायन विज्ञान की कुछ मूल अवधारणाएँ (Some Basic Concepts of Chemistry)", "परमाणु संरचना (Atomic Structure)", "तत्वों का वर्गीकरण और गुणों में आवर्तिता (Classification of Elements and Periodicity in Properties)", "रासायनिक बंधन और आणविक संरचना (Chemical Bonding and Molecular Structure)", "पदार्थ की अवस्थाएँ (States of Matter)", "ऊष्मागतिकी (Thermodynamics)", "साम्यावस्था (Equilibrium)", "रेडॉक्स अभिक्रियाएँ (Redox Reactions)", "हाइड्रोजन (Hydrogen)", "s-ब्लॉक तत्व (s-Block Elements)", "p-ब्लॉक तत्व (p-Block Elements)", "कार्बनिक रसायन विज्ञान के कुछ मूल सिद्धांत और तकनीकें (Some Basic Principles and Techniques of Organic Chemistry)", "हाइड्रोकार्बन (Hydrocarbons)", "पर्यावरण रसायन विज्ञान (Environmental Chemistry)", "ठोस अवस्था (Solid State)", "विलयन (Solutions)", "विद्युत रसायन (Electrochemistry)", "रासायनिक बलगतिकी (Chemical Kinetics)", "पृष्ठ रसायन (Surface Chemistry)", "d और f-ब्लॉक तत्व (d and f-Block Elements)", "उपसहसंयोजन यौगिक (Coordination Compounds)", "हैलोएल्केन और हैलोएरीन (Haloalkanes and Haloarenes)", "एल्कोहल, फिनोल और ईथर (Alcohols, Phenols and Ethers)", "एल्डिहाइड, कीटोन और कार्बोक्जिलिक एसिड (Aldehydes, Ketones and Carboxylic Acids)", "नाइट्रोजन युक्त कार्बनिक यौगिक (Organic Compounds Containing Nitrogen)", "बायोमोलेक्यूल्स (Biomolecules)", "पॉलीमर (Polymers)", "दैनिक जीवन में रसायन विज्ञान (Chemistry in Everyday Life)"],
+            "गणित (Maths)": ["समुच्चय, संबंध और फलन (Sets, Relations and Functions)", "जटिल संख्याएँ और द्विघात समीकरण (Complex Numbers and Quadratic Equations)", "मैट्रिसेस और निर्धारक (Matrices and Determinants)", "क्रमचय और संचय (Permutations and Combinations)", "गणितीय आगमन (Mathematical Induction)", "द्विपद प्रमेय और इसके अनुप्रयोग (Binomial Theorem and Its Applications)", "अनुक्रम और श्रृंखला (Sequences and Series)", "सीमा, निरंतरता और अवकलनीयता (Limit, Continuity and Differentiability)", "अवकलज के अनुप्रयोग (Applications of Derivatives)", "समाकलन (Integrals)", "समाकलन के अनुप्रयोग (Applications of Integrals)", "अवकल समीकरण (Differential Equations)", "सीधी रेखाएँ (Straight Lines)", "शंकु परिच्छेद (Conic Sections)", "त्रि-आयामी ज्यामिति का परिचय (Introduction to Three Dimensional Geometry)", "सदिश बीजगणित (Vector Algebra)", "त्रि-आयामी ज्यामिति (Three Dimensional Geometry)", "सांख्यिकी और प्रायिकता (Statistics and Probability)", "त्रिकोणमिति (Trigonometry)", "गणितीय तर्क (Mathematical Reasoning)"]
+        };
+
+        function populateSubjects() {
+            const container = document.getElementById('subject-selection');
+            container.innerHTML = '';
+            ["भौतिकी (Physics)", "रसायन विज्ञान (Chemistry)", "गणित (Maths)"].forEach(subject => {
+                const label = document.createElement('label');
+                label.className = "flex items-center p-3 border rounded-lg bg-white cursor-pointer has-[:checked]:bg-indigo-100 has-[:checked]:border-indigo-500";
+                label.innerHTML = `<input type="checkbox" name="subject" value="${subject}" class="mr-3 h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500"><span class="font-semibold">${subject}</span>`;
+                container.appendChild(label);
+            });
+            container.addEventListener('change', updateLessonSelection);
+            updateLessonSelection();
+        }
+
+        function updateLessonSelection() {
+            const selectedSubjects = [...document.querySelectorAll('input[name="subject"]:checked')].map(el => el.value);
+            lessonSelectionContainer.innerHTML = '';
+
+            if (selectedSubjects.length > 0) {
+                lessonSelectionSection.classList.remove('hidden');
+                selectedSubjects.forEach(subject => {
+                    const lessons = JEE_LESSONS[subject];
+                    if (lessons && lessons.length > 0) {
+                        const subjectHeader = document.createElement('p');
+                        subjectHeader.className = "font-bold text-lg mt-4 mb-2 text-slate-700";
+                        subjectHeader.textContent = `${subject} के पाठ:`;
+                        lessonSelectionContainer.appendChild(subjectHeader);
+
+                        lessons.forEach(lesson => {
+                            const label = document.createElement('label');
+                            label.className = "flex items-center p-2 border rounded-md bg-white cursor-pointer hover:bg-slate-50";
+                            label.innerHTML = `<input type="checkbox" name="lesson" value="${lesson}" data-subject="${subject}" class="mr-3 h-4 w-4 rounded text-indigo-600 focus:ring-indigo-500"><span class="text-sm">${lesson}</span>`;
+                            lessonSelectionContainer.appendChild(label);
+                        });
+                    }
+                });
+            } else {
+                lessonSelectionSection.classList.add('hidden');
+                lessonSelectionContainer.innerHTML = '<p class="text-slate-500">विषय चुनने के बाद पाठ यहाँ दिखाई देंगे।</p>';
+            }
+        }
+
+        // UPDATED generateTest function
+        async function generateTest(isPractice = true) {
+            const selectedSubjects = isPractice ? [...document.querySelectorAll('input[name="subject"]:checked')].map(el => el.value) : ["भौतिकी (Physics)", "रसायन विज्ञान (Chemistry)", "गणित (Maths)"];
+            const selectedLessons = isPractice ? [...document.querySelectorAll('input[name="lesson"]:checked')].map(el => el.value) : [];
+            const difficulty = isPractice ? document.querySelector('input[name="difficulty"]:checked').value : 'JEE Main';
+            const classSelection = isPractice ? document.getElementById('class-select').value : '11,12';
+            
+            let allQuestions = [];
+            const btn = isPractice ? document.getElementById('generate-test-btn') : null;
+
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = `<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div> तैयार हो रहा है...`;
+            }
+
+            const baseModalText = "पेपर तैयार हो रहा है...";
+            showModal(`${baseModalText}<br><br>विषय: कोई नहीं`, "टेस्ट बना रहा है", null);
+            const modalTextEl = document.getElementById('message-modal-text');
+
+            try {
+                for (let i = 0; i < selectedSubjects.length; i++) {
+                    const subject = selectedSubjects[i];
+                    const lessonsForSubject = selectedLessons.filter(lesson => JEE_LESSONS[subject]?.includes(lesson));
+                    let promptSubjectPart = subject;
+                    if (lessonsForSubject.length > 0) {
+                        promptSubjectPart += ` (focusing on these lessons: ${lessonsForSubject.join(', ')})`;
+                    }
+                    
+                    if (modalTextEl) {
+                         modalTextEl.innerHTML = `${baseModalText}<br><br>विषय: ${subject} (${i+1}/${selectedSubjects.length})`;
+                    }
+
+                    const prompt = `Generate exactly 25 ${difficulty} level practice test questions for JEE Main in HINDI language. Class: ${classSelection}. Subject: ${promptSubjectPart}. IMPORTANT: The questions must be calculative and numerical-based, requiring problem-solving skills, similar to the actual JEE exam pattern. Avoid purely theoretical questions. For each question, provide: 1. A question text in Hindi that involves a calculation or numerical problem. 2. Four options (A, B, C, D), also in Hindi. 3. The correct option letter (e.g., "A"). 4. A detailed, step-by-step explanation in Hindi showing the calculation to reach the answer.`;
+                    const schema = { type: "OBJECT", properties: { "questions": { "type": "ARRAY", "items": { "type": "OBJECT", "properties": { "subject": {"type": "STRING"}, "question": {"type": "STRING"}, "options": { "type": "OBJECT", "properties": { "A": {"type": "STRING"}, "B": {"type": "STRING"}, "C": {"type": "STRING"}, "D": {"type": "STRING"} } }, "correct_answer": {"type": "STRING"}, "explanation": {"type": "STRING"} } } } } };
+
+                    const response = await fetch(GEMINI_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { responseMimeType: "application/json", responseSchema: schema } }) });
+                    if (!response.ok) throw new Error(`API Error for ${subject}: ${response.statusText}`);
+                    
+                    const result = await response.json();
+                     if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0].text) {
+                        const parsedData = JSON.parse(result.candidates[0].content.parts[0].text);
+                        if (parsedData.questions && parsedData.questions.length > 0) {
+                             allQuestions.push(...parsedData.questions);
+                        } else {
+                            console.warn(`No questions generated for ${subject}.`);
+                        }
+                    } else {
+                         console.warn(`Empty or malformed response from API for ${subject}.`);
+                    }
+                }
+
+                if (allQuestions.length === 0) {
+                    throw new Error("No questions could be generated for any selected subject.");
+                }
+
+                // Shuffle the questions to mix subjects
+                for (let i = allQuestions.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [allQuestions[i], allQuestions[j]] = [allQuestions[j], allQuestions[i]];
+                }
+
+                const finalData = { questions: allQuestions };
+                
+                if (isPractice) {
+                    currentExamData = finalData;
+                    currentExamData.type = 'practice';
+                }
+                
+                return finalData;
+
+            } catch (error) { 
+                console.error("Test generation error:", error); 
+                showModal("Failed to generate test. Please try again.", "Error");
+                return null;
+            } finally {
+                if (generationTimerInterval) clearInterval(generationTimerInterval);
+                if (btn) {
+                    btn.disabled = false;
+                    btn.textContent = "टेस्ट बनाएँ";
+                }
+            }
+        }
+
+        // UPDATED generatePYQTest function
+        async function generatePYQTest(year, type) {
+            const subjects = ["भौतिकी (Physics)", "रसायन विज्ञान (Chemistry)", "गणित (Maths)"];
+            let allQuestions = [];
+            
+            const baseModalText = `${year} JEE ${type} का पेपर तैयार हो रहा है...`;
+            showModal(`${baseModalText}<br><br>विषय: कोई नहीं`, "टेस्ट बना रहा है", null);
+            const modalTextEl = document.getElementById('message-modal-text');
+
+            try {
+                for (let i = 0; i < subjects.length; i++) {
+                    const subject = subjects[i];
+                    console.log(`Generating questions for ${subject}...`);
+                    if (modalTextEl) {
+                         modalTextEl.innerHTML = `${baseModalText}<br><br>विषय: ${subject} (${i+1}/${subjects.length})`;
+                    }
+
+                    const prompt = `Generate exactly 25 practice questions simulating the official JEE ${type} paper from the year ${year} for the subject ${subject}. The language must be HINDI. The questions must be calculative and numerical-based, requiring problem-solving skills, similar to the actual JEE exam pattern. Avoid purely theoretical questions. For each question, provide: 1. A question text in Hindi. 2. Four options (A, B, C, D). 3. The correct option letter. 4. A detailed, step-by-step explanation in Hindi.`;
+                    const schema = { type: "OBJECT", properties: { "questions": { "type": "ARRAY", "items": { "type": "OBJECT", "properties": { "subject": {"type": "STRING"}, "question": {"type": "STRING"}, "options": { "type": "OBJECT", "properties": { "A": {"type": "STRING"}, "B": {"type": "STRING"}, "C": {"type": "STRING"}, "D": {"type": "STRING"} } }, "correct_answer": {"type": "STRING"}, "explanation": {"type": "STRING"} } } } } };
+
+                    const response = await fetch(GEMINI_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { responseMimeType: "application/json", responseSchema: schema } }) });
+                    
+                    if (!response.ok) {
+                        throw new Error(`API Error for ${subject}: ${response.statusText}`);
+                    }
+                    
+                    const result = await response.json();
+                    if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0].text) {
+                        const parsedData = JSON.parse(result.candidates[0].content.parts[0].text);
+                        if (parsedData.questions && parsedData.questions.length > 0) {
+                             allQuestions.push(...parsedData.questions);
+                        } else {
+                            console.warn(`No questions generated for ${subject}.`);
+                        }
+                    } else {
+                         console.warn(`Empty or malformed response from API for ${subject}.`);
+                    }
+                }
+
+                if (allQuestions.length === 0) {
+                    throw new Error("No questions could be generated for any subject.");
+                }
+                
+                // Shuffle the questions to mix subjects
+                for (let i = allQuestions.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [allQuestions[i], allQuestions[j]] = [allQuestions[j], allQuestions[i]];
+                }
+
+                console.log(`Total questions generated: ${allQuestions.length}`);
+                return { questions: allQuestions };
+
+            } catch (error) { 
+                console.error("PYQ generation error:", error); 
+                showModal("पेपर बनाने में विफल। कृपया फिर से प्रयास करें।", "त्रुटि");
+                return null;
+            }
+        }
+
+
+        function startExam(examData) {
+            document.getElementById('exam-content').innerHTML = '';
+             if (examData.type === 'daily') {
+                document.getElementById('exam-title').textContent = 'दैनिक रैंक टेस्ट';
+            } else if (examData.type === 'real-jee') {
+                document.getElementById('exam-title').textContent = 'REAL JEE MAIN TEST';
+            } else {
+                document.getElementById('exam-title').textContent = 'अभ्यास टेस्ट';
+            }
+            examData.questions.forEach((q, i) => {
+                const qEl = document.createElement('div');
+                qEl.className = 'exam-question bg-white p-6 rounded-lg shadow-md';
+                qEl.id = `question-${i}`;
+                qEl.innerHTML = `<p class="font-bold text-lg mb-4">प्रश्न ${i + 1} (${q.subject})</p><p class="mb-6 text-lg">${q.question}</p><div class="space-y-3">${Object.entries(q.options).map(([k, v]) => `<label class="flex items-center p-3 border rounded-lg cursor-pointer has-[:checked]:bg-indigo-100"><input type="radio" name="q${i}" value="${k}" class="mr-4 h-5 w-5"><span><b>${k}.</b> ${v}</span></label>`).join('')}</div>`;
+                document.getElementById('exam-content').appendChild(qEl);
+            });
+            showScreen('exam-screen');
+            startTimer(180 * 60);
+            if (examData.type === 'daily' || examData.type === 'real-jee') {
+                tabSwitchCount = 0;
+                document.addEventListener('visibilitychange', handleVisibilityChange);
+            }
+        }
+
+        function handleVisibilityChange() {
+            if (document.visibilityState === 'hidden' && document.getElementById('exam-screen').classList.contains('active') && (currentExamData.type === 'daily' || currentExamData.type === 'real-jee')) {
+                tabSwitchCount++;
+                showModal(`चेतावनी: टैब बदलना प्रतिबंधित है। आपका रैंक प्रभावित हो सकता है। स्विच: ${tabSwitchCount}`, "धोखाधड़ी की चेतावनी");
+                if (tabSwitchCount >= 3) {
+                    showModal("आपने 3 से अधिक बार टैब बदला है। आपका टेस्ट अपने आप जमा हो जाएगा।", "टेस्ट समाप्त", () => submitExam(true));
+                }
+            }
+        }
+
+        function startTimer(duration) {
+            clearInterval(examTimerInterval);
+            remainingExamTime = duration;
+            updateTimerDisplay();
+            examTimerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            remainingExamTime--;
+            updateTimerDisplay();
+            if (remainingExamTime <= 0) {
+                clearInterval(examTimerInterval);
+                showModal("समय समाप्त!", "समय समाप्त", () => submitExam());
+            }
+        }
+
+        function updateTimerDisplay() {
+            const timerEl = document.getElementById('exam-timer');
+            if (!timerEl) return;
+            
+            let h = Math.floor(remainingExamTime / 3600);
+            let m = Math.floor((remainingExamTime % 3600) / 60);
+            let s = remainingExamTime % 60;
+            timerEl.textContent = `${h<10?'0'+h:h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
+        }
+
+        async function submitExam(cheated = false) {
+            clearInterval(examTimerInterval);
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            let correct = 0, incorrect = 0, unanswered = 0;
+            currentExamData.questions.forEach((q, i) => {
+                const sel = document.querySelector(`input[name="q${i}"]:checked`);
+                const userAnswer = sel ? sel.value : null;
+                q.user_answer = userAnswer;
+                if (!userAnswer) { unanswered++; }
+                else if (userAnswer === q.correct_answer) { correct++; } 
+                else { incorrect++; }
+            });
+            const score = (correct * 4) - (incorrect * 1);
+
+            // Award XP for taking the test
+            const xpGained = correct * 10; // 10 XP for each correct answer
+            if (xpGained > 0) {
+                await addXp(xpGained);
+            }
+
+            if (currentExamData.type === 'daily') {
+                const finalScore = cheated ? 0 : score;
+                try {
+                    const dailyTestId = getTodayDateString();
+                    await addDoc(collection(db, "dailyTestSubmissions"), { 
+                        userId: applicationUserId,
+                        userName: currentUserName, 
+                        score: finalScore, 
+                        cheated, 
+                        submittedAt: serverTimestamp(),
+                        paperDate: dailyTestId
+                    });
+                    showModal(`टेस्ट सफलतापूर्वक जमा हो गया है। आपका स्कोर ${finalScore} है। परिणाम 2 घंटे बाद स्कोरबोर्ड पर अपडेट किया जाएगा।`, "सफलता", () => showScreen('home-screen', true));
+                } catch (e) { console.error(e); showModal("टेस्ट जमा करने में त्रुटि।", "त्रुटि"); }
+            } else if (currentExamData.type === 'real-jee') {
+                 const finalScore = cheated ? 0 : score;
+                try {
+                    await addDoc(collection(db, "jeeScores"), { 
+                        userId: applicationUserId,
+                        userName: currentUserName, 
+                        score: finalScore, 
+                        cheated, 
+                        submittedAt: serverTimestamp(),
+                        isReal: true
+                    });
+                     document.getElementById('real-jee-result-score').textContent = finalScore;
+                    const statusEl = document.getElementById('real-jee-cutoff-status');
+                    if (finalScore >= 50) {
+                        statusEl.textContent = "PASS";
+                        statusEl.className = "text-4xl font-bold mt-4 text-green-600";
+                    } else {
+                        statusEl.textContent = "YOU ARE FAIL";
+                        statusEl.className = "text-4xl font-bold mt-4 text-red-600";
+                    }
+                    showScreen('real-jee-result-screen');
+                } catch (e) { console.error(e); showModal("टेस्ट जमा करने में त्रुटि।", "त्रुटि"); }
+            } else {
+                document.getElementById('result-score').textContent = `${score}/${currentExamData.questions.length * 4}`;
+                document.getElementById('result-correct').textContent = correct;
+                document.getElementById('result-incorrect').textContent = incorrect;
+                document.getElementById('result-unanswered').textContent = unanswered;
+                showScreen('result-screen');
+            }
+        }
+        
+        function startReview() {
+            const reviewContent = document.getElementById('review-content');
+            reviewContent.innerHTML = '';
+            
+            currentExamData.questions.forEach((q, i) => {
+                const qEl = document.createElement('div');
+                qEl.className = 'review-question bg-white p-6 rounded-lg shadow-md';
+                qEl.id = `review-question-${i}`;
+
+                let optionsHTML = '<div class="space-y-3">';
+                for (const [key, value] of Object.entries(q.options)) {
+                    let labelClass = 'flex items-center p-3 border rounded-lg';
+                    let indicator = '';
+                    
+                    const isCorrect = key === q.correct_answer;
+                    const isUserChoice = key === q.user_answer;
+
+                    if (isCorrect) {
+                        labelClass += ' bg-green-100 border-green-500';
+                        indicator = '<span class="ml-auto text-green-600 font-bold">सही उत्तर</span>';
+                    }
+                    if (isUserChoice && !isCorrect) {
+                        labelClass += ' bg-red-100 border-red-500';
+                        indicator = '<span class="ml-auto text-red-600 font-bold">आपका उत्तर</span>';
+                    } else if (isUserChoice && isCorrect) {
+                         indicator = '<span class="ml-auto text-green-600 font-bold">आपका सही उत्तर</span>';
+                    }
+
+                    optionsHTML += `<div class="${labelClass}"><span><b>${key}.</b> ${value}</span>${indicator}</div>`;
+                }
+                optionsHTML += '</div>';
+
+                qEl.innerHTML = `
+                    <p class="font-bold text-lg mb-4">प्रश्न ${i + 1} (${q.subject})</p>
+                    <p class="mb-6 text-lg">${q.question}</p>
+                    ${optionsHTML}
+                    <div class="mt-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <p class="font-bold text-slate-700 mb-2">हल:</p>
+                        <p class="text-slate-600 whitespace-pre-wrap">${q.explanation}</p>
+                    </div>
+                `;
+                reviewContent.appendChild(qEl);
+            });
+
+            showScreen('review-screen');
+        }
+
+        async function startDailyTest() {
+            const btn = document.getElementById('daily-rank-test-btn');
+            btn.disabled = true;
+            
+            const today = getTodayDateString();
+            
+            const submissionsRef = collection(db, "dailyTestSubmissions");
+            const q = query(submissionsRef, where("userId", "==", applicationUserId), where("paperDate", "==", today));
+            const submissionSnap = await getDocs(q);
+
+            if (!submissionSnap.empty) {
+                showModal("आप आज का टेस्ट पहले ही दे चुके हैं। कृपया कल फिर प्रयास करें।", "पहले ही प्रयास किया गया");
+                btn.disabled = false;
+                return;
+            }
+
+            showModal("आज का टेस्ट लोड हो रहा है...", "कृपया प्रतीक्षा करें");
+            const paperRef = doc(db, "dailyPaper", today);
+            const paperSnap = await getDoc(paperRef);
+            let paperData;
+
+            if (paperSnap.exists()) {
+                paperData = paperSnap.data();
+            } else {
+                paperData = await generateTest(false);
+                
+                if (paperData) {
+                    await setDoc(paperRef, { ...paperData, createdAt: serverTimestamp() });
+                } else {
+                    showModal("आज का टेस्ट बनाने में विफल। कृपया बाद में पुनः प्रयास करें।", "त्रुटि");
+                    btn.disabled = false;
+                    return;
+                }
+            }
+            
+            showModal("टेस्ट एक समय-बद्ध परीक्षा है। टैब बदलने पर आपका स्कोर 0 हो सकता है। क्या आप तैयार हैं?", "चेतावनी", () => {
+                hideModals();
+                currentExamData = paperData;
+                currentExamData.type = 'daily';
+                startExam(currentExamData);
+            });
+            btn.disabled = false;
+        }
+        
+        async function loadScoreboard() {
+            showScreen('scoreboard-screen');
+            const listEl = document.getElementById('scoreboard-list');
+            listEl.innerHTML = `<p class="text-center p-8">स्कोरबोर्ड लोड हो रहा है...</p>`;
+            try {
+                const today = getTodayDateString();
+                const q = query(collection(db, "dailyTestSubmissions"), where("paperDate", "==", today));
+                const snap = await getDocs(q);
+                if (snap.empty) { 
+                    listEl.innerHTML = `<p class="text-center p-8">आज के लिए कोई सबमिशन नहीं है।</p>`;
+                    return; 
+                }
+
+                const twoHoursAgo = new Date(Date.now() - 2 * 60 * 60 * 1000);
+                let scoresToShow = [];
+                
+                snap.docs.forEach(docSnap => {
+                    const data = docSnap.data();
+                    if (data.submittedAt && data.submittedAt.toDate) {
+                        const submissionTime = data.submittedAt.toDate();
+                        if (submissionTime < twoHoursAgo) {
+                            scoresToShow.push(data);
+                        }
+                    }
+                });
+
+                scoresToShow.sort((a, b) => b.score - a.score);
+
+                if (scoresToShow.length === 0) {
+                    listEl.innerHTML = `<p class="text-center p-8">अभी तक कोई परिणाम घोषित नहीं हुआ है। परिणाम टेस्ट जमा करने के 2 घंटे बाद दिखाए जाते हैं।</p>`;
+                    return;
+                }
+                
+                listEl.innerHTML = '';
+                scoresToShow.forEach((data, i) => {
+                    const isMe = data.userId === applicationUserId;
+                    const itemEl = document.createElement('div');
+                    itemEl.className = `flex items-center p-4 rounded-lg ${isMe ? 'bg-indigo-100 border-2 border-indigo-500' : 'bg-slate-100'}`;
+                    itemEl.innerHTML = `<span class="font-bold w-12 text-lg">${i + 1}.</span><span class="flex-grow font-semibold">${data.userName} ${isMe ? '(आप)' : ''} ${data.cheated ? '<span class=\"text-red-500 font-normal\">(धोखाधड़ी)</span>' : ''}</span><span class="font-bold text-xl text-indigo-600">${data.score}</span>`;
+                    listEl.appendChild(itemEl);
+                });
+            } catch (error) { 
+                console.error("Scoreboard error:", error); 
+                listEl.innerHTML = `<p class="text-center text-red-500 p-8">Could not load scoreboard.</p>`;
+            }
+        }
+
+        async function openFeedbackModal() {
+            const userDoc = await getDoc(doc(db, "users", applicationUserId));
+            const lastFeedback = userDoc.data().lastFeedbackTimestamp;
+            if (lastFeedback && (new Date() - lastFeedback.toDate()) / (1000 * 3600) < 24) {
+                showModal("आप प्रतिदिन केवल एक बार प्रतिक्रिया जमा कर सकते हैं।", "Cooldown"); return;
+            }
+            feedbackModal.input.value = '';
+            modalContainer.classList.remove('hidden');
+            feedbackModal.el.classList.remove('hidden');
+            messageModal.el.classList.add('hidden');
+        }
+
+        async function submitFeedback() {
+            const text = feedbackModal.input.value.trim();
+            if (text.length < 10) { showModal("कृपया अधिक विस्तृत प्रतिक्रिया प्रदान करें।", "Error"); return; }
+            feedbackModal.submitBtn.disabled = true;
+            try {
+                await addDoc(collection(db, "feedback"), { 
+                    userId: applicationUserId,
+                    userName: currentUserName, 
+                    feedback: text, 
+                    createdAt: serverTimestamp() 
+                });
+                await updateDoc(doc(db, "users", applicationUserId), { lastFeedbackTimestamp: serverTimestamp() });
+                hideModals();
+                showModal("आपकी प्रतिक्रिया के लिए धन्यवाद!", "Success", null, 2000);
+            } catch (error) { console.error(error); showModal("Error submitting feedback.", "Error");
+            } finally { feedbackModal.submitBtn.disabled = false; }
+        }
+
+        // --- AUTHENTICATION LOGIC (REVISED) ---
+
+        async function handleGuestSignIn() {
+            const name = document.getElementById('new-user-name-input').value.trim();
+            if (!name) { showModal("कृपया अपना नाम दर्ज करें।", "Error"); return; }
+
+            try {
+                // Ensure we have an anonymous Firebase user session
+                if (!auth.currentUser || auth.currentUser.isAnonymous === false) {
+                     await signInAnonymously(auth);
+                }
+                
+                const firebaseUser = auth.currentUser;
+                if (!firebaseUser) throw new Error("Anonymous authentication failed.");
+
+                const newAppUserId = crypto.randomUUID();
+                const userDocRef = doc(db, "users", newAppUserId);
+
+                const userDataPayload = {
+                    name: name,
+                    userId: newAppUserId,
+                    authUid: firebaseUser.uid,
+                    createdAt: serverTimestamp(),
+                    lastActive: serverTimestamp(),
+                    authType: 'anonymous',
+                    level: 0,
+                    xp: 0
+                };
+                // This write will succeed because the authUid matches the current user's UID
+                await setDoc(userDocRef, userDataPayload);
+                
+                localStorage.setItem('arvindAppUserId', newAppUserId);
+                
+                // Use a local version of the user data to avoid another read
+                const localUserData = { ...userDataPayload, createdAt: new Date(), lastActive: new Date() };
+                setupAppForUser(localUserData, newAppUserId);
+
+            } catch (error) {
+                console.error("Error creating guest user:", error);
+                if (error.code === 'permission-denied') {
+                    showModal("खाता बनाने में विफल: सर्वर अनुमति त्रुटि।", "खाता निर्माण त्रुटि");
+                } else {
+                    showModal("गेस्ट खाता बनाने में विफल। कृपया पुनः प्रयास करें।", "खाता निर्माण त्रुटि");
+                }
+            }
+        }
+
+        async function handleEmailSignup() {
+            const name = document.getElementById('signup-name-input').value.trim();
+            const email = document.getElementById('signup-email-input').value.trim();
+            const password = document.getElementById('signup-password-input').value.trim();
+
+            if (!name || !email || !password) {
+                showModal("कृपया सभी फ़ील्ड भरें।", "Error");
+                return;
+            }
+            if (password.length < 6) {
+                showModal("पासवर्ड कम से कम 6 वर्णों का होना चाहिए।", "Error");
+                return;
+            }
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const firebaseUser = userCredential.user;
+                const newAppUserId = crypto.randomUUID();
+                const userDocRef = doc(db, "users", newAppUserId);
+
+                const userDataPayload = {
+                    name: name,
+                    email: email,
+                    userId: newAppUserId,
+                    authUid: firebaseUser.uid,
+                    createdAt: serverTimestamp(),
+                    lastActive: serverTimestamp(),
+                    authType: 'email',
+                    level: 0,
+                    xp: 0
+                };
+                // This write will succeed because the authUid matches the new user's UID
+                await setDoc(userDocRef, userDataPayload);
+
+                localStorage.setItem('arvindAppUserId', newAppUserId);
+                currentUser = firebaseUser;
+                
+                const localUserData = { ...userDataPayload, createdAt: new Date(), lastActive: new Date() };
+                
+                showModal("खाता सफलतापूर्वक बनाया गया!", "Success", () => {
+                    setupAppForUser(localUserData, newAppUserId);
+                });
+
+            } catch (error) {
+                console.error("Error during email signup:", error);
+                let errorMessage = "खाता बनाने में विफल। कृपया पुनः प्रयास करें।";
+                if (error.code === 'auth/email-already-in-use') {
+                    errorMessage = "यह ईमेल पहले से उपयोग में है। कृपया कोई अन्य ईमेल का उपयोग करें या लॉग इन करें।";
+                } else if (error.code === 'auth/invalid-email') {
+                    errorMessage = "अमान्य ईमेल प्रारूप।";
+                } else if (error.code === 'auth/weak-password') {
+                    errorMessage = "पासवर्ड बहुत कमजोर है। कृपया एक मजबूत पासवर्ड चुनें।";
+                } else if (error.code === 'permission-denied') {
+                    errorMessage = "खाता बनाने में विफल: सर्वर अनुमति त्रुटि।";
+                }
+                showModal(errorMessage, "साइनअप त्रुटि");
+            }
+        }
+
+        async function handleEmailLogin() {
+            const email = document.getElementById('login-email-input').value.trim();
+            const password = document.getElementById('login-password-input').value.trim();
+
+            if (!email || !password) {
+                showModal("कृपया ईमेल और पासवर्ड दर्ज करें।", "Error");
+                return;
+            }
+
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                // onAuthStateChanged will handle the rest of the login flow by calling findAndLinkAppUserByAuthUid
+                showModal("सफलतापूर्वक लॉग इन किया गया!", "Success", null, 2000);
+
+            } catch (error) {
+                console.error("Error during email login:", error);
+                let errorMessage = "लॉग इन करने में विफल। कृपया पुनः प्रयास करें।";
+                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+                    errorMessage = "अमान्य ईमेल या पासवर्ड।";
+                } else if (error.code === 'auth/invalid-email') {
+                    errorMessage = "अमान्य ईमेल प्रारूप।";
+                }
+                showModal(errorMessage, "Login Error");
+            }
+        }
+
+        function listenForUserCount() {
+            if (unsubscribeUserCount) unsubscribeUserCount();
+            const usersRef = collection(db, "users");
+            unsubscribeUserCount = onSnapshot(usersRef, (snapshot) => {
+                const userCount = snapshot.size;
+                document.getElementById('target-count').textContent = userCount;
+            });
+        }
+        
+        function loadMessages(isInitialLoad = false) {
+            if (isFetchingMessages) return;
+            isFetchingMessages = true;
+
+            const chatMessages = document.getElementById('chat-messages');
+            const chatFilter = document.getElementById('chat-filter').value;
+            const sortDirection = chatFilter === 'newest' ? 'desc' : 'asc';
+            const messagesRef = collection(db, "chats");
+            let q;
+
+            if (isInitialLoad) {
+                chatMessages.innerHTML = '';
+                lastVisibleMessage = null;
+                q = query(messagesRef, orderBy("timestamp", sortDirection), limit(5));
+            } else {
+                if (!lastVisibleMessage) {
+                    loadMoreBtn.classList.add('hidden');
+                    isFetchingMessages = false;
+                    return;
+                }
+                q = query(messagesRef, orderBy("timestamp", sortDirection), startAfter(lastVisibleMessage), limit(5));
+            }
+
+            getDocs(q).then(querySnapshot => {
+                if (isInitialLoad) {
+                    // Reverse the array for newest first to display correctly
+                    const docs = sortDirection === 'desc' ? querySnapshot.docs.reverse() : querySnapshot.docs;
+                    docs.forEach(doc => displayMessage(doc.data(), false));
+                } else {
+                    querySnapshot.docs.forEach(doc => displayMessage(doc.data(), true));
+                }
+
+                if (querySnapshot.docs.length > 0) {
+                    lastVisibleMessage = querySnapshot.docs[querySnapshot.docs.length - 1];
+                    loadMoreBtn.classList.remove('hidden');
+                } else {
+                    loadMoreBtn.classList.add('hidden');
+                }
+                
+                if (isInitialLoad) {
+                    document.getElementById('chat-messages-container').scrollTop = document.getElementById('chat-messages-container').scrollHeight;
+                }
+                
+                isFetchingMessages = false;
+            }).catch(error => {
+                console.error("Error fetching messages:", error);
+                isFetchingMessages = false;
+            });
+        }
+
+        function displayMessage(msg, prepend = false) {
+            const chatMessages = document.getElementById('chat-messages');
+            const bubble = document.createElement('div');
+            const isMe = msg.senderId === applicationUserId;
+            bubble.className = `p-3 rounded-xl max-w-xs ${isMe ? 'bg-indigo-500 text-white self-end' : 'bg-slate-200 self-start'}`;
+            bubble.innerHTML = `${!isMe ? `<div class="font-bold text-xs text-indigo-600">${msg.senderName}</div>` : ''}<div>${msg.text}</div>`;
+            
+            if (prepend) {
+                chatMessages.prepend(bubble);
+            } else {
+                chatMessages.appendChild(bubble);
+            }
+        }
+
+        async function sendMessage(e) {
+            e.preventDefault();
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if (text === "") return;
+            input.value = "";
+            const newMessage = { text: text, senderId: applicationUserId, senderName: currentUserName, timestamp: serverTimestamp() };
+            const docRef = await addDoc(collection(db, "chats"), newMessage);
+            
+            // Only add the message visually if sorted by newest
+            if (document.getElementById('chat-filter').value === 'newest') {
+                displayMessage({ ...newMessage, timestamp: { toDate: () => new Date() } });
+                document.getElementById('chat-messages-container').scrollTop = document.getElementById('chat-messages-container').scrollHeight;
+            }
+        }
+        
+        async function updateUserName() {
+            const newName = document.getElementById('profile-name-input').value.trim();
+            if (!newName) { showModal("Name cannot be empty.", "Error"); return; }
+            await updateDoc(doc(db, "users", applicationUserId), { name: newName });
+            currentUserName = newName;
+            document.getElementById('welcome-message').textContent = `नमस्ते, ${currentUserName}!`;
+            showModal("Name updated successfully!", "Success", null, 2000);
+        }
+        
+        function handleLogout() {
+            signOut(auth).then(() => {
+                localStorage.removeItem('arvindAppUserId');
+                currentUser = null;
+                applicationUserId = null;
+                if (unsubscribeNotifications) unsubscribeNotifications();
+                if (unsubscribeUserCount) unsubscribeUserCount();
+                // onAuthStateChanged will detect the signed-out state and show the main screen
+                window.location.reload();
+            });
+        }
+
+        // --- LEVELING SYSTEM ---
+        function getXpForNextLevel(level) {
+            return (level + 1) * 100; // e.g., Level 0 -> 100 XP, Level 1 -> 200 XP
+        }
+
+        function updateProfileUI() {
+            const level = userData.level || 0;
+            const xp = userData.xp || 0;
+            const nextLevelXp = getXpForNextLevel(level);
+            
+            document.getElementById('profile-level').textContent = level;
+            document.getElementById('profile-xp').textContent = `${xp} / ${nextLevelXp} XP`;
+            const xpPercentage = (xp / nextLevelXp) * 100;
+            document.getElementById('profile-xp-bar').style.width = `${xpPercentage}%`;
+        }
+        
+        function showLevelUpModal(newLevel) {
+            levelUpModal.text.textContent = `आप लेवल ${newLevel} पर पहुंच गए हैं!`;
+            modalContainer.classList.remove('hidden');
+            levelUpModal.el.classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        async function addXp(xpGained) {
+            if (!applicationUserId) return;
+            const userRef = doc(db, "users", applicationUserId);
+            
+            await updateDoc(userRef, { xp: increment(xpGained) });
+
+            const updatedUserSnap = await getDoc(userRef);
+            userData = updatedUserSnap.data();
+            
+            let currentLevel = userData.level || 0;
+            let currentXp = userData.xp || 0;
+            let xpForNext = getXpForNextLevel(currentLevel);
+
+            if (currentXp >= xpForNext) {
+                currentLevel++;
+                await updateDoc(userRef, { level: currentLevel });
+                userData.level = currentLevel;
+                showLevelUpModal(currentLevel);
+            }
+            updateProfileUI();
+        }
+
+        // --- PERSONAL MESSAGING & NOTIFICATIONS ---
+        async function loadUsersList() {
+            showScreen('users-list-screen');
+            const container = document.getElementById('users-list-container');
+            container.innerHTML = '<p class="text-center text-slate-500 p-8">उपयोगकर्ताओं को लोड किया जा रहा है...</p>';
+
+            const usersRef = collection(db, "users");
+            const q = query(usersRef, where("userId", "!=", applicationUserId));
+            const querySnapshot = await getDocs(q);
+            
+            container.innerHTML = '';
+            if (querySnapshot.empty) {
+                container.innerHTML = '<p class="text-center text-slate-500 p-8">चैट करने के लिए कोई अन्य उपयोगकर्ता नहीं मिला।</p>';
+                return;
+            }
+
+            querySnapshot.forEach((doc) => {
+                const user = doc.data();
+                const userEl = document.createElement('div');
+                userEl.className = 'flex items-center p-4 bg-slate-100 rounded-lg cursor-pointer hover:bg-slate-200';
+                userEl.innerHTML = `
+                    <div class="flex-grow">
+                        <p class="font-bold">${user.name}</p>
+                        <p class="text-sm text-slate-500">लेवल ${user.level || 0}</p>
+                    </div>
+                    <i data-lucide="message-circle" class="text-indigo-500"></i>
+                `;
+                userEl.addEventListener('click', () => openPersonalChat(user));
+                container.appendChild(userEl);
+            });
+            lucide.createIcons();
+        }
+
+        function openPersonalChat(recipientData) {
+            currentPersonalChatRecipient = recipientData; // Store the whole user object
+            document.getElementById('personal-chat-header').textContent = recipientData.name;
+            document.getElementById('personal-chat-messages').innerHTML = '';
+            showScreen('personal-chat-screen');
+            loadPersonalMessages(recipientData.userId);
+        }
+
+        function loadPersonalMessages(recipientId) {
+            if (unsubscribePersonalChat) unsubscribePersonalChat();
+
+            const chatMessages = document.getElementById('personal-chat-messages');
+            const chatID = [applicationUserId, recipientId].sort().join('_');
+            const messagesRef = collection(db, "personalChats", chatID, "messages");
+            const q = query(messagesRef, orderBy("timestamp", "asc"), limit(50));
+
+            unsubscribePersonalChat = onSnapshot(q, (querySnapshot) => {
+                chatMessages.innerHTML = "";
+                querySnapshot.forEach(doc => {
+                    const msg = doc.data();
+                    const bubble = document.createElement('div');
+                    const isMe = msg.senderId === applicationUserId;
+                    bubble.className = `p-3 rounded-xl max-w-xs ${isMe ? 'bg-indigo-500 text-white self-end' : 'bg-slate-200 self-start'}`;
+                    bubble.innerHTML = `<div>${msg.text}</div>`;
+                    chatMessages.appendChild(bubble);
+                });
+                setTimeout(() => {
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 0);
+            });
+        }
+
+        async function sendPersonalMessage(e) {
+            e.preventDefault();
+            const input = document.getElementById('personal-chat-input');
+            const text = input.value.trim();
+            if (text === "" || !currentPersonalChatRecipient.userId) return;
+            
+            const recipientId = currentPersonalChatRecipient.userId;
+            const recipientUid = currentPersonalChatRecipient.authUid;
+            const recipientName = currentPersonalChatRecipient.name;
+            input.value = "";
+
+            const chatID = [applicationUserId, recipientId].sort().join('_');
+            const messagesRef = collection(db, "personalChats", chatID, "messages");
+            const chatDocRef = doc(db, "personalChats", chatID);
+            
+            // 1. Add the message
+            await addDoc(messagesRef, {
+                text: text,
+                senderId: applicationUserId,
+                recipientId: recipientId,
+                timestamp: serverTimestamp()
+            });
+
+            // 2. Create a notification for the recipient
+            const notificationsColRef = collection(db, "notifications", recipientId, "userNotifications");
+            const messagePreview = text.substring(0, 40) + (text.length > 40 ? "..." : "");
+            await addDoc(notificationsColRef, {
+                fromId: applicationUserId,
+                fromName: currentUserName,
+                text: `ne aapko ek sandesh bheja hai: "${messagePreview}"`,
+                timestamp: serverTimestamp(),
+                type: 'personal_message',
+                relatedId: applicationUserId, 
+                read: false
+            });
+
+            // 3. Update the chat document with last message info
+            await setDoc(chatDocRef, {
+                lastMessage: text,
+                lastMessageTimestamp: serverTimestamp(),
+                participantUids: [currentUser.uid, recipientUid]
+            }, { merge: true });
+        }
+        
+        function listenForNotifications() {
+            if (unsubscribeNotifications) unsubscribeNotifications();
+            if (!applicationUserId) return;
+
+            const notificationsRef = collection(db, "notifications", applicationUserId, "userNotifications");
+            const q = query(notificationsRef, orderBy("timestamp", "desc"));
+
+            unsubscribeNotifications = onSnapshot(q, (snapshot) => {
+                const notificationsContainer = document.getElementById('notifications-container');
+                notificationsContainer.innerHTML = '';
+                let unreadCount = 0;
+
+                if (snapshot.empty) {
+                    notificationsContainer.innerHTML = '<p class="text-center text-slate-500 p-8">कोई सूचना नहीं है।</p>';
+                }
+
+                snapshot.forEach(docSnap => {
+                    const notification = docSnap.data();
+                    if (!notification.read) {
+                        unreadCount++;
+                    }
+                    const itemEl = document.createElement('div');
+                    itemEl.className = `notification-item p-4 rounded-lg cursor-pointer shadow-sm ${notification.read ? 'read' : 'unread'}`;
+                    itemEl.innerHTML = `
+                        <p class="text-slate-800">
+                            <span class="font-bold">${notification.fromName}</span>
+                            <span> ${notification.text}</span>
+                        </p>
+                        <p class="text-xs text-slate-400 mt-1">${new Date(notification.timestamp?.toDate()).toLocaleString()}</p>
+                    `;
+                    itemEl.addEventListener('click', async () => {
+                        const userRef = doc(db, "users", notification.relatedId);
+                        const userSnap = await getDoc(userRef);
+                        if (userSnap.exists()) {
+                            openPersonalChat(userSnap.data());
+                        }
+                        await updateDoc(doc(db, "notifications", applicationUserId, "userNotifications", docSnap.id), { read: true });
+                    });
+                    notificationsContainer.appendChild(itemEl);
+                });
+
+                // Update badge
+                const badge = document.querySelector('#nav-notifications .notification-badge');
+                if (badge) badge.remove();
+
+                if (unreadCount > 0) {
+                    const newBadge = document.createElement('div');
+                    newBadge.className = 'notification-badge';
+                    newBadge.textContent = unreadCount;
+                    document.getElementById('nav-notifications').appendChild(newBadge);
+                }
+            });
+        }
+
+        // --- REAL JEE TEST & FAKE SCOREBOARD LOGIC ---
+        async function handleRealJeeFormSubmit() {
+            const btn = document.getElementById('real-jee-form-submit-btn');
+            btn.disabled = true;
+            btn.innerHTML = `<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div> सबमिट हो रहा है...`;
+
+            try {
+                // REAL JEE RANK ONCE FIX: Check if user has already taken the test
+                const scoresRef = collection(db, "jeeScores");
+                const q = query(scoresRef, where("userId", "==", applicationUserId), where("isReal", "==", true), limit(1));
+                const existingSubmission = await getDocs(q);
+
+                if (!existingSubmission.empty) {
+                    const prevData = existingSubmission.docs[0].data();
+                    const score = prevData.score;
+                    const status = score >= 50 ? "PASS" : "FAIL";
+                    showModal(`आप यह टेस्ट पहले ही दे चुके हैं।<br><br>आपका स्कोर: <b>${score}</b><br>परिणाम: <b>${status}</b>`, "Test Already Taken");
+                    btn.disabled = false;
+                    btn.textContent = "टेस्ट शुरू करें";
+                    return;
+                }
+
+                const studentInfo = {
+                    name: document.getElementById('real-jee-name').value,
+                    class: document.getElementById('real-jee-class').value,
+                    targetYear: document.getElementById('real-jee-target').value,
+                    submittedAt: serverTimestamp()
+                };
+
+                // Save user info
+                await setDoc(doc(db, "userInfo", applicationUserId), studentInfo, { merge: true });
+                
+                // Generate and start the test
+                const testPaper = await generateRealJeeTest();
+                if (testPaper) {
+                    hideModals();
+                    currentExamData = testPaper;
+                    currentExamData.type = 'real-jee';
+                    startExam(currentExamData);
+                } else {
+                    // Error modal is already shown in generateRealJeeTest
+                    console.error("Test paper generation returned null.");
+                }
+
+            } catch (error) {
+                console.error("Error submitting Real JEE form:", error);
+                showModal("पंजीकरण में विफल। कृपया पुनः प्रयास करें।", "Error");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "टेस्ट शुरू करें";
+            }
+        }
+
+        async function generateRealJeeTest() {
+            const subjects = ["भौतिकी (Physics)", "रसायन विज्ञान (Chemistry)", "गणित (Maths)"];
+            let allQuestions = [];
+            const today = getTodayDateString();
+            const testId = `real-jee-${today}`;
+            const testRef = doc(db, "jeeMainTest", testId);
+
+            // Check if test for today already exists
+            const testSnap = await getDoc(testRef);
+            if (testSnap.exists()) {
+                console.log("Today's Real JEE Test already exists. Loading from DB.");
+                return testSnap.data();
+            }
+
+            const baseModalText = "REAL JEE MAIN TEST तैयार हो रहा है...";
+            showModal(`${baseModalText}<br><br>यह सबसे कठिन पेपर होगा।<span id="generation-status"></span>`, "कृपया प्रतीक्षा करें", null);
+            const statusEl = document.getElementById('generation-status');
+            let dotInterval;
+
+            try {
+                dotInterval = setInterval(() => {
+                    statusEl.textContent = statusEl.textContent.length < 3 ? statusEl.textContent + '.' : '.';
+                }, 500);
+
+                for (let i = 0; i < subjects.length; i++) {
+                    const subject = subjects[i];
+                     if (statusEl) {
+                         document.getElementById('message-modal-text').innerHTML = `${baseModalText}<br><br>विषय: ${subject} (${i+1}/${subjects.length})<span id="generation-status">.</span>`;
+                    }
+
+                    const prompt = `Generate exactly 25 practice questions for a REAL JEE MAIN TEST in HINDI for the subject ${subject}. The questions must be high-quality, calculative, and numerical-based, matching the difficulty and pattern of the actual JEE Main exam. Avoid simple theoretical questions. For each question, provide: 1. A unique question text in Hindi. 2. Four distinct options (A, B, C, D) in Hindi. 3. The correct option letter (e.g., "A"). 4. A detailed, step-by-step explanation in Hindi showing the calculation to reach the answer.`;
+                    const schema = { type: "OBJECT", properties: { "questions": { "type": "ARRAY", "items": { "type": "OBJECT", "properties": { "subject": {"type": "STRING"}, "question": {"type": "STRING"}, "options": { "type": "OBJECT", "properties": { "A": {"type": "STRING"}, "B": {"type": "STRING"}, "C": {"type": "STRING"}, "D": {"type": "STRING"} } }, "correct_answer": {"type": "STRING"}, "explanation": {"type": "STRING"} } } } } };
+                    
+                    const response = await fetch(GEMINI_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { responseMimeType: "application/json", responseSchema: schema } }) });
+                    if (!response.ok) throw new Error(`API Error for ${subject}: ${response.statusText}`);
+                    
+                    const result = await response.json();
+                    if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0].text) {
+                        const parsedData = JSON.parse(result.candidates[0].content.parts[0].text);
+                        if(parsedData && parsedData.questions) {
+                           allQuestions.push(...parsedData.questions);
+                        } else {
+                           throw new Error(`Parsed data is invalid for ${subject}.`);
+                        }
+                    } else {
+                         throw new Error(`Empty response from API for ${subject}.`);
+                    }
+                }
+
+                if (allQuestions.length < 75) {
+                    throw new Error(`Failed to generate the full set of questions. Got only ${allQuestions.length}.`);
+                }
+
+                const finalData = { questions: allQuestions, createdAt: serverTimestamp() };
+                await setDoc(testRef, finalData); // Save the generated test
+                return finalData;
+
+            } catch (error) {
+                console.error("Real JEE Test generation error:", error);
+                showModal(`सबसे कठिन टेस्ट बनाने में विफल: ${error.message}। कृपया बाद में पुनः प्रयास करें।`, "Error");
+                return null;
+            } finally {
+                if(dotInterval) clearInterval(dotInterval);
+            }
+        }
+
+        async function loadExternalScoreboard() {
+            showScreen('external-scoreboard-screen');
+            const listEl = document.getElementById('external-scoreboard-list');
+            const stickyRankEl = document.getElementById('user-rank-sticky');
+            listEl.innerHTML = `<p class="text-center p-8">स्कोरबोर्ड लोड हो रहा है...</p>`;
+            stickyRankEl.classList.add('hidden');
+
+            try {
+                await populateFakeScoreboardIfNeeded();
+
+                const q = query(collection(db, "jeeScores"), orderBy("score", "desc"));
+                const snap = await getDocs(q);
+
+                if (snap.empty) {
+                    listEl.innerHTML = `<p class="text-center p-8">अभी तक कोई स्कोर जमा नहीं हुआ है।</p>`;
+                    return;
+                }
+
+                listEl.innerHTML = '';
+                let myRankData = null;
+                let myRank = -1;
+
+                // First pass: find current user's rank
+                snap.docs.forEach((doc, index) => {
+                    const data = doc.data();
+                    if (data.isReal && data.userId === applicationUserId) {
+                        myRankData = data;
+                        myRank = index + 1;
+                    }
+                });
+                
+                // SCOREBOARD FIX: Display sticky user rank
+                if (myRankData) {
+                    const status = myRankData.score >= 50 ? "PASS" : "FAIL";
+                    const statusColor = status === "PASS" ? "text-green-600" : "text-red-600";
+                    stickyRankEl.innerHTML = `
+                        <div class="flex items-center justify-between font-bold text-lg">
+                            <span>आपकी रैंक: #${myRank}</span>
+                            <span>स्कोर: ${myRankData.score}</span>
+                            <span class="${statusColor}">${status}</span>
+                        </div>
+                    `;
+                    stickyRankEl.classList.remove('hidden');
+                }
+
+
+                // Second pass: render the full list
+                let rank = 1;
+                snap.docs.forEach(docSnap => {
+                    const data = docSnap.data();
+                    const isMe = data.isReal && data.userId === applicationUserId;
+                    const itemEl = document.createElement('div');
+                    itemEl.className = `flex items-center p-4 rounded-lg ${isMe ? 'bg-yellow-100 border-2 border-yellow-400' : 'bg-slate-100'}`;
+                    itemEl.innerHTML = `
+                        <span class="font-bold w-16 text-lg">#${rank}</span>
+                        <span class="flex-grow font-semibold">${data.userName} ${isMe ? '(आप)' : ''}</span>
+                        <span class="font-bold text-xl text-purple-600">${data.score}</span>`;
+                    listEl.appendChild(itemEl);
+                    rank++;
+                });
+
+            } catch (error) {
+                console.error("External Scoreboard error:", error);
+                listEl.innerHTML = `<p class="text-center text-red-500 p-8">स्कोरबोर्ड लोड नहीं हो सका।</p>`;
+            }
+        }
+
+        async function populateFakeScoreboardIfNeeded() {
+            const initRef = doc(db, "jeeScores", "--init--");
+            const initSnap = await getDoc(initRef);
+
+            if (initSnap.exists()) {
+                console.log("Fake scoreboard already populated.");
+                return;
+            }
+
+            console.log("Populating fake scoreboard for the first time...");
+            showModal("स्कोरबोर्ड को पहली बार सेट किया जा रहा है...", "प्रारंभ हो रहा है");
+
+            const indianNames = ["Aarav Sharma", "Vivaan Singh", "Aditya Kumar", "Vihaan Gupta", "Arjun Yadav", "Sai Patel", "Reyansh Reddy", "Krishna Verma", "Ishaan Choudhary", "Rohan Mishra", "Priya Agarwal", "Ananya Jain", "Diya Mehta", "Saanvi Shah", "Myra Tiwari", "Aadhya Reddy", "Kiara Patel", "Anika Gupta", "Riya Singh", "Ishita Sharma"];
+            const batch = writeBatch(db);
+            const totalFakes = 1500;
+
+            for (let i = 0; i < totalFakes; i++) {
+                const name = indianNames[Math.floor(Math.random() * indianNames.length)];
+                const score = Math.floor(Math.random() * 121); // Scores from 0 to 120
+                const fakeEntry = {
+                    userName: name,
+                    score: score,
+                    submittedAt: serverTimestamp(),
+                    isReal: false // Flag to distinguish fake entries
+                };
+                const newDocRef = doc(collection(db, "jeeScores"));
+                batch.set(newDocRef, fakeEntry);
+            }
+            
+            // Add the init flag to the batch
+            batch.set(initRef, { initialized: true });
+
+            await batch.commit();
+            console.log("Fake scoreboard populated successfully.");
+            hideModals();
+        }
+
+
+        // --- EVENT LISTENERS ---
+        window.addEventListener('load', () => {
+            console.log("Window loaded. Starting initial screen sequence.");
+            document.getElementById('loading-screen').classList.add('active');
+            setTimeout(() => {
+                document.getElementById('loading-screen').classList.remove('active');
+                document.getElementById('intro-screen').classList.add('active');
+                initializeFirebase();
+            }, 1000);
+        });
+
+        document.querySelectorAll('.back-btn').forEach(btn => btn.addEventListener('click', goBack));
+        messageModal.okBtn.addEventListener('click', hideModals);
+        levelUpModal.okBtn.addEventListener('click', hideModals);
+        targetInfoModal.okBtn.addEventListener('click', () => {
+            modalContainer.classList.add('hidden');
+            targetInfoModal.el.classList.add('hidden');
+        });
+
+        document.getElementById('target-info-icon').addEventListener('click', () => {
+             modalContainer.classList.remove('hidden');
+             targetInfoModal.el.classList.remove('hidden');
+             messageModal.el.classList.add('hidden');
+             feedbackModal.el.classList.add('hidden');
+             levelUpModal.el.classList.add('hidden');
+             lucide.createIcons();
+        });
+        
+        // LOGIN FIX: Removed listener for have-account-btn
+        document.getElementById('email-signup-btn').addEventListener('click', () => showScreen('email-signup-screen'));
+        document.getElementById('email-login-btn').addEventListener('click', () => showScreen('email-login-screen'));
+        document.getElementById('continue-as-guest-btn').addEventListener('click', () => showScreen('new-user-screen'));
+        
+        document.getElementById('create-guest-user-btn').addEventListener('click', handleGuestSignIn);
+        document.getElementById('signup-btn').addEventListener('click', handleEmailSignup);
+        document.getElementById('email-login-submit-btn').addEventListener('click', handleEmailLogin);
+        // LOGIN FIX: Removed listener for login-btn
+        document.getElementById('chat-form').addEventListener('submit', sendMessage);
+        document.getElementById('personal-chat-form').addEventListener('submit', sendPersonalMessage);
+        loadMoreBtn.addEventListener('click', () => loadMessages(false));
+        document.getElementById('chat-filter').addEventListener('change', () => loadMessages(true));
+
+
+        document.getElementById('copy-id-btn').addEventListener('click', () => {
+            const tempInput = document.createElement('input');
+            tempInput.value = applicationUserId;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                showModal("आईडी कॉपी हो गया!", "Success", null, 2000);
+            } catch (err) {
+                console.error('Failed to copy text:', err);
+                showModal("Failed to copy ID. Please copy manually.", "Error");
+            }
+            document.body.removeChild(tempInput);
+        });
+        document.getElementById('save-name-btn').addEventListener('click', updateUserName);
+        document.getElementById('logout-btn').addEventListener('click', handleLogout);
+
+        document.getElementById('nav-home').addEventListener('click', () => showScreen('home-screen', true));
+        document.getElementById('nav-chat').addEventListener('click', () => showScreen('chat-screen', true));
+        document.getElementById('nav-users').addEventListener('click', () => loadUsersList());
+        document.getElementById('nav-notifications').addEventListener('click', () => showScreen('notifications-screen', true));
+        document.getElementById('nav-profile').addEventListener('click', () => {
+            document.getElementById('display-user-id').textContent = applicationUserId;
+            document.getElementById('profile-name-input').value = currentUserName;
+            updateProfileUI();
+            showScreen('profile-screen', true);
+        });
+
+        document.getElementById('prep-by-syllabus-btn').addEventListener('click', () => { populateSubjects(); showScreen('jee-prep-setup-screen'); });
+        document.getElementById('daily-rank-test-btn').addEventListener('click', startDailyTest);
+        document.getElementById('scoreboard-btn').addEventListener('click', loadScoreboard);
+        document.getElementById('external-scoreboard-btn').addEventListener('click', loadExternalScoreboard);
+        document.getElementById('feedback-btn').addEventListener('click', openFeedbackModal);
+        
+        thumbsUpBtn.addEventListener('click', () => submitVote('thumbsUp'));
+        thumbsDownBtn.addEventListener('click', () => submitVote('thumbsDown'));
+
+        document.getElementById('generate-test-btn').addEventListener('click', async () => {
+            const subjects = [...document.querySelectorAll('input[name="subject"]:checked')].map(el => el.value);
+            if (subjects.length === 0) {
+                showModal("कृपया कम से कम एक विषय चुनें।", "Error");
+                return;
+            }
+            const examData = await generateTest(true); 
+            if (examData) {
+                hideModals();
+                startExam(examData);
+            }
+        });
+
+        document.getElementById('submit-exam-btn').addEventListener('click', () => {
+            if (currentExamData.type === 'daily' || currentExamData.type === 'real-jee') {
+                showModal("क्या आप वाकई टेस्ट जमा करना चाहते हैं?", "Submit Confirmation", () => submitExam());
+            } else {
+                submitExam();
+            }
+        });
+
+        document.getElementById('back-to-home-btn').addEventListener('click', () => showScreen('home-screen', true));
+        document.getElementById('real-jee-back-home-btn').addEventListener('click', () => showScreen('home-screen', true));
+        document.getElementById('review-answers-btn').addEventListener('click', startReview);
+        feedbackModal.cancelBtn.addEventListener('click', hideModals);
+        feedbackModal.submitBtn.addEventListener('click', submitFeedback);
+
+        // Real JEE Test Listeners
+        document.getElementById('real-jee-test-btn').addEventListener('click', () => {
+            document.getElementById('real-jee-name').value = currentUserName;
+            showScreen('real-jee-form-screen');
+        });
+        document.getElementById('real-jee-form-submit-btn').addEventListener('click', handleRealJeeFormSubmit);
+
+        // PYQ Listeners
+        document.getElementById('pyq-btn').addEventListener('click', () => {
+            const yearGrid = document.getElementById('pyq-year-grid');
+            yearGrid.innerHTML = '';
+            const years = [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016];
+            years.forEach(year => {
+                const yearBtn = document.createElement('button');
+                yearBtn.className = 'button-secondary py-4 text-xl';
+                yearBtn.textContent = year;
+                yearBtn.dataset.year = year;
+                yearBtn.addEventListener('click', () => {
+                    selectedPYQYear = year;
+                    document.getElementById('pyq-type-title').textContent = `${year} - परीक्षा का प्रकार चुनें`;
+                    showScreen('pyq-type-screen');
+                });
+                yearGrid.appendChild(yearBtn);
+            });
+            showScreen('pyq-year-screen');
+        });
+
+        document.querySelectorAll('.pyq-type-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const type = e.target.dataset.pyqType;
+                const year = selectedPYQYear;
+                const paperId = `${year}-${type}`;
+                const paperRef = doc(db, "pyqPapers", paperId);
+
+                showModal("पेपर लोड हो रहा है...", "कृपया प्रतीक्षा करें");
+
+                try {
+                    const paperSnap = await getDoc(paperRef);
+                    let paperData;
+
+                    if (paperSnap.exists()) {
+                        console.log(`Loading PYQ paper ${paperId} from Firestore.`);
+                        paperData = paperSnap.data();
+                    } else {
+                        console.log(`PYQ paper ${paperId} not found in Firestore. Generating...`);
+                        paperData = await generatePYQTest(year, type);
+                        if (paperData) {
+                            console.log(`Saving generated PYQ paper ${paperId} to Firestore.`);
+                            await setDoc(paperRef, { ...paperData, createdAt: serverTimestamp() });
+                        }
+                    }
+
+                    if (paperData) {
+                        hideModals();
+                        currentExamData = paperData;
+                        currentExamData.type = 'practice'; // PYQs are for practice
+                        startExam(paperData);
+                    } else {
+                         hideModals();
+                         showModal("पेपर लोड करने में विफल।", "त्रुटि");
+                    }
+                } catch (error) {
+                    console.error("Error fetching/generating PYQ paper:", error);
+                    hideModals();
+                    showModal("पेपर लोड करने में एक त्रुटि हुई।", "त्रुटि");
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
