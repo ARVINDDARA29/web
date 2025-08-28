@@ -3,129 +3,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdGem Demo Offerwall</title>
+    <title>ADGEM Free Fire Diamonds Demo</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Custom font for a clean, modern look */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
+            padding: 0;
+            background-color: #1a202c; /* Dark background for game feel */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure full viewport height */
+            color: #e2e8f0; /* Light text color */
         }
-        .container {
-            max-width: 400px;
-            width: 100%;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            text-align: center;
+        /* Hide scrollbar for a cleaner mobile app look, but still allow scrolling */
+        body::-webkit-scrollbar {
+            display: none;
         }
-        .header {
-            color: #333333;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        .description {
-            color: #666666;
-            font-size: 16px;
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
-        .btn-offerwall {
-            background-color: #4CAF50; /* Green */
-            color: white;
-            padding: 14px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            width: 100%;
-            max-width: 250px;
-            display: inline-block;
-            text-decoration: none;
-        }
-        .btn-offerwall:hover {
-            background-color: #45a049;
-            transform: translateY(-2px);
-        }
-        .btn-offerwall:active {
-            transform: translateY(0);
-        }
-        .reward-message {
-            margin-top: 25px;
-            font-size: 18px;
-            color: #007bff;
-            font-weight: 600;
-            display: none; /* Initially hidden */
-        }
-        /* Mobile-specific adjustments */
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-            .header {
-                font-size: 20px;
-            }
-            .description {
-                font-size: 14px;
-            }
-            .btn-offerwall {
-                padding: 12px 20px;
-                font-size: 16px;
-            }
+        body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1 class="header">Welcome to AdGem Demo App</h1>
-        <p class="description">
-            Click the button below to simulate opening the AdGem Offerwall.
-            This is a demo to show the integration point for your monetization app.
-        </p>
-        <button id="showOfferwallBtn" class="btn-offerwall">Show Offerwall</button>
-        <p id="rewardMessage" class="reward-message">
-            Congratulations! You earned a reward! (Demo Reward)
-        </p>
-    </div>
+<body class="flex flex-col h-screen">
+    <!-- Top Header Bar -->
+    <header class="bg-gray-800 text-white p-4 shadow-lg flex items-center justify-between rounded-b-lg">
+        <button class="text-2xl focus:outline-none text-gray-400 hover:text-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </button>
+        <h1 class="text-xl font-bold">ADGEM Diamonds Demo</h1>
+        <div class="flex items-center space-x-2">
+            <span class="text-yellow-400 text-lg font-bold flex items-center">
+                <span id="diamond-balance" class="mr-1">0</span> 💎
+            </span>
+            <button class="text-2xl focus:outline-none text-gray-400 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
+            </button>
+        </div>
+    </header>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const showOfferwallBtn = document.getElementById('showOfferwallBtn');
-            const rewardMessage = document.getElementById('rewardMessage');
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto p-4 space-y-4">
+        <!-- Message Card for status updates -->
+        <div id="message-card" class="bg-blue-900 text-blue-200 p-4 rounded-xl shadow-md text-center hidden border border-blue-700">
+            <p id="app-message">App load ho raha hai...</p>
+        </div>
 
-            showOfferwallBtn.addEventListener('click', () => {
-                // In a real Android app, this is where you would call the AdGem SDK
-                // For example: AdGem.showOfferwall();
+        <!-- User Info & Action Card -->
+        <div id="user-action-card" class="bg-gray-800 p-4 rounded-xl shadow-lg hidden border border-gray-700">
+            <h2 class="text-lg font-bold text-gray-200 mb-2">User Aur ADGEM Status</h2>
+            <p class="text-gray-400"><strong>User ID:</strong> <span id="user-id" class="break-all font-mono text-sm bg-gray-700 p-1 rounded"></span></p>
 
-                // Here we are just simulating it for the web demo
-                console.log("Simulating AdGem Offerwall opening...");
+            <div class="mt-4 flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-3">
+                <button id="open-offerwall-button" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition-colors duration-200 flex-1 font-semibold text-base shadow-md">
+                    ADGEM Offerwall Kholo 🚀
+                </button>
+                <button id="simulate-completion-button" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-colors duration-200 flex-1 font-semibold text-base shadow-md" disabled>
+                    Offer Poora Hua (Simulate) ✅
+                </button>
+            </div>
+            <button id="reset-diamonds-button" class="mt-4 w-full bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition-colors duration-200 font-semibold text-base shadow-md">
+                Heere Reset Karo 🔄
+            </button>
+        </div>
 
-                // Hide the button and show a "loading" or "offerwall open" message
-                showOfferwallBtn.style.display = 'none';
-                rewardMessage.textContent = "Offerwall is loading... (Please integrate AdGem SDK in your Android app)";
-                rewardMessage.style.display = 'block';
-                rewardMessage.style.color = '#ff9800'; // Orange for loading
+        <!-- Diamond Info Card -->
+        <div id="diamond-info-card" class="bg-blue-900 p-4 rounded-xl shadow-lg border-2 border-blue-700">
+            <h2 class="text-lg font-bold text-blue-200 mb-2">💎 Aapke Heere</h2>
+            <p class="text-blue-100">ADGEM offerwall se heere kamao aur game mein exclusive items unlock karo!</p>
+            <div class="mt-3 flex items-center space-x-2 text-blue-100">
+                <span class="text-3xl font-extrabold" id="current-diamond-balance">0</span>
+                <span class="text-2xl">💎</span>
+            </div>
+        </div>
 
-                // Simulate an offerwall being completed after a few seconds (for demo purposes)
-                setTimeout(() => {
-                    // This part would be triggered by a callback from AdGem SDK in a real app
-                    rewardMessage.textContent = "Congratulations! You earned a reward! (Demo Reward)";
-                    rewardMessage.style.color = '#4CAF50'; // Green for reward
-                    showOfferwallBtn.style.display = 'inline-block'; // Show button again
-                }, 3000); // Simulate 3 seconds for offerwall interaction
+        <!-- Exclusive Content Card (conditionally visible) -->
+        <div id="exclusive-content-card" class="bg-yellow-900 p-4 rounded-xl shadow-lg border-2 border-yellow-700 hidden">
+            <h2 class="text-lg font-bold text-yellow-200 mb-2">🌟 Exclusive Content!</h2>
+            <p class="text-yellow-100">Badhai ho! Aapne ADGEM offer poora karke exclusive game content unlock kar liya hai. Ab aap in heeron se khaas skins ya characters khareed sakte hain!</p>
+            <div class="mt-3 flex items-center space-x-2 text-yellow-100">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <span>Naye items kharidne ke liye store par jaao!</span>
+            </div>
+        </div>
+
+        <!-- Regular Game Features Card (Always visible) -->
+        <div class="bg-gray-800 p-4 rounded-xl shadow-lg border border-gray-700">
+            <h2 class="text-lg font-bold text-gray-200 mb-2">🎮 Game Ke Regular Features</h2>
+            <p class="text-gray-400">Yeh game ki woh suvidhayein hain jo sabhi players ke liye uplabdh hain.</p>
+            <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-200 font-semibold text-base shadow-md">
+                Game Khelna Shuru Karo
+            </button>
+        </div>
+
+        <!-- Placeholder content to ensure scrolling -->
+        <div class="h-20 bg-transparent"></div>
+    </main>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, onSnapshot, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Canvas environment se milne wale global variables
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'adgem-game-demo';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let app;
+        let auth;
+        let db;
+        let userId = null;
+        let unsubscribeFromUserRewards = null; // Listener ko clean up karne ke liye
+
+        // DOM elements
+        const messageCard = document.getElementById('message-card');
+        const appMessage = document.getElementById('app-message');
+        const userActionCard = document.getElementById('user-action-card');
+        const userIdSpan = document.getElementById('user-id');
+        const diamondBalanceHeader = document.getElementById('diamond-balance');
+        const currentDiamondBalance = document.getElementById('current-diamond-balance');
+        const openOfferwallButton = document.getElementById('open-offerwall-button');
+        const simulateCompletionButton = document.getElementById('simulate-completion-button');
+        const resetDiamondsButton = document.getElementById('reset-diamonds-button');
+        const exclusiveContentCard = document.getElementById('exclusive-content-card');
+
+        // Messages dikhane ke liye function
+        function showMessage(msg, type = 'info') {
+            appMessage.textContent = msg;
+            messageCard.classList.remove('hidden', 'bg-red-900', 'text-red-200', 'bg-blue-900', 'text-blue-200', 'bg-green-900', 'text-green-200', 'bg-yellow-900', 'text-yellow-200');
+            messageCard.classList.remove('border-red-700', 'border-blue-700', 'border-green-700', 'border-yellow-700');
+
+            if (type === 'error') {
+                messageCard.classList.add('bg-red-900', 'text-red-200', 'border-red-700');
+            } else if (type === 'success') {
+                messageCard.classList.add('bg-green-900', 'text-green-200', 'border-green-700');
+            } else if (type === 'action') { // For active actions/waiting
+                messageCard.classList.add('bg-yellow-900', 'text-yellow-200', 'border-yellow-700');
+            } else { // info (default blue)
+                messageCard.classList.add('bg-blue-900', 'text-blue-200', 'border-blue-700');
+            }
+            messageCard.classList.remove('hidden');
+        }
+
+        // Messages chhupane ke liye function
+        function hideMessage() {
+            messageCard.classList.add('hidden');
+        }
+
+        // Firebase ko initialize aur authentication handle karna
+        async function initializeFirebase() {
+            showMessage("App load ho raha hai...", 'info');
+            try {
+                if (!Object.keys(firebaseConfig).length) {
+                    throw new Error("Firebase config nahi di gayi hai. Kripya nischit karein ki __firebase_config set hai.");
+                }
+                app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                // Auth state changes ke liye suno
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        userIdSpan.textContent = userId;
+                        userActionCard.classList.remove('hidden');
+                        hideMessage();
+                        console.log("User ID ke saath authenticated:", userId);
+
+                        // User rewards changes ke liye sunna shuru karo
+                        await setupUserRewardsListener();
+                    } else {
+                        // Sign in karne ki koshish karein
+                        if (initialAuthToken) {
+                            await signInWithCustomToken(auth, initialAuthToken);
+                        } else {
+                            await signInAnonymously(auth);
+                        }
+                        console.log("Sign-in karne ki koshish ki jaa rahi hai...");
+                    }
+                });
+
+            } catch (error) {
+                console.error("Firebase initialize karne ya sign in karne mein error:", error);
+                showMessage(`Error: ${error.message}`, 'error');
+                userActionCard.classList.add('hidden'); // Error hone par user info chhupao
+            }
+        }
+
+        // User rewards ke liye real-time listener set karna
+        async function setupUserRewardsListener() {
+            if (!userId || !db) {
+                console.error("Reward listener ke liye Firestore ya User ID uplabdh nahi hai.");
+                return;
+            }
+
+            // User ke private rewards document ka path
+            const userRewardsDocRef = doc(db, `artifacts/${appId}/users/${userId}/userRewards`, 'profile');
+
+            // Agar koi pichla listener hai to use clean up karein
+            if (unsubscribeFromUserRewards) {
+                unsubscribeFromUserRewards();
+            }
+
+            unsubscribeFromUserRewards = onSnapshot(userRewardsDocRef, (docSnap) => {
+                let diamonds = 0;
+                let adgemOfferPending = false;
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    diamonds = data.diamonds || 0;
+                    adgemOfferPending = data.adgemOfferPending || false;
+                    console.log("Reward data prapt hua:", data);
+                } else {
+                    console.log("User ke liye koi rewards document nahi mila, default roop se 0 heere.");
+                    // Agar document maujood nahi hai to default rewards document banao
+                    setDoc(userRewardsDocRef, { diamonds: 0, adgemOfferPending: false }, { merge: true }).catch(e => console.error("Default rewards doc banane mein error:", e));
+                }
+
+                updateUIRewards(diamonds, adgemOfferPending);
+            }, (error) => {
+                console.error("Rewards sunne mein error:", error);
+                showMessage(`Rewards fetch karne mein error: ${error.message}`, 'error');
+                updateUIRewards(0, false); // Error hone par default 0 heere
             });
+        }
+
+        // Rewards status ke aadhar par UI update karna
+        function updateUIRewards(diamonds, offerPending) {
+            diamondBalanceHeader.textContent = diamonds;
+            currentDiamondBalance.textContent = diamonds;
+
+            if (diamonds > 0) {
+                exclusiveContentCard.classList.remove('hidden');
+                showMessage("Heere mil gaye! Exclusive content unlocked. 🎉", 'success');
+            } else {
+                exclusiveContentCard.classList.add('hidden');
+            }
+
+            if (offerPending) {
+                openOfferwallButton.disabled = true;
+                openOfferwallButton.classList.add('opacity-50', 'cursor-not-allowed');
+                simulateCompletionButton.disabled = false;
+                simulateCompletionButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                showMessage("ADGEM offer pending hai. Pura hone ka intzaar hai...", 'action');
+            } else {
+                openOfferwallButton.disabled = false;
+                openOfferwallButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                simulateCompletionButton.disabled = true;
+                simulateCompletionButton.classList.add('opacity-50', 'cursor-not-allowed');
+                if (diamonds === 0) {
+                    showMessage("ADGEM offerwall se heere kamao!", 'info');
+                } else {
+                    hideMessage(); // Hide message if diamonds exist and no offer pending
+                }
+            }
+        }
+
+        // "ADGEM Offerwall Kholo" button click handler (ADGEM offer wall par jaane ka simulation)
+        openOfferwallButton.addEventListener('click', async () => {
+            if (!userId || !db) {
+                showMessage("App poori tarah se initialize nahi hua hai ya user logged in nahi hai.", 'error');
+                return;
+            }
+            const userRewardsDocRef = doc(db, `artifacts/${appId}/users/${userId}/userRewards`, 'profile');
+            try {
+                // Simulate going to ADGEM offer wall and setting a pending state
+                await updateDoc(userRewardsDocRef, { adgemOfferPending: true });
+                console.log("ADGEM offer pending state set kiya gaya.");
+                showMessage("ADGEM Offerwall khul gaya hai... task poora karo!", 'action');
+            } catch (error) {
+                console.error("ADGEM offer pending state set karne mein error:", error);
+                showMessage(`Offer shuru karne mein vifal: ${error.message}`, 'error');
+            }
         });
+
+        // "Offer Poora Hua (Simulate)" button click handler
+        // Yeh simulate karta hai ki ADGEM SDK ne ek successful callback bheja hai
+        simulateCompletionButton.addEventListener('click', async () => {
+            if (!userId || !db) {
+                showMessage("App poori tarah se initialize nahi hua hai ya user logged in nahi hai.", 'error');
+                return;
+            }
+            const userRewardsDocRef = doc(db, `artifacts/${appId}/users/${userId}/userRewards`, 'profile');
+            const diamondsToAdd = 100; // Har offer completion par 100 heere
+
+            try {
+                // Fetch current diamonds to update correctly
+                const docSnap = await db.getDoc(userRewardsDocRef);
+                const currentDiamonds = docSnap.exists() ? docSnap.data().diamonds || 0 : 0;
+
+                // Add diamonds and clear pending state
+                await updateDoc(userRewardsDocRef, {
+                    diamonds: currentDiamonds + diamondsToAdd,
+                    adgemOfferPending: false
+                });
+                console.log(`${diamondsToAdd} heere diye gaye aur offer pending state hataya gaya.`);
+                // UI automatically onSnapshot ke through update hoga
+            } catch (error) {
+                console.error("Heere grant karne mein error:", error);
+                showMessage(`Heere grant karne mein vifal: ${error.message}`, 'error');
+            }
+        });
+
+        // "Heere Reset Karo" button click handler
+        resetDiamondsButton.addEventListener('click', async () => {
+            if (!userId || !db) {
+                showMessage("App poori tarah se initialize nahi hua hai ya user logged in nahi hai.", 'error');
+                return;
+            }
+            const userRewardsDocRef = doc(db, `artifacts/${appId}/users/${userId}/userRewards`, 'profile');
+            try {
+                // Reset diamonds to 0 and clear any pending state
+                await updateDoc(userRewardsDocRef, { diamonds: 0, adgemOfferPending: false });
+                console.log("Heere reset kiye gaye Firestore mein.");
+                // UI automatically onSnapshot ke through update hoga
+            } catch (error) {
+                console.error("Heere reset karne mein error:", error);
+                showMessage(`Heere reset karne mein vifal: ${error.message}`, 'error');
+            }
+        });
+
+        // Window load hone par initialization shuru karein
+        window.onload = initializeFirebase;
     </script>
 </body>
 </html>
