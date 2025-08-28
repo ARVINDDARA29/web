@@ -1,41 +1,132 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>फुलस्क्रीन वेबसाइट</title>
+    <title>AdGem Demo Offerwall</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* बॉडी और HTML को पूरी ऊंचाई लेने के लिए सेट करें */
-        html, body {
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             margin: 0;
-            padding: 0;
-            overflow: hidden; /* स्क्रॉलबार छुपाएं */
-            width: 100%;
-            height: 100%;
-            font-family: 'Inter', sans-serif; /* इंटर फ़ॉन्ट का उपयोग करें */
+            padding: 20px;
+            box-sizing: border-box;
         }
-
-        /* iframe को पूरी स्क्रीन लेने के लिए स्टाइल करें */
-        iframe {
+        .container {
+            max-width: 400px;
             width: 100%;
-            height: 100%;
-            border: none; /* iframe बॉर्डर हटाएँ */
-            display: block; /* अतिरिक्त खाली जगह हटाएँ */
-            border-radius: 0.5rem; /* हल्के गोलाकार कोने */
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+        }
+        .header {
+            color: #333333;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .description {
+            color: #666666;
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        .btn-offerwall {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%;
+            max-width: 250px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn-offerwall:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+        .btn-offerwall:active {
+            transform: translateY(0);
+        }
+        .reward-message {
+            margin-top: 25px;
+            font-size: 18px;
+            color: #007bff;
+            font-weight: 600;
+            display: none; /* Initially hidden */
+        }
+        /* Mobile-specific adjustments */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            .header {
+                font-size: 20px;
+            }
+            .description {
+                font-size: 14px;
+            }
+            .btn-offerwall {
+                padding: 12px 20px;
+                font-size: 16px;
+            }
         }
     </style>
-    <!-- Tailwind CSS CDN (वैकल्पिक, लेकिन कुछ तत्वों के लिए इस्तेमाल किया जा सकता है) -->
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex items-center justify-center">
-    <!-- वह iframe जो बाहरी वेबसाइट को लोड करेगा -->
-    <iframe
-        src="https://9000-firebase-studio-1755944925402.cluster-ubrd2huk7jh6otbgyei4h62ope.cloudworkstations.dev"
-        frameborder="0"
-        allowfullscreen
-        title="एंबेडेड वेबसाइट"
-        class="shadow-lg"
-    >
-    </iframe>
+<body>
+    <div class="container">
+        <h1 class="header">Welcome to AdGem Demo App</h1>
+        <p class="description">
+            Click the button below to simulate opening the AdGem Offerwall.
+            This is a demo to show the integration point for your monetization app.
+        </p>
+        <button id="showOfferwallBtn" class="btn-offerwall">Show Offerwall</button>
+        <p id="rewardMessage" class="reward-message">
+            Congratulations! You earned a reward! (Demo Reward)
+        </p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const showOfferwallBtn = document.getElementById('showOfferwallBtn');
+            const rewardMessage = document.getElementById('rewardMessage');
+
+            showOfferwallBtn.addEventListener('click', () => {
+                // In a real Android app, this is where you would call the AdGem SDK
+                // For example: AdGem.showOfferwall();
+
+                // Here we are just simulating it for the web demo
+                console.log("Simulating AdGem Offerwall opening...");
+
+                // Hide the button and show a "loading" or "offerwall open" message
+                showOfferwallBtn.style.display = 'none';
+                rewardMessage.textContent = "Offerwall is loading... (Please integrate AdGem SDK in your Android app)";
+                rewardMessage.style.display = 'block';
+                rewardMessage.style.color = '#ff9800'; // Orange for loading
+
+                // Simulate an offerwall being completed after a few seconds (for demo purposes)
+                setTimeout(() => {
+                    // This part would be triggered by a callback from AdGem SDK in a real app
+                    rewardMessage.textContent = "Congratulations! You earned a reward! (Demo Reward)";
+                    rewardMessage.style.color = '#4CAF50'; // Green for reward
+                    showOfferwallBtn.style.display = 'inline-block'; // Show button again
+                }, 3000); // Simulate 3 seconds for offerwall interaction
+            });
+        });
+    </script>
 </body>
 </html>
+
