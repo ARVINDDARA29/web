@@ -1,112 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Friendly AI Chat</title>
-<style>
-  body { font-family: Arial; background: #f5f5f5; margin:0; padding:0; display:flex; flex-direction:column; height:100vh;}
-  #chatBox { flex:1; overflow-y:auto; padding:10px; max-width:700px; margin:0 auto; display:flex; flex-direction:column; }
-  .message { margin:5px 0; padding:10px; border-radius:10px; max-width:80%; word-break:break-word; }
-  .user { background:#d1e7ff; align-self:flex-end; text-align:right;}
-  .ai { background:#e2ffe2; align-self:flex-start; text-align:left;}
-  #inputArea { display:flex; padding:10px; max-width:700px; margin:0 auto; }
-  #inputText { flex:1; padding:10px; border-radius:5px 0 0 5px; border:1px solid #ccc; outline:none; }
-  #sendBtn { padding:10px 20px; border:none; border-radius:0 5px 5px 0; background:#4CAF50; color:white; cursor:pointer; }
-  #sendBtn:hover { background:#45a049; }
-  .loader { font-style:italic; color:#888; }
-  img.ai-img { max-width:200px; margin-top:5px; border-radius:5px; cursor:pointer; }
-</style>
-</head>
-<body>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Iframe</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: #000; /* optional background */
+    }
 
-<div id="chatBox"></div>
+    .iframe-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+    }
 
-<div id="inputArea">
-  <input type="text" id="inputText" placeholder="Type your message..." />
-  <button id="sendBtn">Send</button>
-</div>
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      transform: scale(0.95); /* zoom out slightly */
+      transform-origin: top left;
+    }
 
-<script>
-const apiKey = "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";
-const model = "x-ai/grok-4-fast:free";
-const chatBox = document.getElementById("chatBox");
-const inputText = document.getElementById("inputText");
-const sendBtn = document.getElementById("sendBtn");
+    /* Watermark styling */
+    .watermark {
+      position: absolute;
+      bottom: 46px;
+      right: 60px;
+      color: #ffffff;
+      font-weight: bolder;
+      font-size: 2.5vw; /* responsive font size */
+      background: #000000;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      user-select: none;
+      pointer-events: auto;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
 
-// Default AI message
-appendMessage("Hello! मैं आपका मज़ाकिया AI हूँ 😎. मुझसे कुछ भी पूछ सकते हो!", "ai");
+    /* Optional hover effect */
+    .watermark:hover {
+      transform: scale(1.05);
+    }
 
-sendBtn.addEventListener("click", sendMessage);
-inputText.addEventListener("keypress", function(e){ if(e.key==="Enter"){sendMessage();} });
+    /* Mobile adjustments */
+    @media (max-width: 600px) {
+      .watermark {
+        font-size: 10vw;
+        padding: 3px 6px;
+      }
+    }
+  </style>
 
-async function sendMessage() {
-  const message = inputText.value.trim();
-  if(!message) return;
-  appendMessage(message, "user");
-  inputText.value = "";
 
-  // Loader
-  const loaderDiv = appendMessage("Typing...", "ai", true);
+  <div class="iframe-container">
+    <iframe src="https://vid-tube-f02aea36.base44.app/Home"></iframe>
+    <div class="watermark" id="watermark">😎😎arvind bishnoi</div>
+  </div>
 
-  try {
-    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${apiKey}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        model: model,
-        messages: [
-          {
-            role: "system",
-            content: "You are a friendly, funny AI. Always reply in a playful, humorous tone. Be friendly and a bit cheeky. If user asks 'Who created you?', reply 'Arvind Bishnoi ने बनाया, और मैं उसके jokes भी याद रखता हूँ 😎'."
-          },
-          {
-            role: "user",
-            content: message
-          }
-        ]
-      })
+  <script>
+    const watermark = document.getElementById('watermark');
+    let shade = 255; // starting color (white)
+
+    watermark.addEventListener('click', () => {
+      // Gradually darken on click
+      shade = Math.max(shade - 25, 0); // don't go below 0
+      watermark.style.color = `rgb(${shade},${shade},${shade})`;
     });
-    
-    const data = await response.json();
-    loaderDiv.textContent = ""; 
-    loaderDiv.classList.remove("loader");
-
-    // AI response text
-    const aiText = data.choices?.[0]?.message?.content;
-    if(aiText) appendMessage(aiText, "ai");
-
-    // Check if AI returned images
-    const images = data.choices?.[0]?.message?.images || [];
-    images.forEach(url => {
-      const img = document.createElement("img");
-      img.src = url;
-      img.classList.add("ai-img");
-      img.onclick = () => window.open(url,"_blank"); // click to open full image
-      loaderDiv.appendChild(img);
-    });
-
-    if(!aiText && images.length===0) loaderDiv.textContent = "No response from AI.";
-  } catch(err) {
-    console.error(err);
-    loaderDiv.textContent = "Error connecting to API.";
-    loaderDiv.classList.remove("loader");
-  }
-}
-
-function appendMessage(text, sender, isLoader=false) {
-  const div = document.createElement("div");
-  div.classList.add("message", sender);
-  if(isLoader) div.classList.add("loader");
-  div.textContent = text;
-  chatBox.appendChild(div);
-  chatBox.scrollTop = chatBox.scrollHeight;
-  return div;
-}
-</script>
-
-</body>
-</html>
+  </script>
