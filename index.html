@@ -1,14 +1,18 @@
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Custom Iframe</title>
+
+  
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;display=swap" rel="stylesheet">
+
   <style>
     body, html {
       margin: 0;
       padding: 0;
       height: 100%;
       overflow: hidden;
-      font-family: Arial, sans-serif;
-      background: #000; /* optional background */
+      background: #000;
+      font-family: 'Orbitron', sans-serif;
     }
 
     .iframe-container {
@@ -21,54 +25,64 @@
       width: 100%;
       height: 100%;
       border: none;
-      transform: scale(0.95); /* zoom out slightly */
+      transform: scale(0.95);
       transform-origin: top left;
     }
 
-    /* Watermark styling */
+    /* Watermark solid design */
     .watermark {
       position: absolute;
-      bottom: 46px;
-      right: 60px;
-      color: #ffffff;
-      font-weight: bolder;
-      font-size: 2.5vw; /* responsive font size */
-      background: #000000;
-      padding: 4px 8px;
-      border-radius: 4px;
+      bottom: 45px;
+      right: 70px;
+      color: #00fff7;
+      background: #000; /* solid black background */
+      font-size: 1vw;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 10px;
+      border: 2px solid #00fff7;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px #00fff7, 0 0 15px #00fff7;
       cursor: pointer;
-      user-select: none;
-      pointer-events: auto;
-      transition: color 0.3s ease, transform 0.2s ease;
+      transition: all 0.3s ease;
     }
 
-    /* Optional hover effect */
     .watermark:hover {
-      transform: scale(1.05);
+      transform: scale(1.08);
+      color: #fff;
+      background: #00fff7;
+      border-color: #00fff7;
+      text-shadow: 0 0 15px #000, 0 0 25px #000;
     }
 
     /* Mobile adjustments */
     @media (max-width: 600px) {
       .watermark {
-        font-size: 10vw;
-        padding: 3px 6px;
+        font-size: 1vw;
+        bottom: 35px;
+        right: 35px;
+        padding: 6px 12px;
       }
     }
   </style>
 
 
+
   <div class="iframe-container">
     <iframe src="https://vid-tube-f02aea36.base44.app/Home"></iframe>
-    <div class="watermark" id="watermark">😎😎arvind bishnoi</div>
+    <div class="watermark" id="watermark">😎 ARVIND BISHNOI</div>
   </div>
 
   <script>
     const watermark = document.getElementById('watermark');
-    let shade = 255; // starting color (white)
+    let hue = 180;
 
     watermark.addEventListener('click', () => {
-      // Gradually darken on click
-      shade = Math.max(shade - 25, 0); // don't go below 0
-      watermark.style.color = `rgb(${shade},${shade},${shade})`;
+      hue = (hue + 40) % 360;
+      const color = `hsl(${hue}, 100%, 60%)`;
+      watermark.style.color = color;
+      watermark.style.borderColor = color;
+      watermark.style.textShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
     });
   </script>
